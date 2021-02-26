@@ -1,18 +1,20 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateStocksTable extends Migration {
 
 	public function up()
 	{
 		Schema::create('stocks', function(Blueprint $table) {
-			$table->increments('id');
-			$table->timestamps();
-			$table->softDeletes();
-			$table->bigInteger('product_id')->unsigned();
+			$table->bigIncrements('id');
 			$table->integer('ammount');
+			$table->unsignedBigInteger('product_id');
+			$table->foreign('product_id')->references('id')->on('products');
+			$table->softDeletes();
+			$table->timestamps();
 		});
 	}
 

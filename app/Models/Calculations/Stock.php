@@ -1,16 +1,9 @@
 <?php
+namespace App\Models\Calculations;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-namespace inventory;
-
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
-
-class Stock extends Eloquent {
-
-	protected $table = 'stocks';
-	public $timestamps = true;
-
-	use SoftDeletingTrait;
-
-	protected $dates = ['deleted_at'];
+class Stock extends Model 
+{
+	use SoftDeletes;
 
 }

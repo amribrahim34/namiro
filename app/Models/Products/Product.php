@@ -2,14 +2,14 @@
 
 namespace Products;
 
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Product extends Eloquent {
+class Product extends Model {
 
 	protected $table = 'products';
 	public $timestamps = true;
 
-	use SoftDeletingTrait;
+	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
 

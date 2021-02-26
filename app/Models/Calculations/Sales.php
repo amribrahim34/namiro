@@ -1,16 +1,10 @@
 <?php
 
-namespace Sales;
+namespace App\Models\Calculations;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
-
-class Sales extends Eloquent {
-
-	protected $table = 'product_sales';
-	public $timestamps = true;
-
-	use SoftDeletingTrait;
-
-	protected $dates = ['deleted_at'];
+class Sales extends Model 
+{
+	use SoftDeletes;
 
 }

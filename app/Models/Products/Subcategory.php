@@ -2,14 +2,14 @@
 
 namespace Products;
 
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Subcategory extends Eloquent {
+class Subcategory extends Model {
 
 	protected $table = 'subcategories';
 	public $timestamps = true;
 
-	use SoftDeletingTrait;
+	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
 

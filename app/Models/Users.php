@@ -2,14 +2,14 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Users extends Eloquent {
+class Users extends Model {
 
 	protected $table = 'users';
 	public $timestamps = true;
 
-	use SoftDeletingTrait;
+	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
 

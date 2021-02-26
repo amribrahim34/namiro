@@ -2,14 +2,14 @@
 
 namespace Wishes;
 
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Wish extends Eloquent {
+class Wish extends Model {
 
 	protected $table = 'wishes';
 	public $timestamps = true;
 
-	use SoftDeletingTrait;
+	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
 

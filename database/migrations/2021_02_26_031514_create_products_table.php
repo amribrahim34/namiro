@@ -1,22 +1,26 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateProductsTable extends Migration {
 
 	public function up()
 	{
 		Schema::create('products', function(Blueprint $table) {
-			$table->increments('id');
-			$table->timestamps();
-			$table->softDeletes();
-			$table->bigInteger('subcategory_id')->unsigned();
+			$table->bigIncrements('id');
 			$table->string('name');
 			$table->float('price');
-			$table->bigInteger('color_id')->unsigned();
-			$table->bigInteger('material_id')->unsigned()->nullable();
+			$table->unsignedBigInteger('subcategory_id');
+			$table->foreign('subcategory_id')->references('id')->on('subcategories');
+			$table->unsignedBigInteger('color_id');
+			$table->foreign('color_id')->references('id')->on('colors');
+			$table->unsignedBigInteger('material_id')->nullable();
+			$table->foreign('material_id')->references('id')->on('materials');
 			$table->string('discription');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

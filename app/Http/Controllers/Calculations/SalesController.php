@@ -1,6 +1,10 @@
 <?php 
 
-class SalesController extends BaseController {
+namespace App\Http\Controllers\Calculations;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class SalesController extends Controller {
 
   /**
    * Display a listing of the resource.

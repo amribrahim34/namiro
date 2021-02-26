@@ -1,81 +1,86 @@
 <?php 
 
-class StockController extends BaseController {
+namespace App\Http\Controllers\Calculations;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-  /**
-   * Display a listing of the resource.
-   *
-   * @return Response
-   */
-  public function index()
-  {
-    
-  }
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return Response
-   */
-  public function create()
-  {
-    
-  }
+class StockController extends Controller 
+{
 
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @return Response
-   */
-  public function store()
-  {
-    
-  }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+      
+    }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function show($id)
-  {
-    
-  }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+      
+    }
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function edit($id)
-  {
-    
-  }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+      
+    }
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function update($id)
-  {
-    
-  }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+      
+    }
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function destroy($id)
-  {
-    
-  }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+      
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update($id)
+    {
+      
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+      
+    }
   
 }
 
-?>

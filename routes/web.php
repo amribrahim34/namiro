@@ -41,3 +41,11 @@ Route::name('rates.')->namespace('Rates')->prefix('rates')->group(function(){
 	Route::resource('rate', 'RateController');
 	Route::resource('review', 'ReviewController');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

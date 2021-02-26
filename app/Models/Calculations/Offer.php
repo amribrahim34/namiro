@@ -1,16 +1,9 @@
 <?php
 
-namespace Offers;
+namespace App\Models\Calculations;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
-
-class Offer extends Eloquent {
-
-	protected $table = 'offers';
-	public $timestamps = true;
-
-	use SoftDeletingTrait;
-
-	protected $dates = ['deleted_at'];
+class Offer extends Model {
+    use SoftDeletes;
 
 }
