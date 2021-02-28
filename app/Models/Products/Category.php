@@ -8,9 +8,13 @@ class Category extends Model {
 
 	protected $table = 'categories';
 	public $timestamps = true;
-
 	use SoftDeletes;
 
-	protected $dates = ['deleted_at'];
+	public function products (){
+		return $this->hasMany(Product::class);
+	}
 
+	public function subcategories (){
+		return $this->hasMany(Subcategory::class);
+	}
 }

@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Wish extends Model {
 
 	protected $table = 'wishes';
-	public $timestamps = true;
-
 	use SoftDeletes;
 
-	protected $dates = ['deleted_at'];
+	public function product(){
+		return $this->belongsTo('App\Models\Products\Product');
+	}
 
+	public function user(){
+		return $this->hasOne('App\User');
+	}
 }
