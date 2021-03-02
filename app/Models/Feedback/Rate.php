@@ -2,6 +2,7 @@
 
 namespace App\Models\Feedback;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
 
 class Rate extends Model 
 {

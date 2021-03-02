@@ -1,8 +1,9 @@
 <?php
 
-namespace Products;
+namespace App\Models\Products;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model {
 
@@ -33,7 +34,7 @@ class Product extends Model {
 		return $this->belongsTo('App\Models\Specifications\Size');
 	}
 
-	public function (){
+	public function carts(){
 		return $this->hasMany('App\Models\Processes\Cart');
 	}
 
