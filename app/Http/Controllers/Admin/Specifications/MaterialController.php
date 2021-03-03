@@ -1,11 +1,12 @@
 <?php 
-namespace App\Http\Controllers\Admin\Products;
+
+namespace App\Http\Controllers\Specifications;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Products\Category;
 
-class CategoryController extends Controller 
+class MaterialController extends Controller 
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -13,8 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::get();
-        return view('admin.products.category.index',['categories'=>$categories]);
+      
     }
 
     /**
@@ -24,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-      return view('admin.products.category.create');
+      
     }
 
     /**
@@ -32,16 +32,9 @@ class CategoryController extends Controller
      *
      * @return Response
      */
-    public function store(Request $request)
+    public function store()
     {
-      $request->validate([
-        'name' =>'required',
-      ]);
-      $category = new Category;
-      $category->title = $request->name;
-      $category->save();
-
-      return redirect(route('admin.products.category.index'));
+      
     }
 
     /**

@@ -258,6 +258,7 @@
                           </div>
                           <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">NameSpaces</div>
                           <ul class="pcoded-item pcoded-left-item">
+                              {{-- products --}}
                               <li class="pcoded-hasmenu">
                                   <a href="javascript:void(0)" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
@@ -273,16 +274,47 @@
                                           </a>
                                       </li>
                                       <li class=" ">
-                                          <a href="icon-themify.html" class="waves-effect waves-dark">
+                                          <a href="{{route('admin.products.category.index')}} " class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                               <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Category</span>
                                               <span class="pcoded-mcaret"></span>
                                           </a>
                                       </li>
                                       <li class=" ">
-                                          <a href="icon-themify.html" class="waves-effect waves-dark">
+                                          <a href="{{route('admin.products.subcategory.index')}} " class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                               <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Subcategory</span>
+                                              <span class="pcoded-mcaret"></span>
+                                          </a>
+                                      </li>
+                                  </ul>
+                              </li>
+                              {{-- specifications --}}
+                              <li class="pcoded-hasmenu">
+                                  <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">specifications</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                                  <ul class="pcoded-submenu">
+                                      <li class=" ">
+                                          <a href="{{route('admin.specifications.color.index')}}" class="waves-effect waves-dark">
+                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Color</span>
+                                              <span class="pcoded-mcaret"></span>
+                                          </a>
+                                      </li>
+                                      <li class=" ">
+                                          <a href="{{route('admin.specifications.material.index')}} " class="waves-effect waves-dark">
+                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Material</span>
+                                              <span class="pcoded-mcaret"></span>
+                                          </a>
+                                      </li>
+                                      <li class=" ">
+                                          <a href="{{route('admin.specifications.size.index')}} " class="waves-effect waves-dark">
+                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Size</span>
                                               <span class="pcoded-mcaret"></span>
                                           </a>
                                       </li>

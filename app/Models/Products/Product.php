@@ -18,10 +18,6 @@ class Product extends Model {
 		return $this->belongsTo(Subcategory::class);
 	}
 
-	public function subcategories(){
-		return $this->belongsTo(Subcategory::class);
-	}
-
 	public function color(){
 		return $this->belongsTo('App\Models\Specifications\Color');
 	}

@@ -1,7 +1,9 @@
 <?php 
-namespace App\Http\Controllers\Products;
+namespace App\Http\Controllers\Admin\Products;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Products\Subcategory;
+use App\Models\Products\Category;
 
 class SubcategoryController extends Controller 
 {
@@ -11,7 +13,11 @@ class SubcategoryController extends Controller
      * @return Response
      */
     public function index()
-    {
+    {   
+        $subcategories = Subcategory::with('category')->get();
+        return view('admin.products.subcategory.index',[
+            'subcategories'=>$subcategories
+        ]);
       
     }
 
@@ -22,7 +28,8 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-      
+        $categories = Category::get();
+        return view('admin.products.subcategory.create',['categories'=>$categories]);
     }
 
     /**
@@ -30,8 +37,17 @@ class SubcategoryController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
+        $request->validate([
+            'title'=>'required',
+            'category_id'=>'required'
+        ]);
+        $subcategory = new Subcategory;
+        $subcategory->title = $request->title;
+        $subcategory->category_id = $request->category_id;
+        $subcategory->save();
+        return redirect(route('admin.products.subcategory.index'));
       
     }
 

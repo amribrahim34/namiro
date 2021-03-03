@@ -1,11 +1,13 @@
 <?php 
-namespace App\Http\Controllers\Admin\Products;
+namespace App\Http\Controllers\Admin\Specifications;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Products\Category;
+use App\Models\Specifications\Color;
 
-class CategoryController extends Controller 
+
+class ColorController extends Controller 
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -13,8 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::get();
-        return view('admin.products.category.index',['categories'=>$categories]);
+        $colors = Color::get(); 
+        return view('admin.specifications.color.index',['colors'=>$colors]);
     }
 
     /**
@@ -24,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-      return view('admin.products.category.create');
+        return view('admin.specifications.color.create');
     }
 
     /**
@@ -34,14 +36,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-      $request->validate([
-        'name' =>'required',
-      ]);
-      $category = new Category;
-      $category->title = $request->name;
-      $category->save();
-
-      return redirect(route('admin.products.category.index'));
+        $request->validate(['name'=>'required']);
+        $color = new Color;
+        $color->name = $request->name;
+        $color->save();
+        return redirect(route('admin.specifications.color.index'));
     }
 
     /**
@@ -87,5 +86,5 @@ class CategoryController extends Controller
     {
       
     }
-  
+
 }
