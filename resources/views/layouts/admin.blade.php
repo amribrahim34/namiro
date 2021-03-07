@@ -18,6 +18,7 @@
       <meta name="author" content="codedthemes" />
       <!-- Favicon icon -->
       <link rel="icon" href="{{asset('assets/megable/images/favicon.ico')}}" type="image/x-icon">
+      @yield('css')
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- waves.css -->
@@ -36,7 +37,6 @@
         <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css')}}" type="text/css" media="all" />
       <!-- Style.css -->
       <link rel="stylesheet" type="text/css" href="{{asset('assets/megable/css/style.css')}}">
-      @yield('css')
   </head>
 
   <body>

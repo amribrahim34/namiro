@@ -1,8 +1,9 @@
 <?php 
 
-namespace App\Http\Controllers\Specifications;
+namespace App\Http\Controllers\Admin\Specifications;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Specifications\Material;
 
 class MaterialController extends Controller 
 {
@@ -14,7 +15,8 @@ class MaterialController extends Controller
      */
     public function index()
     {
-      
+        $materials = Material::get(); 
+        return view('admin.specifications.material.index',['materials'=>$materials]);
     }
 
     /**
@@ -24,7 +26,7 @@ class MaterialController extends Controller
      */
     public function create()
     {
-      
+        return view('admin.specifications.material.create');
     }
 
     /**
@@ -32,9 +34,13 @@ class MaterialController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-      
+        $request->validate(['name'=>'required']);
+        $material = new Material;
+        $material->title = $request->name;
+        $material->save();
+        return redirect(route('admin.specifications.material.index'));
     }
 
     /**

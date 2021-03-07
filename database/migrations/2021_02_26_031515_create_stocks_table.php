@@ -10,7 +10,7 @@ class CreateStocksTable extends Migration {
 	{
 		Schema::create('stocks', function(Blueprint $table) {
 			$table->bigIncrements('id');
-			$table->integer('ammount');
+			$table->integer('amount');
 			$table->unsignedBigInteger('product_id');
 			$table->foreign('product_id')->references('id')->on('products');
 			$table->softDeletes();

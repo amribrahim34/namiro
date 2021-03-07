@@ -26,8 +26,8 @@ class Product extends Model {
 		return $this->belongsTo('App\Models\Specifications\Material');
 	}
 
-	public function size(){
-		return $this->belongsTo('App\Models\Specifications\Size');
+	public function sizes(){
+		return $this->belongsToMany('App\Models\Specifications\Size');
 	}
 
 	public function carts(){

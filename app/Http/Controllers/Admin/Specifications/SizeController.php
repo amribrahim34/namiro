@@ -1,7 +1,8 @@
 <?php 
-namespace App\Http\Controllers\Specifications;
+namespace App\Http\Controllers\Admin\Specifications;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Specifications\Size;
 
 class SizeController extends Controller 
 {
@@ -12,7 +13,8 @@ class SizeController extends Controller
      */
     public function index()
     {
-      
+        $sizes = Size::get(); 
+        return view('admin.specifications.size.index',['sizes'=>$sizes]);
     }
 
     /**
@@ -22,7 +24,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-      
+        return view('admin.specifications.size.create');
     }
 
     /**
@@ -30,9 +32,13 @@ class SizeController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-      
+        $request->validate(['name'=>'required']);
+        $size = new Size;
+        $size->title = $request->name;
+        $size->save();
+        return redirect(route('admin.specifications.size.index'));
     }
 
     /**

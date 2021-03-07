@@ -10,8 +10,8 @@ class CreateProductSizeTable extends Migration {
 	{
 		Schema::create('product_size', function(Blueprint $table) {
 			$table->bigIncrements('id');
-			$table->unsignedBigInteger('user_id');
-			$table->foreign('user_id')->references('id')->on('users');
+			$table->unsignedBigInteger('size_id');
+			$table->foreign('size_id')->references('id')->on('sizes');
 			$table->unsignedBigInteger('product_id');
 			$table->foreign('product_id')->references('id')->on('products');
 			$table->softDeletes();
