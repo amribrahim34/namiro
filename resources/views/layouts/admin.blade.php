@@ -213,9 +213,10 @@
                                       </a>
                                   </li>
                                   <li class="waves-effect waves-light">
-                                      <a href="auth-normal-sign-in.html">
-                                          <i class="ti-layout-sidebar-left"></i> Logout
-                                      </a>
+                                    <form action="{{route('logout')}}" method="post">
+                                        @csrf
+                                        <button type="submit" ><i class="ti-layout-sidebar-left  btn-link"></i> Logout</button>
+                                    </form>
                                   </li>
                               </ul>
                           </li>

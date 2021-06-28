@@ -1,10 +1,11 @@
 <?php
 
-Route::get('/', function () {
-    return view('admin.index');
-});
 
-Route::namespace('Admin')->group(function(){
+
+Route::namespace('Admin')->middleware('auth')->group(function(){
+	Route::get('/', function () {
+		return view('admin.index');
+	});
 	// Route::name('calculations.')->namespace('Calculations')->prefix('calculations')->group(function(){
 	// 	Route::resource('sales', 'SalesController');
 	// 	Route::resource('offer', 'OfferController');
@@ -34,4 +35,3 @@ Route::namespace('Admin')->group(function(){
 	// });
 
 });
-?>
