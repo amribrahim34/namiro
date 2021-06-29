@@ -19,6 +19,8 @@
       <!-- Favicon icon -->
       <link rel="icon" href="{{asset('assets/megable/images/favicon.ico')}}" type="image/x-icon">
       @yield('css')
+      <link rel="stylesheet" type="text/css" href="{{asset('assets/megable/css/select2/select2.min.css')}}">
+
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- waves.css -->

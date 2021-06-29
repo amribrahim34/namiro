@@ -10384,6 +10384,11 @@ body.menu-bottom #collapse-menu {
     font-size: 11px; }
 .form-material textarea {
   height: 100px !important; }
+/* my edit */
+.select2-search textarea{
+  height: inherit !important;
+}
+/* end of my edit */
 .form-material .form-bar {
   position: relative;
   display: block;

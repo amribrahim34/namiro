@@ -41,7 +41,7 @@
                 </select>
             </div>
             <div class="form-group form-default">
-                <select class="form-control select2 h-25" name="color_id" multiple="multiple">
+                <select class="form-control select2" name="color_id" multiple="multiple">
                     <option selected="" disabled="">select colors</option>
                     @if($colors->count() > 0)
                     @foreach($colors as $color)
