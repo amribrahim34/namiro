@@ -6,14 +6,14 @@
     <section class="hero">
       <div id="owl-hero" class="owl-carousel owl-theme owl-carousel--dots-inside">        
 
-        <div class="hero__slide" style="background-image: url({{asset('assets/namira/img/hero/1.jpg')}})">
+        <div class="hero__slide" style="background-image: url({{asset('assets/namiro/img/hero/1.jpg')}})">
           <div class="container text-center">
             <h1 class="hero__title">Got the style? Show us</h1>
             <a href="single-product.html" class="hero__link">Shop Now</a>
           </div>          
         </div>
 
-        <div class="hero__slide" style="background-image: url({{asset('assets/namira/img/hero/2.jpg')}})">
+        <div class="hero__slide" style="background-image: url({{asset('assets/namiro/img/hero/2.jpg')}})">
           <div class="container relative">
             <div class="hero__holder">
               <h1 class="hero__title-1">dope<br>street<br>wear</h1>
@@ -22,7 +22,7 @@
           </div>
         </div>
 
-        <div class="hero__slide" style="background-image: url({{asset('assets/namira/img/hero/3.jpg')}})">
+        <div class="hero__slide" style="background-image: url({{asset('assets/namiro/img/hero/3.jpg')}})">
           <div class="container text-center">
             <div class="hero__holder-1">
               <h1 class="hero__title-2">new lookbook</h1>
@@ -57,7 +57,7 @@
             <i class="ui-pricetag feature__icon"></i>
             <div class="feature__holder">
               <h6 class="feature__title"><span class="feature__promo">50% Off</span> winter sale</h6>
-              <span class="feature__text">Use code Namira50</span>
+              <span class="feature__text">Use code namiro50</span>
             </div>
           </div>
         </div>
@@ -81,8 +81,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="{{asset('assets/namira/img/shop/product_11.jpg')}}" alt="" class="product__img">
-                <img src="{{asset('assets/namira/img/shop/product_back_11.jpg')}}" alt="" class="product__img-back">
+                <img src="{{asset('assets/namiro/img/shop/product_11.jpg')}}" alt="" class="product__img">
+                <img src="{{asset('assets/namiro/img/shop/product_back_11.jpg')}}" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -115,8 +115,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="{{asset('assets/namira/img/shop/product_12.jpg')}}" alt="" class="product__img">
-                <img src="{{asset('assets/namira/img/shop/product_back_12.jpg')}}" alt="" class="product__img-back">
+                <img src="{{asset('assets/namiro/img/shop/product_12.jpg')}}" alt="" class="product__img">
+                <img src="{{asset('assets/namiro/img/shop/product_back_12.jpg')}}" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -146,8 +146,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="{{asset('assets/namira/img/shop/product_5.jpg')}}" alt="" class="product__img">
-                <img src="{{asset('assets/namira/img/shop/product_back_5.jpg')}}" alt="" class="product__img-back">
+                <img src="{{asset('assets/namiro/img/shop/product_5.jpg')}}" alt="" class="product__img">
+                <img src="{{asset('assets/namiro/img/shop/product_back_5.jpg')}}" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -177,8 +177,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="{{asset('assets/namira/img/shop/product_6.jpg')}}" alt="" class="product__img">
-                <img src="{{asset('assets/namira/img/shop/product_back_6.jpg')}}" alt="" class="product__img-back">
+                <img src="{{asset('assets/namiro/img/shop/product_6.jpg')}}" alt="" class="product__img">
+                <img src="{{asset('assets/namiro/img/shop/product_back_6.jpg')}}" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -211,8 +211,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="{{asset('assets/namira/img/shop/product_7.jpg')}}" alt="" class="product__img">
-                <img src="{{asset('assets/namira/img/shop/product_back_7.jpg')}}" alt="" class="product__img-back">
+                <img src="{{asset('assets/namiro/img/shop/product_7.jpg')}}" alt="" class="product__img">
+                <img src="{{asset('assets/namiro/img/shop/product_back_7.jpg')}}" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -245,8 +245,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="{{asset('assets/namira/img/shop/product_8.jpg')}}" alt="" class="product__img">
-                <img src="{{asset('assets/namira/img/shop/product_back_8.jpg')}}" alt="" class="product__img-back">
+                <img src="{{asset('assets/namiro/img/shop/product_8.jpg')}}" alt="" class="product__img">
+                <img src="{{asset('assets/namiro/img/shop/product_back_8.jpg')}}" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -297,8 +297,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="{{asset('assets/namira/img/shop/product_1.jpg')}}" alt="" class="product__img">
-                <img src="{{asset('assets/namira/img/shop/product_back_1.jpg')}}" alt="" class="product__img-back">
+                <img src="{{asset('assets/namiro/img/shop/product_1.jpg')}}" alt="" class="product__img">
+                <img src="{{asset('assets/namiro/img/shop/product_back_1.jpg')}}" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -328,8 +328,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="{{asset('assets/namira/img/shop/product_9.jpg')}}" alt="" class="product__img">
-                <img src="{{asset('assets/namira/img/shop/product_back_9.jpg')}}" alt="" class="product__img-back">
+                <img src="{{asset('assets/namiro/img/shop/product_9.jpg')}}" alt="" class="product__img">
+                <img src="{{asset('assets/namiro/img/shop/product_back_9.jpg')}}" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -359,8 +359,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="{{asset('assets/namira/img/shop/product_10.jpg')}}" alt="" class="product__img">
-                <img src="{{asset('assets/namira/img/shop/product_back_10.jpg')}}" alt="" class="product__img-back">
+                <img src="{{asset('assets/namiro/img/shop/product_10.jpg')}}" alt="" class="product__img">
+                <img src="{{asset('assets/namiro/img/shop/product_back_10.jpg')}}" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -390,8 +390,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="{{asset('assets/namira/img/shop/product_2.jpg')}}" alt="" class="product__img">
-                <img src="{{asset('assets/namira/img/shop/product_back_2.jpg')}}" alt="" class="product__img-back">
+                <img src="{{asset('assets/namiro/img/shop/product_2.jpg')}}" alt="" class="product__img">
+                <img src="{{asset('assets/namiro/img/shop/product_back_2.jpg')}}" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -421,8 +421,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="{{asset('assets/namira/img/shop/product_3.jpg')}}" alt="" class="product__img">
-                <img src="{{asset('assets/namira/img/shop/product_back_3.jpg')}}" alt="" class="product__img-back">
+                <img src="{{asset('assets/namiro/img/shop/product_3.jpg')}}" alt="" class="product__img">
+                <img src="{{asset('assets/namiro/img/shop/product_back_3.jpg')}}" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -455,8 +455,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="{{asset('assets/namira/img/shop/product_4.jpg')}}" alt="" class="product__img">
-                <img src="{{asset('assets/namira/img/shop/product_back_4.jpg')}}" alt="" class="product__img-back">
+                <img src="{{asset('assets/namiro/img/shop/product_4.jpg')}}" alt="" class="product__img">
+                <img src="{{asset('assets/namiro/img/shop/product_back_4.jpg')}}" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">

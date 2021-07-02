@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="ar">
+<html class="no-js" dir="rtl" lang="ar">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
