@@ -62,6 +62,7 @@ class ProductController extends Controller
         'color_id' =>'required',
         'material_id' =>'required',
       ]);
+    //   dd($request);
       $product = new Product;
       $product->name = $request->name;
       $product->subcategory_id = $request->subcategory_id;
@@ -75,7 +76,7 @@ class ProductController extends Controller
       $stock->product_id = $product->id;
       $stock->save();
       $product->sizes()->sync([$request->size_id]);
-      return redirect(route('products.product.index'));
+      return redirect(route('admin.products.product.index'));
     }
 
     /**

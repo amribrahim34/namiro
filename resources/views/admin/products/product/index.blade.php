@@ -9,8 +9,9 @@
 	<div class="card-body">
 		@if($products->count() >0)
 		<table id="DataTable" class="w-100">
+
 			<thead>
-				<tr class="d-flex justify-content-around">
+				<tr class="">
 					<td >#</td>
 					<td >Name</td>
 					<td >price</td>
@@ -18,9 +19,31 @@
 					<td >subcategory</td>
 					<td >color</td>
 					<td >material</td>
+					<td >size</td>
 					<td >discription</td>
 				</tr>
 			</thead>
+			<tbody>
+				@foreach($products as $product)
+				<tr>
+					<td>{{$product->id}} </td>
+					<td>{{$product->name}} </td>
+					<td>{{$product->price}} </td>
+					<td>{{$product->subcategory->category->title}} </td>
+					<td>{{$product->subcategory->title}} </td>
+					<td>{{$product->color->name}} </td>
+					<td>{{$product->material->name}} </td>
+					<td>
+						@foreach ($product->sizes as $size)
+							<span class="badge badge-primary mx-2 px-2">
+								{{$size->title}}
+							</span>
+						@endforeach
+					</td>
+					<td>{{$product->discription}} </td>
+				</tr>
+				@endforeach
+			</tbody>
 		</table>
 		@endif
 	</div>
