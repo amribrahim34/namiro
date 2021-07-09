@@ -18,6 +18,7 @@
 					<td >category</td>
 					<td >subcategory</td>
 					<td >color</td>
+					<td >quantity</td>
 					<td >material</td>
 					<td >size</td>
 					<td >discription</td>
@@ -25,23 +26,22 @@
 			</thead>
 			<tbody>
 				@foreach($products as $product)
-				<tr>
-					<td>{{$product->id}} </td>
-					<td>{{$product->name}} </td>
-					<td>{{$product->price}} </td>
-					<td>{{$product->subcategory->category->title}} </td>
-					<td>{{$product->subcategory->title}} </td>
-					<td>{{$product->color->name}} </td>
-					<td>{{$product->material->name}} </td>
-					<td>
-						@foreach ($product->sizes as $size)
-							<span class="badge badge-primary mx-2 px-2">
-								{{$size->title}}
-							</span>
+					@if ($product->stocks )
+						@foreach ($product->stocks as $stock)
+							<tr>
+								<td>{{$product->id}} </td>
+								<td>{{$product->name}} </td>
+								<td>{{$product->price}} </td>
+								<td>{{$product->subcategory->category->title}} </td>
+								<td>{{$product->subcategory->title}} </td>
+								<td>{{$stock->color->title}} </td>
+								<td>{{$stock->amount}} </td>
+								<td>{{$stock->material->title}} </td>
+								<td>{{$stock->size->title}} </td>
+								<td>{{$product->discription}} </td>
+							</tr>
 						@endforeach
-					</td>
-					<td>{{$product->discription}} </td>
-				</tr>
+					@endif
 				@endforeach
 			</tbody>
 		</table>

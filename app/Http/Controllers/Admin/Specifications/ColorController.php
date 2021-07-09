@@ -36,9 +36,9 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['name'=>'required']);
+        $request->validate(['title'=>'required']);
         $color = new Color;
-        $color->name = $request->name;
+        $color->title = $request->title;
         $color->save();
         return redirect(route('admin.specifications.color.index'));
     }

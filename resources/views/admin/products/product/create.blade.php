@@ -51,11 +51,11 @@
                 <span class="form-bar"></span>
                 <label class="float-label">Product Price</label>
             </div>
-            <div class="form-group form-default">
+            {{-- <div class="form-group form-default">
                 <input type="number" name="quantity" class="form-control" value="{{old('quantity')}}" required="">
                 <span class="form-bar"></span>
                 <label class="float-label">Product Quantity</label>
-            </div>
+            </div> --}}
             <div class="form-group form-default">
                 <textarea name="discription" class="form-control" required="">
                     {{old('discription')}}
@@ -96,7 +96,7 @@
                         </select>
                     </div>
                     <div class="form-group form-default col-md-2">
-                        <input type="number" name="stock" class="form-control">
+                        <input type="number" name="quantity" class="form-control" value="{{old('quantity')}}" required>
                     </div>
                     <input data-repeater-delete type="button" value="delete" class="btn btn-danger "/>
                 </div>

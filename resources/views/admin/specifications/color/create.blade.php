@@ -10,7 +10,7 @@
         <form method="post" class="form-material" action="{{route('admin.specifications.color.store')}} ">
             @CSRF
             <div class="form-group form-default">
-                <input type="text" name="name" class="form-control" required="">
+                <input type="text" name="title" class="form-control" required="">
                 <span class="form-bar"></span>
                 <label class="float-label">color Name</label>
             </div>
