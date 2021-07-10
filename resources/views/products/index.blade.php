@@ -7,16 +7,16 @@
               <div class="col-lg-3">
                   <div class="shop-sidebar mr-50">
                       <div class="sidebar-widget mb-50">
-                          <h3 class="sidebar-title">Search Products</h3>
+                          <h3 class="sidebar-title text-right">بحث </h3>
                           <div class="sidebar-search">
                               <form action="#">
-                                  <input placeholder="Search Products..." type="text">
+                                  <input placeholder="ابحث هنا.." type="text">
                                   <button><i class="ti-search"></i></button>
                               </form>
                           </div>
                       </div>
                       <div class="sidebar-widget mb-40">
-                          <h3 class="sidebar-title">Filter by Price</h3>
+                          <h3 class="sidebar-title text-right">السعر</h3>
                           <div class="price_filter">
                               <div id="slider-range"></div>
                               <div class="price_slider_amount">
@@ -29,7 +29,7 @@
                           </div>
                       </div>
                       <div class="sidebar-widget mb-45">
-                          <h3 class="sidebar-title">Categories</h3>
+                          <h3 class="sidebar-title text-right"> القسم </h3>
                           <div class="sidebar-categories">
                               <ul>
                                 @if ($categories)
@@ -47,7 +47,7 @@
                           </div>
                       </div>
                       <div class="sidebar-widget sidebar-overflow mb-45">
-                          <h3 class="sidebar-title">color</h3>
+                          <h3 class="sidebar-title text-right"> اللون</h3>
                           <div class="product-color">
                               <ul>
                                 @if ($colors)
@@ -59,7 +59,7 @@
                           </div>
                       </div>
                       <div class="sidebar-widget mb-40">
-                          <h3 class="sidebar-title">size</h3>
+                          <h3 class="sidebar-title text-right"> الحجم </h3>
                           <div class="product-size">
                               <ul>
                                 @if ($sizes)
@@ -166,209 +166,54 @@
                               </div>
                               <div id="grid-sidebar4" class="tab-pane fade">
                                   <div class="row">
-                                      <div class="col-lg-12 col-xl-6">
-                                          <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
-                                              <div class="product-img list-img-width">
-                                                  <a href="#">
-                                                      <img src="{{asset('assets/namiro/img/product/fashion-colorful/1.jpg')}}" alt="">
-                                                  </a>
-                                                  <span>hot</span>
-                                                  <div class="product-action-list-style">
-                                                      <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                          <i class="pe-7s-look"></i>
-                                                      </a>
-                                                  </div>
-                                              </div>
-                                              <div class="product-content-list">
-                                                  <div class="product-list-info">
-                                                      <h4><a href="#"> Dagger Smart Trousers </a></h4>
-                                                      <span>$150.00</span>
-                                                      <p>Lorem ipsum dolor sit amet, mana consectetur adipisicing elit, sed do eiusmod tempor labore. </p>
-                                                  </div>
-                                                  <div class="product-list-cart-wishlist">
-                                                      <div class="product-list-cart">
-                                                          <a class="btn-hover list-btn-style" href="#">add to cart</a>
-                                                      </div>
-                                                      <div class="product-list-wishlist">
-                                                          <a class="btn-hover list-btn-wishlist" href="#">
-                                                              <i class="pe-7s-like"></i>
-                                                          </a>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="col-lg-12 col-xl-6">
-                                          <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
-                                              <div class="product-img list-img-width">
-                                                  <a href="#">
-                                                      <img src="{{asset('assets/namiro/img/product/fashion-colorful/2.jpg')}}" alt="">
-                                                  </a>
-                                                  <div class="product-action-list-style">
-                                                      <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                          <i class="pe-7s-look"></i>
-                                                      </a>
-                                                  </div>
-                                              </div>
-                                              <div class="product-content-list">
-                                                  <div class="product-list-info">
-                                                      <h4><a href="#">Homme Tapered Smart </a></h4>
-                                                      <span>$180.00</span>
-                                                      <p>Lorem ipsum dolor sit amet, mana consectetur adipisicing elit, sed do eiusmod tempor labore. </p>
-                                                  </div>
-                                                  <div class="product-list-cart-wishlist">
-                                                      <div class="product-list-cart">
-                                                          <a class="btn-hover list-btn-style" href="#">add to cart</a>
-                                                      </div>
-                                                      <div class="product-list-wishlist">
-                                                          <a class="btn-hover list-btn-wishlist" href="#">
-                                                              <i class="pe-7s-like"></i>
-                                                          </a>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="col-lg-12 col-xl-6">
-                                          <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
-                                              <div class="product-img list-img-width">
-                                                  <a href="#">
-                                                      <img src="{{asset('assets/namiro/img/product/fashion-colorful/3.jpg')}}" alt="">
-                                                  </a>
-                                                  <div class="product-action-list-style">
-                                                      <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                          <i class="pe-7s-look"></i>
-                                                      </a>
-                                                  </div>
-                                              </div>
-                                              <div class="product-content-list">
-                                                  <div class="product-list-info">
-                                                      <h4><a href="#">Navy Bird Print </a></h4>
-                                                      <span>$130.00</span>
-                                                      <p>Lorem ipsum dolor sit amet, mana consectetur adipisicing elit, sed do eiusmod tempor labore. </p>
-                                                  </div>
-                                                  <div class="product-list-cart-wishlist">
-                                                      <div class="product-list-cart">
-                                                          <a class="btn-hover list-btn-style" href="#">add to cart</a>
-                                                      </div>
-                                                      <div class="product-list-wishlist">
-                                                          <a class="btn-hover list-btn-wishlist" href="#">
-                                                              <i class="pe-7s-like"></i>
-                                                          </a>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="col-lg-12 col-xl-6">
-                                          <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
-                                              <div class="product-img list-img-width">
-                                                  <a href="#">
-                                                      <img src="{{asset('assets/namiro/img/product/fashion-colorful/4.jpg')}}" alt="">
-                                                  </a>
-                                                  <span>new</span>
-                                                  <div class="product-action-list-style">
-                                                      <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                          <i class="pe-7s-look"></i>
-                                                      </a>
-                                                  </div>
-                                              </div>
-                                              <div class="product-content-list">
-                                                  <div class="product-list-info">
-                                                      <h4><a href="#">Skinny Jeans Terry </a></h4>
-                                                      <span>$120.00</span>
-                                                      <p>Lorem ipsum dolor sit amet, mana consectetur adipisicing elit, sed do eiusmod tempor labore. </p>
-                                                  </div>
-                                                  <div class="product-list-cart-wishlist">
-                                                      <div class="product-list-cart">
-                                                          <a class="btn-hover list-btn-style" href="#">add to cart</a>
-                                                      </div>
-                                                      <div class="product-list-wishlist">
-                                                          <a class="btn-hover list-btn-wishlist" href="#">
-                                                              <i class="pe-7s-like"></i>
-                                                          </a>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="col-lg-12 col-xl-6">
-                                          <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
-                                              <div class="product-img list-img-width">
-                                                  <a href="#">
-                                                      <img src="{{asset('assets/namiro/img/product/fashion-colorful/5.jpg')}}" alt="">
-                                                  </a>
-                                                  <span>hot</span>
-                                                  <div class="product-action-list-style">
-                                                      <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                          <i class="pe-7s-look"></i>
-                                                      </a>
-                                                  </div>
-                                              </div>
-                                              <div class="product-content-list">
-                                                  <div class="product-list-info">
-                                                      <h4><a href="#">Black Faux Suede </a></h4>
-                                                      <span>$170.00</span>
-                                                      <p>Lorem ipsum dolor sit amet, mana consectetur adipisicing elit, sed do eiusmod tempor labore. </p>
-                                                  </div>
-                                                  <div class="product-list-cart-wishlist">
-                                                      <div class="product-list-cart">
-                                                          <a class="btn-hover list-btn-style" href="#">add to cart</a>
-                                                      </div>
-                                                      <div class="product-list-wishlist">
-                                                          <a class="btn-hover list-btn-wishlist" href="#">
-                                                              <i class="pe-7s-like"></i>
-                                                          </a>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="col-lg-12 col-xl-6">
-                                          <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
-                                              <div class="product-img list-img-width">
-                                                  <a href="#">
-                                                      <img src="{{asset('assets/namiro/img/product/fashion-colorful/1.jpg')}}" alt="">
-                                                  </a>
-                                                  <div class="product-action-list-style">
-                                                      <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                          <i class="pe-7s-look"></i>
-                                                      </a>
-                                                  </div>
-                                              </div>
-                                              <div class="product-content-list">
-                                                  <div class="product-list-info">
-                                                      <h4><a href="#">Jacket Stonewash </a></h4>
-                                                      <span>$190.00</span>
-                                                      <p>Lorem ipsum dolor sit amet, mana consectetur adipisicing elit, sed do eiusmod tempor labore. </p>
-                                                  </div>
-                                                  <div class="product-list-cart-wishlist">
-                                                      <div class="product-list-cart">
-                                                          <a class="btn-hover list-btn-style" href="#">add to cart</a>
-                                                      </div>
-                                                      <div class="product-list-wishlist">
-                                                          <a class="btn-hover list-btn-wishlist" href="#">
-                                                              <i class="pe-7s-like"></i>
-                                                          </a>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
+                                      @if ($products)
+                                        @foreach ($products as $product)
+                                            <div class="col-lg-12 col-xl-6">
+                                                <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
+                                                    <div class="product-img list-img-width">
+                                                        <a href="#">
+                                                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/1.jpg')}}" alt="">
+                                                        </a>
+                                                        <div class="product-action-list-style">
+                                                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                                <i class="pe-7s-look"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-content-list">
+                                                        <div class="product-list-info">
+                                                            <h4><a href="#">{{$product->name}} </a></h4>
+                                                            <span>${{$product->price}}</span>
+                                                            <p>{{ \Illuminate\Support\Str::limit($product->discription, 100 , $end='...') }}</p>
+                                                        </div>
+                                                        <div class="product-list-cart-wishlist">
+                                                            <div class="product-list-cart">
+                                                                <a class="btn-hover list-btn-style" href="#">add to cart</a>
+                                                            </div>
+                                                            <div class="product-list-wishlist">
+                                                                <a class="btn-hover list-btn-wishlist" href="#">
+                                                                    <i class="pe-7s-like"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                      @endif
                                   </div>
                               </div>
                           </div>
                       </div>
                   </div>
-                  <div class="pagination-style mt-50 text-center">
-                      <ul>
-                          <li><a href="#"><i class="ti-angle-left"></i></a></li>
-                          <li><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">...</a></li>
-                          <li><a href="#">19</a></li>
-                          <li class="active"><a href="#"><i class="ti-angle-right"></i></a></li>
-                      </ul>
+                  <div class="pagination-style mt-50 text-center d-flex justify-content-center">
+                      {{-- <ul> --}}
+                          {{-- <li><a href="#"><i class="ti-angle-right"></i></a></li> --}}
+                            @if ($products->links())
+                                {{$products->links()}}
+                            @endif
+                          {{-- <li class="active"><a href="#"><i class="ti-angle-left"></i></a></li> --}}
+                      {{-- </ul> --}}
                   </div>
               </div>
           </div>
