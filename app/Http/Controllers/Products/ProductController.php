@@ -2,6 +2,10 @@
 namespace App\Http\Controllers\Products;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Products\Product;
+use App\Models\Products\Category;
+use App\Models\Specifications\Color;
+use App\Models\Specifications\Size;
 
 class ProductController extends Controller
 {
@@ -13,7 +17,18 @@ class ProductController extends Controller
      */
     public function index()
     {
-      
+      $products = Product::paginate(6);
+      $colors = Color::get();
+      $sizes = Size::get();
+      $categories = Category::with('subcategories','products')->get();
+      $related_products = Product::inRandomOrder()->paginate(4);
+      return view('products.index',[
+          'products'=>$products,
+          'categories'=>$categories,
+          'colors'=>$colors,
+          'sizes'=>$sizes,
+          'related_products'=>$related_products,
+        ]);
     }
 
     /**
