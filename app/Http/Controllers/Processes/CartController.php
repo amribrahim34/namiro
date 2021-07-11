@@ -66,7 +66,7 @@ class CartController extends Controller
                 $prev_cart->update(['quantity'=>1]);
             }
         }
-        
+        return redirect(route('processes.carts.index'));
     }
 
     /**
@@ -110,7 +110,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-      
+      $cart = Cart::find($id);
+      $cart->delete();
     }
   
 }

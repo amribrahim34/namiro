@@ -22,9 +22,9 @@
                             <tbody>
                                 @if (Auth::user()->carts)
                                     @foreach (Auth::user()->carts as $cart)
-                                        <tr>
-                                            <td class="product-remove">
-                                                <a href="#"><i class="pe-7s-close"></i></a>
+                                        <tr id="cart{{$cart->id}}">
+                                            <td class="">
+                                                <button data-cart_id="{{$cart->id}}" class="deleteButton btn btn-light"><i class="pe-7s-close h2 "></i></button>
                                             </td>
                                             <td class="product-thumbnail">
                                                 <a href="#"><img src="assets/img/cart/1.jpg" alt=""></a>
@@ -89,7 +89,7 @@
                                 <tr>
                                     <th></th>
                                     <th>
-                                        <a href="#">Remove <span>x</span></a>
+                                        <a  href="#">Remove <span>x</span></a>
                                         <img src="assets/img/cart/4.jpg" alt="">
                                         <p>Blush Sequin Top </p>
                                         <span>$75.99</span>
@@ -163,4 +163,36 @@
 @endsection
 @section('scripts')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script
+			  src="https://code.jquery.com/jquery-3.6.0.min.js"
+			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			  crossorigin="anonymous"></script>
+<script>
+    $('.deleteButton').on('click',function () {
+        // preventDefault();
+        Swal.fire({
+            title: 'هل انت متأكد من انك تريد الحذف ؟ ',
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var cartId = $(this).data('cart_id');
+                var RequestUrl = '{{route("processes.carts.destroy",'cartId')}}'
+                RequestUrl.replace("cartId",1);
+                $.ajax({
+                    url: RequestUrl.replace("cartId",cartId),
+                    type:'delete',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    context: document.body
+                }).done(function() {
+                    $('#cart'+cartId).remove()
+                });
+            } 
+        });
+    });
+    
+</script>
 @endsection

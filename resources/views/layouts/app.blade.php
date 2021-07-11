@@ -6,9 +6,10 @@
         <title>Ezone - eCommerce HTML5 Template</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/namiro/img/favicon.png')}}">
-		
+		@yield('css')
 		<!-- all css here -->
         <link rel="stylesheet" href="{{asset('assets/namiro/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/namiro/css/magnific-popup.css')}}">
@@ -38,7 +39,8 @@
 		@include('partials.footer')
 		
 		<!-- all js here -->
-        <script src="{{asset('assets/namiro/js/vendor/jquery-1.12.0.min.js')}}"></script>
+        @yield('scripts')
+        {{-- <script src="{{asset('assets/namiro/js/vendor/jquery-1.12.0.min.js')}}"></script> --}}
         <script src="{{asset('assets/namiro/js/popper.js')}}"></script>
         <script src="{{asset('assets/namiro/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('assets/namiro/js/jquery.magnific-popup.min.js')}}"></script>

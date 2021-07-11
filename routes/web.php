@@ -28,8 +28,7 @@ Route::name('specifications.')->namespace('Specifications')->prefix('specificati
 	Route::resource('size', 'SizeController');
 });
 Route::name('processes.')->namespace('Processes')->prefix('processes')->group(function(){
-	Route::get('carts', 'CartController@index')->name('carts.index');
-	Route::resource('carts', 'CartController')->middleware('auth')->except('index');
+	Route::resource('carts', 'CartController')->middleware('auth');
 	Route::resource('wishs', 'WishController');
 	Route::resource('orders', 'OrderController');
 });
