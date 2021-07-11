@@ -1,6 +1,6 @@
 <?php
 
-namespace Products;
+namespace App\Models\Processes;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model {
 
 	protected $table = 'carts';
+	protected $guarded = [];
 	use SoftDeletes;
 
-	public function product(){
-		return $this->belongsTo('App\Models\Products\Product');
+	public function stock(){
+		return $this->belongsTo('App\Models\Calculations\Stock');
 	}
 
 	public function user(){

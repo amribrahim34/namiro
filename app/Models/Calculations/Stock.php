@@ -11,4 +11,16 @@ class Stock extends Model
 		return $this->belongsTo('App\Models\Products\Product');
 	}
 
+	public function size(){
+		return $this->belongsTo('App\Models\Specifications\Size');
+	}
+
+	public function color(){
+		return $this->belongsTo('App\Models\Specifications\Color');
+	}
+
+	public function material(){
+		return $this->belongsTo('App\Models\Specifications\Material');
+	}
+
 }

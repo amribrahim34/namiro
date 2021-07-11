@@ -20,7 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
+        $products = Product::with('stocks','stocks.color','stocks.material','stocks.size')->get();
         return view('admin.products.product.index',['products'=>$products]);
     }
 
@@ -57,25 +57,32 @@ class ProductController extends Controller
         'name' =>'required',
         'discription' =>'required',
         'price' =>'required',
-        'quantity' =>'required',
-        'size_id' =>'required',
-        'color_id' =>'required',
-        'material_id' =>'required',
+        'subcategory_id' =>'required',
+        'group.*.quantity' =>'required',
+        'group.*.size_id' =>'required',
+        'group.*.color_id' =>'required',
+        'group.*.material_id' =>'required',
       ]);
+      // dd($request);
       $product = new Product;
       $product->name = $request->name;
       $product->subcategory_id = $request->subcategory_id;
       $product->discription = $request->discription;
       $product->price = $request->price;
-      $product->color_id = $request->color_id;
-      $product->material_id = $request->material_id;
       $product->save();
-      $stock = new Stock;
-      $stock->amount = $request->quantity;
-      $stock->product_id = $product->id;
-      $stock->save();
-      $product->sizes()->sync([$request->size_id]);
-      return redirect(route('products.product.index'));
+      if ($request->group != null ) {
+        foreach ($request->group as  $item) {
+          $stock = new Stock;
+          $stock->amount = $item['quantity'];
+          $stock->product_id = $product->id;
+          $stock->color_id = $item['color_id'];
+          $stock->material_id = $item['material_id'];
+          $stock->size_id = $item['size_id'];
+          $stock->save();
+        }
+      }
+      // $product->sizes()->sync([$request->size_id]);
+      return redirect(route('admin.products.product.index'));
     }
 
     /**

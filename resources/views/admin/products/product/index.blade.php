@@ -9,18 +9,41 @@
 	<div class="card-body">
 		@if($products->count() >0)
 		<table id="DataTable" class="w-100">
+
 			<thead>
-				<tr class="d-flex justify-content-around">
+				<tr class="">
 					<td >#</td>
 					<td >Name</td>
 					<td >price</td>
 					<td >category</td>
 					<td >subcategory</td>
 					<td >color</td>
+					<td >quantity</td>
 					<td >material</td>
+					<td >size</td>
 					<td >discription</td>
 				</tr>
 			</thead>
+			<tbody>
+				@foreach($products as $product)
+					@if ($product->stocks )
+						@foreach ($product->stocks as $stock)
+							<tr>
+								<td>{{$product->id}} </td>
+								<td>{{$product->name}} </td>
+								<td>{{$product->price}} </td>
+								<td>{{$product->subcategory->category->title}} </td>
+								<td>{{$product->subcategory->title}} </td>
+								<td>{{$stock->color->title}} </td>
+								<td>{{$stock->amount}} </td>
+								<td>{{$stock->material->title}} </td>
+								<td>{{$stock->size->title}} </td>
+								<td>{{$product->discription}} </td>
+							</tr>
+						@endforeach
+					@endif
+				@endforeach
+			</tbody>
 		</table>
 		@endif
 	</div>

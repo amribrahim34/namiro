@@ -4,11 +4,13 @@ namespace App\Models\Products;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 class Product extends Model {
 
 	protected $table = 'products';
 	use SoftDeletes;
+	use HasRelationships;
 
 	public function category(){
 		return $this->belongsTo(Category::class);
@@ -18,17 +20,6 @@ class Product extends Model {
 		return $this->belongsTo(Subcategory::class);
 	}
 
-	public function color(){
-		return $this->belongsTo('App\Models\Specifications\Color');
-	}
-
-	public function material(){
-		return $this->belongsTo('App\Models\Specifications\Material');
-	}
-
-	public function sizes(){
-		return $this->belongsToMany('App\Models\Specifications\Size');
-	}
 
 	public function carts(){
 		return $this->hasMany('App\Models\Processes\Cart');

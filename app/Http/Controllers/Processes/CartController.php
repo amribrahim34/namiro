@@ -2,6 +2,11 @@
 namespace App\Http\Controllers\Processes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Processes\Cart;
+use App\Models\Calculations\Stock;
+use App\Models\Products\Product;
+use Illuminate\Support\Facades\Auth;
+
 
 class CartController extends Controller 
 {
@@ -12,7 +17,8 @@ class CartController extends Controller
      */
     public function index()
     {
-      
+        $carts = Cart::with('stock','stock.product','stock.color','stock.material','stock.size')->where('user_id',Auth::id())->get();
+        return view('processes.cart.index',['carts'=>$carts]);
     }
 
     /**
@@ -30,9 +36,37 @@ class CartController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-      
+        $product = Product::find($request->product_id);
+        // dd($product);
+        $prev_cart = Cart::whereIn('stock_id' , $product->stocks->pluck('id'))->first();
+        if ( $prev_cart  == null) {
+            $stock = Stock::where('product_id' ,$request->product_id);
+            if ($request->color_id) {
+                $stock = $stock->where('color_id' ,$request->color_id);
+            }
+            if ($request->size_id) {
+                $stock = $stock->where('size_id' ,$request->size_id);
+            }
+            $stock = $stock->get()->first();  
+            $cart = new Cart;
+            $cart->stock_id = $stock->id;
+            if ($request->quantity) {
+                $cart->quantity = $request->quantity;
+            }else{
+                $cart->quantity = 1;
+            }
+            $cart->user_id = Auth::id();
+            $cart->save();
+        }else {
+            if ($request->quantity) {
+                $prev_cart->update(['quantity'=>$request->quantity]);
+            }else{
+                $prev_cart->update(['quantity'=>1]);
+            }
+        }
+        return redirect(route('processes.carts.index'));
     }
 
     /**
@@ -76,7 +110,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-      
+      $cart = Cart::find($id);
+      $cart->delete();
     }
   
 }

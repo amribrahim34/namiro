@@ -13,6 +13,12 @@ class CreateStocksTable extends Migration {
 			$table->integer('amount');
 			$table->unsignedBigInteger('product_id');
 			$table->foreign('product_id')->references('id')->on('products');
+			$table->unsignedBigInteger('material_id')->nullable();
+			$table->foreign('material_id')->references('id')->on('materials');
+			$table->unsignedBigInteger('color_id')->nullable();
+			$table->foreign('color_id')->references('id')->on('colors');
+			$table->unsignedBigInteger('size_id')->nullable();
+			$table->foreign('size_id')->references('id')->on('sizes');
 			$table->softDeletes();
 			$table->timestamps();
 		});

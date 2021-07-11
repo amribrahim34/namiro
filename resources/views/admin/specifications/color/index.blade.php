@@ -19,7 +19,7 @@
 				@foreach($colors as $color)
 				<tr>
 					<td>{{$color->id}} </td>
-					<td>{{$color->name}} </td>
+					<td>{{$color->title}} </td>
 				</tr>
 				@endforeach
 			</tbody>

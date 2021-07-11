@@ -28,9 +28,9 @@ Route::name('specifications.')->namespace('Specifications')->prefix('specificati
 	Route::resource('size', 'SizeController');
 });
 Route::name('processes.')->namespace('Processes')->prefix('processes')->group(function(){
-	Route::resource('cart', 'CartController');
-	Route::resource('wish', 'WishController');
-	Route::resource('order', 'OrderController');
+	Route::resource('carts', 'CartController')->middleware('auth');
+	Route::resource('wishs', 'WishController');
+	Route::resource('orders', 'OrderController');
 });
 Route::name('products.')->namespace('Products')->prefix('products')->group(function(){
 	Route::resource('category', 'CategoryController');
