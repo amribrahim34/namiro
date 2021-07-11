@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="{{asset('assets/namiro/css/pe-icon-7-stroke.css')}}">
         <link rel="stylesheet" href="{{asset('assets/namiro/css/icofont.css')}}">
         <link rel="stylesheet" href="{{asset('assets/namiro/css/meanmenu.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/namiro/css/jquery-ui.css')}}">
         <link rel="stylesheet" href="{{asset('assets/namiro/css/bundle.css')}}">
         <link rel="stylesheet" href="{{asset('assets/namiro/css/style.css')}}">
         <link rel="stylesheet" href="{{asset('assets/namiro/css/responsive.css')}}">

@@ -9588,3 +9588,21 @@ input.cart-plus-minus-box {
 .modal-content .close:hover {
     color: #050035;
 }
+
+/* mystyle */
+
+.product-action button {
+    background-color: #383838;
+    border-radius: 100%;
+    color: #f7f7f7;
+    display: inline-block;
+    font-size: 24px;
+    height: 45px;
+    line-height: 52px;
+    margin: 0 15px;
+    width: 45px;
+}
+
+.product-action button {
+    margin: 0 12px;
+}

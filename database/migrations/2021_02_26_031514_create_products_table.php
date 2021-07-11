@@ -14,7 +14,7 @@ class CreateProductsTable extends Migration {
 			$table->float('price');
 			$table->unsignedBigInteger('subcategory_id');
 			$table->foreign('subcategory_id')->references('id')->on('subcategories');
-			$table->string('discription');
+			$table->text('discription');
 			$table->timestamps();
 			$table->softDeletes();
 		});

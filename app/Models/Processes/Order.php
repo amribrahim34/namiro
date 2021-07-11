@@ -1,6 +1,6 @@
 <?php
 
-namespace Orders;
+namespace App\Models\Processes;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;

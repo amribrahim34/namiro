@@ -4,11 +4,13 @@ namespace App\Models\Products;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 class Product extends Model {
 
 	protected $table = 'products';
 	use SoftDeletes;
+	use HasRelationships;
 
 	public function category(){
 		return $this->belongsTo(Category::class);

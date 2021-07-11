@@ -70,7 +70,7 @@
                             <option selected="" disabled="">select colors</option>
                             @if($colors->count() > 0)
                             @foreach($colors as $color)
-                            <option value="{{$color->id}}"> {{$color->name}}</option>
+                            <option value="{{$color->id}}"> {{$color->title}}</option>
                             @endforeach
                             @endif
                         </select>
@@ -121,7 +121,21 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 $('.select2').select2();
-                $('form').repeater();
+                $('form').repeater({
+                    show: function () {
+                        $(this).slideDown();
+                        $('.select2-container').remove();
+                        $('.select2').select2({
+                            placeholder: 'اختر'
+                        });
+                        $('.select2-container').css('width','100%');
+                    },
+                    // hide: function (remove) {
+                    //     if(confirm('Confirm Question')) {
+                    //     $(this).slideUp(remove);
+                    //     }
+                    // }
+                });
             });
         </script>
 @endsection

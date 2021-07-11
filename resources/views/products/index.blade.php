@@ -15,20 +15,20 @@
                               </form>
                           </div>
                       </div>
-                      <div class="sidebar-widget mb-40">
-                          <h3 class="sidebar-title text-right">السعر</h3>
+                      <div class="sidebar-widget mb-40 text-right">
+                          <h3 class="sidebar-title">السعر</h3>
                           <div class="price_filter">
                               <div id="slider-range"></div>
-                              <div class="price_slider_amount">
-                                  <div class="label-input">
-                                      <label>price : </label>
+                              <div class="price_slider_amoun text-right">
+                                  <div class="label-input d-flex row-reverse ">
+                                      <label class="">السعر : </label>
                                       <input type="text" id="amount" name="price"  placeholder="Add Your Price" />
                                   </div>
-                                  <button type="button">Filter</button> 
+                                  {{-- <button type="button">Filter</button>  --}}
                               </div>
                           </div>
                       </div>
-                      <div class="sidebar-widget mb-45">
+                      <div class="sidebar-widget mb-45 text-right">
                           <h3 class="sidebar-title text-right"> القسم </h3>
                           <div class="sidebar-categories">
                               <ul>
@@ -78,7 +78,7 @@
                                 <div class="sidebar-top-rated mb-30">
                                   <div class="single-top-rated">
                                       <div class="top-rated-img">
-                                          <a href="#"><img src="{{asset('assets/namiro/img/product/sidebar-product/4.jpg')}}" alt=""></a>
+                                          <a href="{{route('products.product.show',$product->id)}}"><img src="{{asset('assets/namiro/img/product/sidebar-product/4.jpg')}}" alt=""></a>
                                       </div>
                                       <div class="top-rated-text">
                                           <h4><a href="#">{{$product->name}}</a></h4>
@@ -138,7 +138,7 @@
                                         <div class="col-md-6 col-xl-4">
                                           <div class="product-wrapper mb-30">
                                               <div class="product-img">
-                                                  <a href="#">
+                                                  <a href="{{route('products.product.show',$product->id)}}">
                                                       <img src="{{asset('assets/namiro/img/product/fashion-colorful/1.jpg')}}" alt="">
                                                   </a>
                                                   <span>hot</span>
@@ -146,16 +146,23 @@
                                                       <a class="animate-left" title="Wishlist" href="#">
                                                           <i class="pe-7s-like"></i>
                                                       </a>
-                                                      <a class="animate-top" title="Add To Cart" href="#">
+                                                        <form class="d-inline p-0" action="{{route('processes.carts.store')}}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                                                            <button type="submit" class="animate-top btn " title="اضافة الي السلة ">
+                                                                <i class="pe-7s-cart"></i>
+                                                            </button>
+                                                        </form>
+                                                      {{-- <a class="animate-top" title="Add To Cart" href="#">
                                                           <i class="pe-7s-cart"></i>
-                                                      </a>
-                                                      <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                      </a> --}}
+                                                      <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#product{{$product->id}}" href="#">
                                                           <i class="pe-7s-look"></i>
                                                       </a>
                                                   </div>
                                               </div>
-                                              <div class="product-content">
-                                                  <h4><a href="#"> {{$product->name}} </a></h4>
+                                              <div class="product-content text-right">
+                                                  <h4><a href="{{route('products.product.show',$product->id)}}"> {{$product->name}} </a></h4>
                                                   <span>${{$product->price}} </span>
                                               </div>
                                           </div>
@@ -171,7 +178,7 @@
                                             <div class="col-lg-12 col-xl-6">
                                                 <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
                                                     <div class="product-img list-img-width">
-                                                        <a href="#">
+                                                        <a href="{{route('products.product.show',$product->id)}}">
                                                             <img src="{{asset('assets/namiro/img/product/fashion-colorful/1.jpg')}}" alt="">
                                                         </a>
                                                         <div class="product-action-list-style">
@@ -182,7 +189,7 @@
                                                     </div>
                                                     <div class="product-content-list">
                                                         <div class="product-list-info">
-                                                            <h4><a href="#">{{$product->name}} </a></h4>
+                                                            <h4><a href="{{route('products.product.show',$product->id)}}">{{$product->name}} </a></h4>
                                                             <span>${{$product->price}}</span>
                                                             <p>{{ \Illuminate\Support\Str::limit($product->discription, 100 , $end='...') }}</p>
                                                         </div>
@@ -219,4 +226,107 @@
           </div>
       </div>
   </div>
+  @if ($products)
+      @foreach ($products as $product)
+        <!-- modal -->
+        <div class="modal fade " id="product{{$product->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="pe-7s-close" aria-hidden="true"></span>
+            </button>
+            <div class="modal-dialog modal-quickview-width " role="document">
+                <div class="modal-content ">
+                    <div class="modal-body">
+                        <div class="qwick-view-left text-right">
+                            <div class="quick-view-learg-img">
+                                <div class="quick-view-tab-content tab-content">
+                                    <div class="tab-pane active show fade" id="modal1" role="tabpanel">
+                                        <img src="{{asset('assets/namiro/img/quick-view/l1.jpg')}}" alt="">
+                                    </div>
+                                    <div class="tab-pane fade" id="modal2" role="tabpanel">
+                                        <img src="{{asset('assets/namiro/img/quick-view/l2.jpg')}}" alt="">
+                                    </div>
+                                    <div class="tab-pane fade" id="modal3" role="tabpanel">
+                                        <img src="{{asset('assets/namiro/img/quick-view/l3.jpg')}}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="quick-view-list nav" role="tablist">
+                                <a class="active" href="#modal1" data-toggle="tab" role="tab">
+                                    <img src="{{asset('assets/namiro/img/quick-view/s1.jpg')}}" alt="">
+                                </a>
+                                <a href="#modal2" data-toggle="tab" role="tab">
+                                    <img src="{{asset('assets/namiro/img/quick-view/s2.jpg')}}" alt="">
+                                </a>
+                                <a href="#modal3" data-toggle="tab" role="tab">
+                                    <img src="{{asset('assets/namiro/img/quick-view/s3.jpg')}}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="qwick-view-right">
+                            <div class="qwick-view-content text-right">
+                                <h3 class="text-right">{{$product->name}}</h3>
+                                <div class="price">
+                                    <span class="new">${{$product->price}}</span>
+                                    {{-- <span class="old">$120.00  </span> --}}
+                                </div>
+                                <div class="rating-number">
+                                    <div class="quick-view-rating">
+                                        <i class="pe-7s-star"></i>
+                                        <i class="pe-7s-star"></i>
+                                        <i class="pe-7s-star"></i>
+                                        <i class="pe-7s-star"></i>
+                                        <i class="pe-7s-star"></i>
+                                    </div>
+                                    <div class="quick-view-number">
+                                        <span>2 Ratting (S)</span>
+                                    </div>
+                                </div>
+                                <p class="text-right">{{$product->discription}}</p>
+                                <form action="{{route('processes.carts.store')}}" method="post">
+                                    @csrf
+                                <div class="quick-view-select">
+                                    @if ($sizes)
+                                    <div class="select-option-part">
+                                        <label>الحجم*</label>
+                                        <select class="select" name="size_id" required>
+                                            <option value="">- اختر الحجم-</option>
+                                                @foreach ($sizes as $size)
+                                                    <option value="{{$size->id}}">{{$size->title}}</option>
+                                                @endforeach
+                                        </select>
+                                    </div>
+                                    @endif
+                                    @if ($colors)
+                                    <div class="select-option-part">
+                                        <label>اللون*</label>
+                                        <select class="select" required>
+                                            <option value="">- اختر اللون-</option>
+                                                @foreach ($colors as $color)
+                                                    <option value="{{$color->id}}">{{$color->title}}</option>
+                                                @endforeach
+                                        </select>
+                                    </div>
+                                    @endif
+                                </div>
+                                <div class="quickview-plus-minus">
+                                    <div class="cart-plus-minus">
+                                        <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box" required>
+                                    </div>
+                                    <div class="quickview-btn-cart">
+                                        <a class="btn-hover-black" href="#">add to cart</a>
+                                    </div>
+                                    <div class="quickview-btn-wishlist">
+                                        <a class="btn-hover" href="#"><i class="pe-7s-like"></i></a>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!-- modal -->
+      @endforeach
+  @endif
 @endsection

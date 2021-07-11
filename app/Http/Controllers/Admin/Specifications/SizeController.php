@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin\Specifications;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Specifications\Size;
+use Illuminate\Support\Facades\Auth;
 
 class SizeController extends Controller 
 {
