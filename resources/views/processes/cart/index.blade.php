@@ -34,9 +34,16 @@
                                             </td>
                                             <td class="product-price-cart"><span class="amount">${{$cart->stock->product->price}}</span></td>
                                             <td class="product-quantity">
-                                                <input value="{{$cart->quantity}}" type="number">
+                                                <input class="quantity" data-cart_id = "{{$cart->id}}" data-price="{{$cart->stock->product->price}}" value="{{$cart->quantity}}" type="number">
                                             </td>
-                                            <td class="product-subtotal">$165.00</td>
+                                            <td class="product-subtotal">
+                                                <span id="total{{$cart->id}}">
+                                                    {{$cart->quantity * $cart->stock->product->price}}
+                                                </span>
+                                                <span>
+                                                    ج.م
+                                                </span>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -46,12 +53,12 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="coupon-all">
-                                <div class="coupon">
+                                {{-- <div class="coupon">
                                     <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
                                     <input class="button" name="apply_coupon" value="Apply coupon" type="submit">
-                                </div>
+                                </div> --}}
                                 <div class="coupon2">
-                                    <input class="button" name="update_cart" value="Update cart" type="submit">
+                                    <input class="button" id="update_cart" name="update_cart" value="تحديث السلة " type="button">
                                 </div>
                             </div>
                         </div>
@@ -179,7 +186,6 @@
             if (result.isConfirmed) {
                 var cartId = $(this).data('cart_id');
                 var RequestUrl = '{{route("processes.carts.destroy",'cartId')}}'
-                RequestUrl.replace("cartId",1);
                 $.ajax({
                     url: RequestUrl.replace("cartId",cartId),
                     type:'delete',
@@ -193,6 +199,35 @@
             } 
         });
     });
-    
+    $('.quantity').change(function(){
+        var span_id = '#total'+$(this).data('cart_id');
+        console.log(span_id);
+        var price = $(this).data('price');
+        var value = $(this).val();
+        $(span_id).html(price * value);
+    });
+    $('#update_cart').click(function(){
+        var jsonData = [];
+        $('.quantity').each(function(){
+            var item = {};
+            item ["id"] = $(this).data('cart_id');
+            item ["quantity"] = $(this).val();
+            jsonData.push(item);
+            console.log(jsonData);
+        });
+        var RequestUrl = '{{route("processes.carts.update")}}'
+        $.ajax({
+                url: RequestUrl,
+                type:'post',
+                data: {data:jsonData},
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                context: document.body
+        }).done(function() {
+                // $('#cart'+cartId).remove()
+        });
+
+    });
 </script>
 @endsection

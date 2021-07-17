@@ -28,7 +28,8 @@ Route::name('specifications.')->namespace('Specifications')->prefix('specificati
 	Route::resource('size', 'SizeController');
 });
 Route::name('processes.')->namespace('Processes')->prefix('processes')->group(function(){
-	Route::resource('carts', 'CartController')->middleware('auth');
+	Route::post('carts/update', 'CartController@update')->name('carts.update')->middleware('auth');
+	Route::resource('carts', 'CartController')->except('update')->middleware('auth');
 	Route::resource('wishs', 'WishController');
 	Route::resource('orders', 'OrderController');
 });

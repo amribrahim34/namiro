@@ -18,18 +18,11 @@
         </div>
     @endif
     <div class="card-block">
-        <form class="form-material" method="POST" action="{{route('admin.products.product.store')}}">
+        <form class="form-material" method="POST" action="{{route('admin.products.product.store')}}" enctype="multipart/form-data" >
             @CSRF
-            {{-- <div class="form-group form-default">
-                <select class="form-control select2" name="category_id" >
-                    <option selected="" disabled="">select category</option>
-                    @if($categories->count() > 0)
-                    @foreach($categories as $category)
-                    <option value="{{$category->id}}"> {{$category->title}}</option>
-                    @endforeach
-                    @endif
-                </select>
-            </div> --}}
+            <div class="form-group form-default">
+                <input type="file" name="cover" id="" class="form-control">
+            </div>
             <div class="form-group form-default">
                 <select class="form-control select2" name="subcategory_id" >
                     <option selected="" disabled="">select subcategory</option>
@@ -98,6 +91,11 @@
                     <div class="form-group form-default col-md-2">
                         <input type="number" name="quantity" class="form-control" value="{{old('quantity')}}" required>
                     </div>
+                    <div class="row">
+                        <div>
+                            <input type="file" name="" id="" class="dropzone">
+                        </div>
+                    </div>
                     <input data-repeater-delete type="button" value="delete" class="btn btn-danger "/>
                 </div>
             </div>
@@ -113,11 +111,13 @@
 @section('css')
     @parent
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="{{asset('assets/megable/js/dropzone-5.7.0/dropzone.min.css')}}"></script>
 @endsection
 @section('js')
     @parent
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script src="{{asset('assets/megable/js/jquery.repeater.min.js')}}"></script>
+        <script src="{{asset('assets/megable/js/dropzone-5.7.0/dropzone.min.js')}}"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                 $('.select2').select2();
@@ -136,6 +136,16 @@
                     //     }
                     // }
                 });
+                Dropzone.options.myAwesomeDropzone = {
+                    paramName: "file", // The name that will be used to transfer the file
+                    maxFilesize: 2, // MB
+                    accept: function(file, done) {
+                        if (file.name == "justinbieber.jpg") {
+                        done("Naha, you don't.");
+                        }
+                        else { done(); }
+                }
+                };      
             });
         </script>
 @endsection

@@ -6,6 +6,7 @@ use App\Models\Processes\Cart;
 use App\Models\Calculations\Stock;
 use App\Models\Products\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
 
 
 class CartController extends Controller 
@@ -97,9 +98,14 @@ class CartController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request)
     {
-      
+        $data = $request->data;
+        foreach ($data as $cart) {
+            $modified_cart = Cart::find($cart['id']);
+            $modified_cart->update(['quantity' => $cart['quantity']]);
+        }
+        return 'updated successfully ';
     }
 
     /**
