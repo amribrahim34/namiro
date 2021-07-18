@@ -101,11 +101,12 @@ class CartController extends Controller
     public function update(Request $request)
     {
         $data = $request->data;
+        $total =0;
         foreach ($data as $cart) {
             $modified_cart = Cart::find($cart['id']);
-            $modified_cart->update(['quantity' => $cart['quantity']]);
+            $modified_cart->update(['quantity' => $cart['quantity']]);$total +=$modified_cart->quantity * $modified_cart->stock->product->price;
         }
-        return 'updated successfully ';
+        return  json_encode(['total'=>$total]);
     }
 
     /**
@@ -116,8 +117,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-      $cart = Cart::find($id);
-      $cart->delete();
+        $cart = Cart::find($id);
+        $cart->forceDelete();
     }
   
 }

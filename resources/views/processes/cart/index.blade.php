@@ -24,7 +24,9 @@
                                     @foreach (Auth::user()->carts as $cart)
                                         <tr id="cart{{$cart->id}}">
                                             <td class="">
-                                                <button data-cart_id="{{$cart->id}}" class="deleteButton btn btn-light"><i class="pe-7s-close h2 "></i></button>
+                                                <button data-cart_id="{{$cart->id}}" type="button" class="deleteButton btn btn-light">
+                                                    <i class="pe-7s-close h2 "></i>
+                                                </button>
                                             </td>
                                             <td class="product-thumbnail">
                                                 <a href="#"><img src="assets/img/cart/1.jpg" alt=""></a>
@@ -66,13 +68,15 @@
                     <div class="row">
                         <div class="col-md-5 ml-auto">
                             <div class="cart-page-total">
-                                <h2>Cart totals</h2>
+                                <h2> مجموع السلة  </h2>
                                 <ul>
-                                    <li>Subtotal<span>100.00</span></li>
-                                    <li>Total<span>100.00</span></li>
+                                    <li> <span id='subtotal_span' >100.00</span>السعر </li>
+                                    <li> السعر الكلي 
+                                        <span id='total_span'>100.00</span> 
+                                    </li>
                                 </ul>
-                                <a href="#">Proceed to checkout</a>
-                            </div>
+                                <a href="{{route('processes.orders.index')}}"> الدفع </a>
+                            </div> 
                         </div>
                     </div>
                 </form>
@@ -169,14 +173,13 @@
 </div>
 @endsection
 @section('scripts')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script
 			  src="https://code.jquery.com/jquery-3.6.0.min.js"
 			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			  crossorigin="anonymous"></script>
 <script>
+    // $('form').preventDefault();
     $('.deleteButton').on('click',function () {
-        // preventDefault();
         Swal.fire({
             title: 'هل انت متأكد من انك تريد الحذف ؟ ',
             showCloseButton: true,
@@ -201,7 +204,6 @@
     });
     $('.quantity').change(function(){
         var span_id = '#total'+$(this).data('cart_id');
-        console.log(span_id);
         var price = $(this).data('price');
         var value = $(this).val();
         $(span_id).html(price * value);
@@ -213,7 +215,6 @@
             item ["id"] = $(this).data('cart_id');
             item ["quantity"] = $(this).val();
             jsonData.push(item);
-            console.log(jsonData);
         });
         var RequestUrl = '{{route("processes.carts.update")}}'
         $.ajax({
@@ -224,10 +225,11 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 context: document.body
-        }).done(function() {
-                // $('#cart'+cartId).remove()
+        }).done(function(total) {
+            var obj = jQuery.parseJSON(total);
+            $('#subtotal_span').html(obj.total);
+            $('#total_span').html(obj.total);
         });
-
     });
 </script>
 @endsection
