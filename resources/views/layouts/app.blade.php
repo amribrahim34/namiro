@@ -40,7 +40,33 @@
 		
 		<!-- all js here -->
         @yield('scripts')
+        <script>
+            $('.cart-delete-button').on('click',function () {
+                Swal.fire({
+                    title: 'هل انت متأكد من انك تريد الحذف ؟ ',
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var cartId = $(this).data('cart_id');
+                        var RequestUrl = '{{route("processes.carts.destroy",'cartId')}}'
+                        $.ajax({
+                            url: RequestUrl.replace("cartId",cartId),
+                            type:'delete',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            context: document.body
+                        }).done(function() {
+                            $('#dropdowncart'+cartId).remove()
+                        });
+                    } 
+                });
+            });
+        </script>
         {{-- <script src="{{asset('assets/namiro/js/vendor/jquery-1.12.0.min.js')}}"></script> --}}
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="{{asset('assets/namiro/js/popper.js')}}"></script>
         <script src="{{asset('assets/namiro/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('assets/namiro/js/jquery.magnific-popup.min.js')}}"></script>

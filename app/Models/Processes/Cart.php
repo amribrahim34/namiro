@@ -15,6 +15,10 @@ class Cart extends Model {
 		return $this->belongsTo('App\Models\Calculations\Stock');
 	}
 
+	public function order(){
+		return $this->belongsTo('App\Models\Processes\Order');
+	}
+
 	public function user(){
 		return $this->hasOne('App\User');
 	}

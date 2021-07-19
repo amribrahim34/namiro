@@ -439,7 +439,7 @@
     opacity: 0;
     padding: 20px 20px 47px;
     position: absolute;
-    right: 0;
+    left: 0;
     top: 140%;
     transition: all 0.3s ease 0s;
     visibility: hidden;
@@ -9603,6 +9603,29 @@ input.cart-plus-minus-box {
     width: 45px;
 }
 
+.order-button-payment .confirm-button:hover {
+    background: #050035;
+    border: 1px solid #050035;
+    color: #fff;
+}
+
 .product-action button {
     margin: 0 12px;
 }
+
+.order-button-payment .confirm-button {
+    background: #464646 none repeat scroll 0 0;
+    border: medium none;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    height: 50px;
+    margin: 20px 0 0;
+    padding: 0;
+    text-transform: uppercase;
+    transition: all 0.3s ease 0s;
+    width: 100%;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+

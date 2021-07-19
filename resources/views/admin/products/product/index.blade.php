@@ -28,7 +28,7 @@
 				@foreach($products as $product)
 					@if ($product->stocks )
 						@foreach ($product->stocks as $stock)
-							<tr>
+							<tr class="text-center">
 								<td>{{$product->id}} </td>
 								<td>{{$product->name}} </td>
 								<td>{{$product->price}} </td>
@@ -38,7 +38,7 @@
 								<td>{{$stock->amount}} </td>
 								<td>{{$stock->material->title}} </td>
 								<td>{{$stock->size->title}} </td>
-								<td>{{$product->discription}} </td>
+								<td class="text-wrap"> {{ \Illuminate\Support\Str::limit($product->discription, 50, $end='...') }}</td>
 							</tr>
 						@endforeach
 					@endif

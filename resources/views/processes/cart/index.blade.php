@@ -24,7 +24,9 @@
                                     @foreach (Auth::user()->carts as $cart)
                                         <tr id="cart{{$cart->id}}">
                                             <td class="">
-                                                <button data-cart_id="{{$cart->id}}" class="deleteButton btn btn-light"><i class="pe-7s-close h2 "></i></button>
+                                                <button data-cart_id="{{$cart->id}}" type="button" class="deleteButton btn btn-light">
+                                                    <i class="pe-7s-close h2 "></i>
+                                                </button>
                                             </td>
                                             <td class="product-thumbnail">
                                                 <a href="#"><img src="assets/img/cart/1.jpg" alt=""></a>
@@ -34,9 +36,16 @@
                                             </td>
                                             <td class="product-price-cart"><span class="amount">${{$cart->stock->product->price}}</span></td>
                                             <td class="product-quantity">
-                                                <input value="{{$cart->quantity}}" type="number">
+                                                <input class="quantity" data-cart_id = "{{$cart->id}}" data-price="{{$cart->stock->product->price}}" value="{{$cart->quantity}}" type="number">
                                             </td>
-                                            <td class="product-subtotal">$165.00</td>
+                                            <td class="product-subtotal">
+                                                <span id="total{{$cart->id}}">
+                                                    {{$cart->quantity * $cart->stock->product->price}}
+                                                </span>
+                                                <span>
+                                                    ج.م
+                                                </span>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -46,12 +55,12 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="coupon-all">
-                                <div class="coupon">
+                                {{-- <div class="coupon">
                                     <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
                                     <input class="button" name="apply_coupon" value="Apply coupon" type="submit">
-                                </div>
+                                </div> --}}
                                 <div class="coupon2">
-                                    <input class="button" name="update_cart" value="Update cart" type="submit">
+                                    <input class="button" id="update_cart" name="update_cart" value="تحديث السلة " type="button">
                                 </div>
                             </div>
                         </div>
@@ -59,13 +68,15 @@
                     <div class="row">
                         <div class="col-md-5 ml-auto">
                             <div class="cart-page-total">
-                                <h2>Cart totals</h2>
+                                <h2> مجموع السلة  </h2>
                                 <ul>
-                                    <li>Subtotal<span>100.00</span></li>
-                                    <li>Total<span>100.00</span></li>
+                                    <li> <span id='subtotal_span' >100.00</span>السعر </li>
+                                    <li> السعر الكلي 
+                                        <span id='total_span'>100.00</span> 
+                                    </li>
                                 </ul>
-                                <a href="#">Proceed to checkout</a>
-                            </div>
+                                <a href="{{route('processes.orders.index')}}"> الدفع </a>
+                            </div> 
                         </div>
                     </div>
                 </form>
@@ -162,14 +173,13 @@
 </div>
 @endsection
 @section('scripts')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script
 			  src="https://code.jquery.com/jquery-3.6.0.min.js"
 			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			  crossorigin="anonymous"></script>
 <script>
+    // $('form').preventDefault();
     $('.deleteButton').on('click',function () {
-        // preventDefault();
         Swal.fire({
             title: 'هل انت متأكد من انك تريد الحذف ؟ ',
             showCloseButton: true,
@@ -179,7 +189,6 @@
             if (result.isConfirmed) {
                 var cartId = $(this).data('cart_id');
                 var RequestUrl = '{{route("processes.carts.destroy",'cartId')}}'
-                RequestUrl.replace("cartId",1);
                 $.ajax({
                     url: RequestUrl.replace("cartId",cartId),
                     type:'delete',
@@ -193,6 +202,34 @@
             } 
         });
     });
-    
+    $('.quantity').change(function(){
+        var span_id = '#total'+$(this).data('cart_id');
+        var price = $(this).data('price');
+        var value = $(this).val();
+        $(span_id).html(price * value);
+    });
+    $('#update_cart').click(function(){
+        var jsonData = [];
+        $('.quantity').each(function(){
+            var item = {};
+            item ["id"] = $(this).data('cart_id');
+            item ["quantity"] = $(this).val();
+            jsonData.push(item);
+        });
+        var RequestUrl = '{{route("processes.carts.update")}}'
+        $.ajax({
+                url: RequestUrl,
+                type:'post',
+                data: {data:jsonData},
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                context: document.body
+        }).done(function(total) {
+            var obj = jQuery.parseJSON(total);
+            $('#subtotal_span').html(obj.total);
+            $('#total_span').html(obj.total);
+        });
+    });
 </script>
 @endsection

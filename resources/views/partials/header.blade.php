@@ -17,6 +17,13 @@
                                     <li><a href="index-fashion-2.html">Fashion style 2</a></li>
                                 </ul> --}}
                             </li>
+                            <li>
+                                <a href="{{route('products.product.index')}}">تصفح المنتجات </a>
+                                {{-- <ul class="single-dropdown">
+                                    <li><a href="index.html">Fashion</a></li>
+                                    <li><a href="index-fashion-2.html">Fashion style 2</a></li>
+                                </ul> --}}
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -29,9 +36,11 @@
                         @endif
                     </a>
                     <ul class="cart-dropdown text-right ">
+                        @php $total = 0 @endphp
                         @if (Auth::user()->carts->count() >0 )
-                            @foreach (Auth::user()->carts as $cart)                        
-                                <li class="single-product-cart">
+                            @foreach (Auth::user()->carts as $cart) 
+                                @php $total += $cart->stock->product->price * $cart->quantity @endphp                       
+                                <li class="single-product-cart" id="dropdowncart{{$cart->id}}">
                                     <div class="cart-img">
                                         <a href="{{route('products.product.show',$cart->stock->product_id)}}">
                                             <img src="{{asset('assets/namiro/img/cart/1.jpg')}}" alt="">
@@ -40,25 +49,25 @@
                                     <div class="cart-title">
                                         <h5><a href="#"> {{$cart->stock->product->name}}</a></h5>
                                         <h6><a href="#">{{$cart->stock->color ? $cart->stock->color->title : ''}}</a></h6>
-                                        <span>${{$cart->stock->product->price}} x {{$cart->stock->amount}}</span>
+                                        <span>{{$cart->stock->product->price}}  * {{$cart->quantity}}</span>
                                     </div>
                                     <div class="cart-delete">
-                                        <a href="#"><i class="ti-trash"></i></a>
+                                        <a href="#" class="cart-delete-button" data-cart_id="{{$cart->id}}"><i class="ti-trash"></i></a>
                                     </div>
                                 </li>
                             @endforeach
                         @endif
                         <li class="cart-space">
                             <div class="cart-sub">
-                                <h4>Subtotal</h4>
+                                <h4>المجموع</h4>
                             </div>
-                            <div class="cart-price">
-                                <h4>$240.00</h4>
+                            <div class="cart-price" id="menue-cart-price">
+                                <h4>{{$total}}</h4>
                             </div>
                         </li>
                         <li class="cart-btn-wrapper">
-                            <a class="cart-btn btn-hover" href="{{route('processes.carts.index')}}">view cart</a>
-                            <a class="cart-btn btn-hover" href="#">checkout</a>
+                            <a class="cart-btn btn-hover" href="{{route('processes.carts.index')}}">السلة </a>
+                            <a class="cart-btn btn-hover" href="{{route('processes.orders.index')}}">الدفع</a>
                         </li>
                     </ul>
                 </div>
@@ -75,6 +84,9 @@
                                         <li><a href="index-fashion-2.html">Fashion style 2</a></li> --}}
                                     </ul>
                                 </li>
+                                <li>
+                                    <a href="{{route('products.product.index')}}">تصفح المنتجات </a>
+                                </li>
                                 
                             </ul>
                         </nav>							
@@ -86,12 +98,14 @@
     <div class="header-bottom-furniture wrapper-padding-2 border-top-3">
         <div class="container-fluid">
             <div class="furniture-bottom-wrapper">
-                <div class="furniture-login">
-                    <ul>
-                        <li> <a href="{{route('login')}}"> تسجيل الدخول</a></li>
-                        <li><a href="{{route('register')}}">تسجيل </a></li>
-                    </ul>
-                </div>
+                @if (!Auth::check())
+                    <div class="furniture-login">
+                        <ul>
+                            <li> <a href="{{route('login')}}"> تسجيل الدخول</a></li>
+                            <li><a href="{{route('register')}}">تسجيل </a></li>
+                        </ul>
+                    </div>
+                @endif
                 <div class="furniture-search">
                     <form action="#">
                         <input placeholder="I am Searching for . . ." type="text">

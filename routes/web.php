@@ -27,8 +27,9 @@ Route::name('specifications.')->namespace('Specifications')->prefix('specificati
 	Route::resource('material', 'MaterialController');
 	Route::resource('size', 'SizeController');
 });
-Route::name('processes.')->namespace('Processes')->prefix('processes')->group(function(){
-	Route::resource('carts', 'CartController')->middleware('auth');
+Route::name('processes.')->middleware('auth')->namespace('Processes')->prefix('processes')->group(function(){
+	Route::post('carts/update', 'CartController@update')->name('carts.update');
+	Route::resource('carts', 'CartController')->except('update');
 	Route::resource('wishs', 'WishController');
 	Route::resource('orders', 'OrderController');
 });
