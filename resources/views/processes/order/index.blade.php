@@ -31,7 +31,7 @@
                             <div class="col-md-12">
                                 <div class="checkout-form-list text-right">
                                     <label>المحافظة / المدينة <span class="required">*</span></label>
-                                    <input type="text" />
+                                    <input type="text" name="governorate"/>
                                 </div>
                             </div>
                             <div class="col-md-12 text-right">

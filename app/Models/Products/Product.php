@@ -13,16 +13,16 @@ class Product extends Model {
 	use HasRelationships;
 
 	public function category(){
-		return $this->belongsTo(Category::class);
+		return $this->belongsTo(Category::class)->withTrashed();
 	}
 
 	public function subcategory(){
-		return $this->belongsTo(Subcategory::class);
+		return $this->belongsTo(Subcategory::class)->withTrashed();
 	}
 
 
 	public function carts(){
-		return $this->hasMany('App\Models\Processes\Cart');
+		return $this->hasMany('App\Models\Processes\Cart')->withTrashed();
 	}
 
 	public function orders(){

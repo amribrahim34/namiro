@@ -22,6 +22,7 @@
 					<td >material</td>
 					<td >size</td>
 					<td >discription</td>
+					<td >action</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -39,12 +40,27 @@
 								<td>{{$stock->material->title}} </td>
 								<td>{{$stock->size->title}} </td>
 								<td class="text-wrap"> {{ \Illuminate\Support\Str::limit($product->discription, 50, $end='...') }}</td>
+								<td class="d-flex">
+									<a href="{{route('admin.products.product.edit',$product->id)}}" class="text-info  d-flex align-items-center">
+										<i class="fa fa-pencil-square-o f-24 m-r-15"></i>
+									</a>
+									<form action="{{route('admin.products.product.destroy',$product->id)}}" method="post">
+										@csrf
+										@method('delete')
+										<button class="text-danger btn btn-link" type="submit">
+											<i class="fa fa-trash f-24"></i>
+										</button>
+									</form>
+								</td>
 							</tr>
 						@endforeach
 					@endif
 				@endforeach
 			</tbody>
 		</table>
+		@if ($products->links())
+			{{$products->links()}}
+		@endif
 		@endif
 	</div>
 </div>	

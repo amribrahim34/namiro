@@ -20,7 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('stocks','stocks.color','stocks.material','stocks.size')->get();
+        $products = Product::with('stocks','stocks.color','stocks.material','stocks.size','category.subcategory','category')->paginate(10);
         return view('admin.products.product.index',['products'=>$products]);
     }
 

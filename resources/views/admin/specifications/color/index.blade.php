@@ -13,6 +13,7 @@
 				<tr class="">
 					<td >#</td>
 					<td >Name</td>
+					<td >action</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -20,6 +21,18 @@
 				<tr>
 					<td>{{$color->id}} </td>
 					<td>{{$color->title}} </td>
+					<td class="d-flex">
+						<a href="{{route('admin.specifications.color.edit',$color->id)}}" class="text-info  d-flex align-items-center">
+							<i class="fa fa-pencil-square-o f-24 m-r-15"></i>
+						</a>
+						<form action="{{route('admin.specifications.color.destroy',$color->id)}}" method="post">
+							@csrf
+							@method('delete')
+							<button class="text-danger btn btn-link" type="submit">
+								<i class="fa fa-trash f-24"></i>
+							</button>
+						</form>
+					</td>
 				</tr>
 				@endforeach
 			</tbody>

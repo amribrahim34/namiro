@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subcategory extends Model {
 
+	protected $guarded = [];
 	protected $table = 'subcategories';
 	use SoftDeletes;
+	
 
 	public function products (){
 		return $this->hasMany(Product::class);
