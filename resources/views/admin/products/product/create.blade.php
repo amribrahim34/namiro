@@ -94,7 +94,7 @@
                     </div>
                     <div class="row">
                         <span class="col-4">product photos</span>
-                        <input type="file" name="" id="" class="col-8">
+                        <input type="file" name="product_images" id="" class="col-8" multiple>
                     </div>
                     <input data-repeater-delete type="button" value="delete" class="btn btn-danger "/>
                 </div>

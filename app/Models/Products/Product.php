@@ -4,13 +4,16 @@ namespace App\Models\Products;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
-class Product extends Model {
+class Product extends Model implements HasMedia {
 
 	protected $table = 'products';
 	use SoftDeletes;
 	use HasRelationships;
+	use HasMediaTrait;
 
 	public function category(){
 		return $this->belongsTo(Category::class)->withTrashed();

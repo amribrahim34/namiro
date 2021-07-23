@@ -63,7 +63,7 @@ class ProductController extends Controller
         'group.*.color_id' =>'required',
         'group.*.material_id' =>'required',
       ]);
-      // dd($request);
+      // dd($request->file()['group']);
       $product = new Product;
       $product->name = $request->name;
       $product->subcategory_id = $request->subcategory_id;
@@ -81,7 +81,19 @@ class ProductController extends Controller
           $stock->save();
         }
       }
-      // $product->sizes()->sync([$request->size_id]);
+      // if ($request->file()['group']) {
+      //     foreach ($request->file()['group'] as $group) {
+      //         foreach ($group as $images) {
+      //             foreach ($images as $image) {
+      //                 // dd($image);
+      //                 $product->addMedia($image->file())->toMediaCollection('product_images');
+      //             }
+      //         }
+      //     }
+      // }
+      if ($request->file('cover')) {
+        $product->addMedia($request->file('cover'))->toMediaCollection('cover');
+      }
       return redirect(route('admin.products.product.index'));
     }
 
@@ -104,7 +116,20 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-      
+        $product = Product::with('stocks','stocks.color','stocks.material','stocks.size','category.subcategory','category')->find($id);
+        $categories = Category::get();
+        $subcategories = Subcategory::get();
+        $colors = Color::get();
+        $materials = Material::get();
+        $sizes = Size::get();
+        return view('admin.products.product.edit',[
+              'product'=>$product,
+              'categories'=>$categories,
+              'subcategories'=>$subcategories,
+              'colors'=>$colors,
+              'materials'=>$materials,
+              'sizes'=>$sizes,
+        ]);
     }
 
     /**
@@ -113,9 +138,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id , Request $request)
     {
-      
+      $product = Product::find($id);
+      $product->update(['title'=>$request->title]);
+      $request->session()->flash('message',__('categories.massages.updated_succesfully'));
+      return redirect(route('admin.products.product.index'));
     }
 
     /**
@@ -124,9 +152,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id , Request $request)
     {
-      
+      $product = Product::find($id);
+      $product->delete();
+      $request->session()->flash('message',__('categories.massages.deleted_succesfully'));
+      return redirect(route('admin.products.product.index'));
     }
   
 }

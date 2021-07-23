@@ -139,7 +139,11 @@
                                           <div class="product-wrapper mb-30">
                                               <div class="product-img">
                                                   <a href="{{route('products.product.show',$product->id)}}">
-                                                      <img src="{{asset('assets/namiro/img/product/fashion-colorful/1.jpg')}}" alt="">
+                                                  @if ($product->getFirstMedia('cover'))
+                                                        {{$product->getFirstMedia('cover')}}                         
+                                                  @else
+                                                      <img src="{{asset('assets/namiro/img/product/fashion-colorful/no-image-available-grid.png')}}" alt="">
+                                                  @endif
                                                   </a>
                                                   <span>hot</span>
                                                   <div class="product-action">
@@ -179,7 +183,7 @@
                                                 <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
                                                     <div class="product-img list-img-width">
                                                         <a href="{{route('products.product.show',$product->id)}}">
-                                                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/1.jpg')}}" alt="">
+                                                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/no-image-available-grid.png')}}" alt="">
                                                         </a>
                                                         <div class="product-action-list-style">
                                                             <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
@@ -240,7 +244,7 @@
                             <div class="quick-view-learg-img">
                                 <div class="quick-view-tab-content tab-content">
                                     <div class="tab-pane active show fade" id="modal1" role="tabpanel">
-                                        <img src="{{asset('assets/namiro/img/quick-view/l1.jpg')}}" alt="">
+                                        <img src="{{asset('assets/namiro/img/quick-view/lno-image-available-grid.png')}}" alt="">
                                     </div>
                                     <div class="tab-pane fade" id="modal2" role="tabpanel">
                                         <img src="{{asset('assets/namiro/img/quick-view/l2.jpg')}}" alt="">
@@ -252,7 +256,7 @@
                             </div>
                             <div class="quick-view-list nav" role="tablist">
                                 <a class="active" href="#modal1" data-toggle="tab" role="tab">
-                                    <img src="{{asset('assets/namiro/img/quick-view/s1.jpg')}}" alt="">
+                                    <img src="{{asset('assets/namiro/img/quick-view/sno-image-available-grid.png')}}" alt="">
                                 </a>
                                 <a href="#modal2" data-toggle="tab" role="tab">
                                     <img src="{{asset('assets/namiro/img/quick-view/s2.jpg')}}" alt="">

@@ -12,8 +12,8 @@
                         <div class="product-details-large tab-content">
                             <div class="tab-pane active show fade" id="pro-details1" role="tabpanel">
                                 <div class="easyzoom easyzoom--overlay">
-                                    <a href="assets/img/product-details/bl1.jpg">
-                                        <img src="{{asset('assets/namiro/img/product-details/l1.jpg')}}" alt="">
+                                    <a href="assets/img/product-details/blno-image-available-grid.png">
+                                        <img src="{{asset('assets/namiro/img/product-details/lno-image-available-grid.png')}}" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="product-details-small nav mt-12" role=tablist>
                             <a class="active mr-12" href="#pro-details1" data-toggle="tab" role="tab" aria-selected="true">
-                                <img src="{{asset('assets/namiro/img/product-details/s1.jpg')}}" alt="">
+                                <img src="{{asset('assets/namiro/img/product-details/sno-image-available-grid.png')}}" alt="">
                             </a>
                             <a class="mr-12" href="#pro-details2" data-toggle="tab" role="tab" aria-selected="true">
                                 <img src="{{asset('assets/namiro/img/product-details/s2.jpg')}}" alt="">
@@ -199,7 +199,7 @@
                 <div class="product-wrapper">
                     <div class="product-img">
                         <a href="#">
-                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/1.jpg')}}" alt="">
+                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/no-image-available-grid.png')}}" alt="">
                         </a>
                         <span>hot</span>
                         <div class="product-action">
@@ -312,7 +312,7 @@
                 <div class="product-wrapper">
                     <div class="product-img">
                         <a href="#">
-                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/1.jpg')}}" alt="">
+                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/no-image-available-grid.png')}}" alt="">
                         </a>
                         <div class="product-action">
                             <a class="animate-left" title="Wishlist" href="#">

@@ -31,19 +31,19 @@
                 <div class="header-cart">
                     <a class="icon-cart-furniture" href="#">
                         <i class="ti-shopping-cart"></i>
-                        @if (Auth::user()->carts->count() > 0)
+                        @if (Auth::user()->carts != null)
                             <span class="shop-count-furniture green">{{ Auth::user()->carts->count()}}</span>
                         @endif
                     </a>
                     <ul class="cart-dropdown text-right ">
                         @php $total = 0 @endphp
-                        @if (Auth::user()->carts->count() >0 )
+                        @if (Auth::user()->carts != null)
                             @foreach (Auth::user()->carts as $cart) 
                                 @php $total += $cart->stock->product->price * $cart->quantity @endphp                       
                                 <li class="single-product-cart" id="dropdowncart{{$cart->id}}">
                                     <div class="cart-img">
                                         <a href="{{route('products.product.show',$cart->stock->product_id)}}">
-                                            <img src="{{asset('assets/namiro/img/cart/1.jpg')}}" alt="">
+                                            <img src="{{asset('assets/namiro/img/cart/no-image-available-grid.png')}}" alt="">
                                         </a>
                                     </div>
                                     <div class="cart-title">

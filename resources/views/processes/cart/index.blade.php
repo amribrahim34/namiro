@@ -29,7 +29,7 @@
                                                 </button>
                                             </td>
                                             <td class="product-thumbnail">
-                                                <a href="#"><img src="assets/img/cart/1.jpg" alt=""></a>
+                                                <a href="#"><img src="assets/img/cart/no-image-available-grid.png" alt=""></a>
                                             </td>
                                             <td class="product-name">
                                                 <a href="#">{{$cart->stock->product->name}} </a>
