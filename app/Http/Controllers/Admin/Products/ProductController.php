@@ -52,7 +52,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
       $request->validate([
         'name' =>'required',
         'discription' =>'required',
@@ -63,7 +62,6 @@ class ProductController extends Controller
         'group.*.color_id' =>'required',
         'group.*.material_id' =>'required',
       ]);
-      // dd($request->file()['group']);
       $product = new Product;
       $product->name = $request->name;
       $product->subcategory_id = $request->subcategory_id;
@@ -81,16 +79,15 @@ class ProductController extends Controller
           $stock->save();
         }
       }
-      // if ($request->file()['group']) {
-      //     foreach ($request->file()['group'] as $group) {
-      //         foreach ($group as $images) {
-      //             foreach ($images as $image) {
-      //                 // dd($image);
-      //                 $product->addMedia($image->file())->toMediaCollection('product_images');
-      //             }
-      //         }
-      //     }
-      // }
+      if ($request->file()['group']) {
+          foreach ($request->file()['group'] as $group) {
+              foreach ($group as $images) {
+                  foreach ($images as $image) {
+                      $product->addMedia($image)->toMediaCollection('product_images');
+                  }
+              }
+          }
+      }
       if ($request->file('cover')) {
         $product->addMedia($request->file('cover'))->toMediaCollection('cover');
       }

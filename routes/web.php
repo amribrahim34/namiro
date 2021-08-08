@@ -37,6 +37,7 @@ Route::name('products.')->namespace('Products')->prefix('products')->group(funct
 	Route::resource('category', 'CategoryController');
 	Route::resource('subcategory', 'SubcategoryController');
 	Route::resource('product', 'ProductController');
+	Route::post('product/search', 'ProductController@search')->name('product.search');
 });
 Route::name('feedback.')->namespace('Feedback')->prefix('feedback')->group(function(){
 	Route::resource('rate', 'RateController');

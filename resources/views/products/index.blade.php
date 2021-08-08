@@ -9,9 +9,10 @@
                       <div class="sidebar-widget mb-50">
                           <h3 class="sidebar-title text-right">بحث </h3>
                           <div class="sidebar-search">
-                              <form action="#">
-                                  <input placeholder="ابحث هنا.." type="text">
-                                  <button><i class="ti-search"></i></button>
+                              <form action="{{route('products.product.search')}}" method="post">
+                                    @CSRF
+                                    <input placeholder="ابحث هنا.." type="text" name="search_term">
+                                    <button><i class="ti-search"></i></button>
                               </form>
                           </div>
                       </div>

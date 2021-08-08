@@ -10,48 +10,38 @@
                 <div class="product-details-img-content">
                     <div class="product-details-tab mr-70">
                         <div class="product-details-large tab-content">
-                            <div class="tab-pane active show fade" id="pro-details1" role="tabpanel">
+
+                            {{-- <div class="tab-pane active show fade" id="pro-details1" role="tabpanel">
                                 <div class="easyzoom easyzoom--overlay">
                                     <a href="assets/img/product-details/blno-image-available-grid.png">
                                         <img src="{{asset('assets/namiro/img/product-details/lno-image-available-grid.png')}}" alt="">
                                     </a>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade" id="pro-details2" role="tabpanel">
-                                <div class="easyzoom easyzoom--overlay">
-                                    <a href="assets/img/product-details/bl2.jpg">
-                                        <img src="{{asset('assets/namiro/img/product-details/l2.jpg')}}" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pro-details3" role="tabpanel">
-                                <div class="easyzoom easyzoom--overlay">
-                                    <a href="assets/img/product-details/bl3.jpg">
-                                        <img src="{{asset('assets/namiro/img/product-details/l3.jpg')}}" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pro-details4" role="tabpanel">
-                                <div class="easyzoom easyzoom--overlay">
-                                    <a href="assets/img/product-details/bl4.jpg">
-                                        <img src="{{asset('assets/namiro/img/product-details/l4.jpg')}}" alt="">
-                                    </a>
-                                </div>
-                            </div>
+                            </div> --}}
+                            @if ($product->getMedia('product_images'))
+                                @foreach ($product->getMedia('product_images') as $image)
+                                    <div class="tab-pane fade " id="pro-details{{$image->id}}" role="tabpanel">
+                                        <div class="easyzoom easyzoom--overlay">
+                                            <a href="{{$image->getUrl()}}">
+                                                <img src="{{$image->getUrl()}}" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                         <div class="product-details-small nav mt-12" role=tablist>
-                            <a class="active mr-12" href="#pro-details1" data-toggle="tab" role="tab" aria-selected="true">
+                            {{-- <a class="active mr-12" href="#pro-details1" data-toggle="tab" role="tab" aria-selected="true">
                                 <img src="{{asset('assets/namiro/img/product-details/sno-image-available-grid.png')}}" alt="">
-                            </a>
-                            <a class="mr-12" href="#pro-details2" data-toggle="tab" role="tab" aria-selected="true">
-                                <img src="{{asset('assets/namiro/img/product-details/s2.jpg')}}" alt="">
-                            </a>
-                            <a class="mr-12" href="#pro-details3" data-toggle="tab" role="tab" aria-selected="true">
-                                <img src="{{asset('assets/namiro/img/product-details/s3.jpg')}}" alt="">
-                            </a>
-                            <a class="mr-12" href="#pro-details4" data-toggle="tab" role="tab" aria-selected="true">
-                                <img src="{{asset('assets/namiro/img/product-details/s4.jpg')}}" alt="">
-                            </a>
+                            </a> --}}
+                            @if ($product->getMedia('product_images'))
+                                @foreach ($product->getMedia('product_images') as $image)
+                                    <a class="mr-12 product-details-small-img" href="#pro-details{{$image->id}}" data-toggle="tab" role="tab" aria-selected="true">
+                                        <img src="{{$image->getUrl()}}" alt="">
+                                    </a>
+                                @endforeach
+                            @endif
+                            
                         </div>
                     </div>
                 </div>
@@ -116,17 +106,14 @@
                         </div>
                     </div>
                     </form>
-                    <div class="product-details-cati-tag mt-35">
+                    <div class="product-details-cati-tag mt-35 text-right">
                         <ul>
-                            <li class="categories-title">Categories :</li>
-                            <li><a href="#">fashion</a></li>
-                            <li><a href="#">electronics</a></li>
-                            <li><a href="#">toys</a></li>
-                            <li><a href="#">food</a></li>
-                            <li><a href="#">jewellery</a></li>
+                            <li class="categories-title"> القسم :</li>
+                            <li><a href="#">{{$product->subcategory->title}}</a></li>
+                            {{-- <li><a href="#">fashion</a></li> --}}
                         </ul>
                     </div>
-                    <div class="product-details-cati-tag mtb-10">
+                    {{-- <div class="product-details-cati-tag mtb-10 text-right">
                         <ul>
                             <li class="categories-title">Tags :</li>
                             <li><a href="#">fashion</a></li>
@@ -135,8 +122,8 @@
                             <li><a href="#">food</a></li>
                             <li><a href="#">jewellery</a></li>
                         </ul>
-                    </div>
-                    <div class="product-share">
+                    </div> --}}
+                    {{-- <div class="product-share">
                         <ul>
                             <li class="categories-title">Share :</li>
                             <li>
@@ -160,13 +147,13 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="product-description-review-area pb-90">
+{{-- <div class="product-description-review-area pb-90">
     <div class="container">
         <div class="product-description-review text-center">
             <div class="description-review-title nav" role=tablist>
@@ -187,7 +174,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- product area start -->
 <div class="product-area pb-95">
     <div class="container">
@@ -196,164 +183,38 @@
         </div>
         <div class="product-style">
             <div class="related-product-active owl-carousel">
-                <div class="product-wrapper">
-                    <div class="product-img">
-                        <a href="#">
-                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/no-image-available-grid.png')}}" alt="">
-                        </a>
-                        <span>hot</span>
-                        <div class="product-action">
-                            <a class="animate-left" title="Wishlist" href="#">
-                                <i class="pe-7s-like"></i>
-                            </a>
-                            <a class="animate-top" title="Add To Cart" href="#">
-                                <i class="pe-7s-cart"></i>
-                            </a>
-                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                <i class="pe-7s-look"></i>
-                            </a>
+                @if ($relatedproducts)
+                    @foreach ($relatedproducts as $relatedproduct)
+                        <div class="product-wrapper">
+                            <div class="product-img">
+                                <a href="#">
+                                    @if ($relatedproduct->getFirstMedia('cover'))
+                                        {{$relatedproduct->getFirstMedia('cover')}}
+                                    @else
+                                        <img src="{{asset('assets/namiro/img/product/fashion-colorful/no-image-available-grid.png')}}" class="product-details-related-img" alt="">
+                                    @endif
+                                </a>
+                                <span>hot</span>
+                                <div class="product-action">
+                                    <a class="animate-left" title="Wishlist" href="#">
+                                        <i class="pe-7s-like"></i>
+                                    </a>        
+                                    <a class="animate-top" title="Add To Cart" href="#">
+                                        <i class="pe-7s-cart"></i>
+                                    </a>
+                                    <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
+                                        <i class="pe-7s-look"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <h4><a href="#">Arifo Stylas Dress</a></h4>
+                                <span>$115.00</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="#">Arifo Stylas Dress</a></h4>
-                        <span>$115.00</span>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="product-img">
-                        <a href="#">
-                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/2.jpg')}}" alt="">
-                        </a>
-                        <div class="product-action">
-                            <a class="animate-left" title="Wishlist" href="#">
-                                <i class="pe-7s-like"></i>
-                            </a>
-                            <a class="animate-top" title="Add To Cart" href="#">
-                                <i class="pe-7s-cart"></i>
-                            </a>
-                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                <i class="pe-7s-look"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="#">Arifo Stylas Dress</a></h4>
-                        <span>$115.00</span>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="product-img">
-                        <a href="#">
-                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/3.jpg')}}" alt="">
-                        </a>
-                        <span>hot</span>
-                        <div class="product-action">
-                            <a class="animate-left" title="Wishlist" href="#">
-                                <i class="pe-7s-like"></i>
-                            </a>
-                            <a class="animate-top" title="Add To Cart" href="#">
-                                <i class="pe-7s-cart"></i>
-                            </a>
-                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                <i class="pe-7s-look"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="#">Arifo Stylas Dress</a></h4>
-                        <span>$115.00</span>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="product-img">
-                        <a href="#">
-                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/4.jpg')}}" alt="">
-                        </a>
-                        <div class="product-action">
-                            <a class="animate-left" title="Wishlist" href="#">
-                                <i class="pe-7s-like"></i>
-                            </a>
-                            <a class="animate-top" title="Add To Cart" href="#">
-                                <i class="pe-7s-cart"></i>
-                            </a>
-                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                <i class="pe-7s-look"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="#">Arifo Stylas Dress</a></h4>
-                        <span>$115.00</span>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="product-img">
-                        <a href="#">
-                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/5.jpg')}}" alt="">
-                        </a>
-                        <span>hot</span>
-                        <div class="product-action">
-                            <a class="animate-left" title="Wishlist" href="#">
-                                <i class="pe-7s-like"></i>
-                            </a>
-                            <a class="animate-top" title="Add To Cart" href="#">
-                                <i class="pe-7s-cart"></i>
-                            </a>
-                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                <i class="pe-7s-look"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="#">Arifo Stylas Dress</a></h4>
-                        <span>$115.00</span>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="product-img">
-                        <a href="#">
-                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/no-image-available-grid.png')}}" alt="">
-                        </a>
-                        <div class="product-action">
-                            <a class="animate-left" title="Wishlist" href="#">
-                                <i class="pe-7s-like"></i>
-                            </a>
-                            <a class="animate-top" title="Add To Cart" href="#">
-                                <i class="pe-7s-cart"></i>
-                            </a>
-                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                <i class="pe-7s-look"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="#">Arifo Stylas Dress</a></h4>
-                        <span>$115.00</span>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="product-img">
-                        <a href="#">
-                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/2.jpg')}}" alt="">
-                        </a>
-                        <span>hot</span>
-                        <div class="product-action">
-                            <a class="animate-left" title="Wishlist" href="#">
-                                <i class="pe-7s-like"></i>
-                            </a>
-                            <a class="animate-top" title="Add To Cart" href="#">
-                                <i class="pe-7s-cart"></i>
-                            </a>
-                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                <i class="pe-7s-look"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="#">Arifo Stylas Dress</a></h4>
-                        <span>$115.00</span>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
+                
             </div>
         </div>
     </div>

@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-      $products = Product::paginate(6);
+      $products = Product::paginate(9);
       $colors = Color::get();
       $sizes = Size::get();
       $categories = Category::with('subcategories','products')->get();
@@ -59,19 +59,34 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-      $product = Product::findOrFail($id);
-      return  view('products.show',['product'=>$product]);
+        $product = Product::findOrFail($id);
+        $relatedproducts = Product::where('subcategory_id' , $product->subcategory_id)->paginate(6);
+        return  view('products.show',[
+          'product'=>$product,
+          'relatedproducts'=>$relatedproducts,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
+ 
+    public function search(Request $request)
     {
-      
+      $products = Product::paginate(9);
+      if ($request->search_term) {
+          $search_term = $request->search_term;
+          $products = Product::where('name' , 'LIKE' , "%$search_term%" )->orWhere('discription' , 'LIKE' , "%$search_term%" )->paginate(9);
+      }
+      // dd($products);
+      $colors = Color::get();
+      $sizes = Size::get();
+      $categories = Category::with('subcategories','products')->get();
+      $related_products = Product::inRandomOrder()->paginate(4);
+      return view('products.index',[
+          'products'=>$products,
+          'categories'=>$categories,
+          'colors'=>$colors,
+          'sizes'=>$sizes,
+          'related_products'=>$related_products,
+        ]);
     }
 
     /**
