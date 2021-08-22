@@ -9,6 +9,7 @@ use App\Models\Specifications\Color;
 use App\Models\Specifications\Material;
 use App\Models\Specifications\Size;
 use App\Models\Calculations\Stock;
+use App\Http\Requests\ProductStoreRequest;
 
 class ProductController extends Controller
 {
@@ -50,46 +51,27 @@ class ProductController extends Controller
      *
      * @return Response
      */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-      $request->validate([
-        'name' =>'required',
-        'discription' =>'required',
-        'price' =>'required',
-        'subcategory_id' =>'required',
-        'group.*.quantity' =>'required',
-        'group.*.size_id' =>'required',
-        'group.*.color_id' =>'required',
-        'group.*.material_id' =>'required',
-      ]);
-      $product = new Product;
-      $product->name = $request->name;
-      $product->subcategory_id = $request->subcategory_id;
-      $product->discription = $request->discription;
-      $product->price = $request->price;
-      $product->save();
+      $product = $this->StoreProduct($request);
       if ($request->group != null ) {
         foreach ($request->group as  $item) {
-          $stock = new Stock;
-          $stock->amount = $item['quantity'];
-          $stock->product_id = $product->id;
-          $stock->color_id = $item['color_id'];
-          $stock->material_id = $item['material_id'];
-          $stock->size_id = $item['size_id'];
-          $stock->save();
+          $this->StoreStock($item , $product);
         }
       }
-      if ($request->file()['group']) {
-          foreach ($request->file()['group'] as $group) {
-              foreach ($group as $images) {
-                  foreach ($images as $image) {
-                      $product->addMedia($image)->toMediaCollection('product_images');
-                  }
-              }
-          }
-      }
-      if ($request->file('cover')) {
-        $product->addMedia($request->file('cover'))->toMediaCollection('cover');
+      if ($request->file()) {
+        if ($request->file()['group']) {
+            foreach ($request->file()['group'] as $group) {
+                foreach ($group as $images) {
+                    foreach ($images as $image) {
+                        $product->addMedia($image)->toMediaCollection('product_images');
+                    }
+                }
+            }
+        }
+        if ($request->file('cover')) {
+          $product->addMedia($request->file('cover'))->toMediaCollection('cover');
+        }
       }
       return redirect(route('admin.products.product.index'));
     }
@@ -156,5 +138,24 @@ class ProductController extends Controller
       $request->session()->flash('message',__('categories.massages.deleted_succesfully'));
       return redirect(route('admin.products.product.index'));
     }
+
+    private function StoreProduct($request){
+      $product = new Product;
+      $product->name = $request->name;
+      $product->subcategory_id = $request->subcategory_id;
+      $product->discription = $request->discription;
+      $product->price = $request->price;
+      $product->save();
+    }
   
+    private function StoreStock($item , $product){ 
+      $stock = new Stock;
+      $stock->amount = $item['quantity'];
+      $stock->product_id = $product->id;
+      $stock->color_id = $item['color_id'];
+      $stock->material_id = $item['material_id'];
+      $stock->size_id = $item['size_id'];
+      $stock->save();
+    }
+
 }
