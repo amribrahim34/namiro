@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Stock extends Model 
 {
 	use SoftDeletes;
+	protected $guarded = [];
 
 	public function product(){
 		return $this->belongsTo('App\Models\Products\Product');
