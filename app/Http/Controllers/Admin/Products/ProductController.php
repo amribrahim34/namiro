@@ -95,7 +95,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::with('stocks','stocks.color','stocks.material','stocks.size','category.subcategory','category')->find($id);
+        $product = Product::with('stocks','stocks.color','stocks.material','stocks.size','category.subcategory','category')->findOrFail($id);
         $categories = Category::get();
         $subcategories = Subcategory::get();
         $colors = Color::get();
@@ -120,7 +120,7 @@ class ProductController extends Controller
     public function update($id , Request $request)
     {
       $product = Product::find($id);
-      $product->update(['title'=>$request->title]);
+      $product->update($request->all());
       $request->session()->flash('message',__('categories.massages.updated_succesfully'));
       return redirect(route('admin.products.product.index'));
     }
@@ -146,6 +146,7 @@ class ProductController extends Controller
       $product->discription = $request->discription;
       $product->price = $request->price;
       $product->save();
+      return $product;
     }
   
     private function StoreStock($item , $product){ 
