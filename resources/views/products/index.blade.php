@@ -23,7 +23,7 @@
                               <div class="price_slider_amoun text-right">
                                   <div class="label-input d-flex row-reverse ">
                                       <label class="">السعر : </label>
-                                      <input type="text" id="amount" name="price"  placeholder="Add Your Price" />
+                                      <input type="range" multiple  data-drag-middle  value="10,80" />
                                   </div>
                                   {{-- <button type="button">Filter</button>  --}}
                               </div>
@@ -36,7 +36,7 @@
                                 @if ($categories)
                                   @foreach ($categories as $category)
                                     <li>
-                                      <a href="#">{{$category->title}} <span>{{$category->products->count()}}</span></a>
+                                      <a href="{{route('products.filter.category',$category->id)}}">{{$category->title}} <span>{{$category->products->count()}}</span></a>
                                     </li>
                                   @endforeach
                                 @endif
@@ -53,7 +53,9 @@
                               <ul>
                                 @if ($colors)
                                   @foreach ($colors as $color)
+                                  <a href="{{route('products.filter.color',$color->id)}}">
                                     <li class="{{$color->title}}"></li>
+                                  </a>
                                   @endforeach
                                 @endif
                               </ul>
@@ -65,7 +67,7 @@
                               <ul>
                                 @if ($sizes)
                                   @foreach ($sizes as $size)
-                                    <li><a href="#">{{$size->title}}</a></li>
+                                    <li><a href="{{route('products.filter.size',$size->id)}}">{{$size->title}}</a></li>
                                   @endforeach
                                 @endif
                               </ul>
@@ -334,4 +336,13 @@
 		<!-- modal -->
       @endforeach
   @endif
+@endsection
+@section('css')
+    <link rel="stylesheet" href="{{asset('assets/namiro/js/multirange/multirange.css')}}">
+@endsection
+@section('js')
+        <script src="{{asset('assets/namiro/js/multirange/multirange.js')}}"></script>
+        <script>
+
+        </script>
 @endsection

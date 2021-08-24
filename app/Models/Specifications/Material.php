@@ -8,7 +8,7 @@ class Material extends Model {
 	use SoftDeletes;
 	protected $guarded = [];
 
-	public function products (){
-		return $this->hasMany('App\Models\Products\Product');
+	public function stocks (){
+		return $this->hasMany('App\Models\Calculations\Stock');
 	}
 }

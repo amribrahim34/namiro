@@ -13,6 +13,8 @@ use App\Models\Products\Category;
 use App\Models\Products\Subcategory;
 use App\Models\Products\Product;
 use App\Models\Calculations\Stock;
+use App\Models\Processes\Cart;
+
 
 
 class CartTest extends TestCase
@@ -28,6 +30,7 @@ class CartTest extends TestCase
              'material' => factory(Material::class)->create() ,
              'product' => factory(Product::class)->create() ,
              'stock' => factory(Stock::class)->create() ,
+             'cart' => factory(Cart::class)->create() ,
          ];
     } 
     
@@ -52,6 +55,32 @@ class CartTest extends TestCase
             [
                 'product_id'=>$data['product']->id,
                 'quantity'=>1,
+            ]
+        ));
+        $response->assertStatus(302);
+    }
+
+    /** @test */
+    public function userCartUpdate()
+    {
+        $this->withoutExceptionHandling();
+        $user = factory(User::class)->create();
+        $data = $this->DbPreparation();
+        $product_id = $data['product']->id;
+        $stock_id = $data['stock']->id;
+        $data['stock']->update(['product_id'=>$product_id]);
+        $data['cart']->update(['stock_id'=>$stock_id]);
+        $response = $this->actingAs($user)->post(route('processes.carts.update',$data['cart']->id,
+            [
+                'data'=> [
+                    [
+                        'cart_id' => $data['stock']->id,
+                        'quantity' => 1,
+                    ],[
+                        'cart_id' => $data['stock']->id,
+                        'quantity' => 1,
+                    ],
+                ]
             ]
         ));
         $response->assertStatus(302);

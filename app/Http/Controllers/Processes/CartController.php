@@ -85,6 +85,7 @@ class CartController extends Controller
     public function update(Request $request)
     {
         $data = $request->data;
+        dd($request);
         $total =0;
         foreach ($data as $cart) {
             $modified_cart = Cart::find($cart['id']);

@@ -38,6 +38,11 @@ Route::name('products.')->namespace('Products')->prefix('products')->group(funct
 	Route::resource('subcategory', 'SubcategoryController');
 	Route::resource('product', 'ProductController');
 	Route::post('product/search', 'ProductController@search')->name('product.search');
+	Route::name('filter.')->prefix('filter')->group(function(){
+		Route::get('category/{category}', 'FilterController@CategoryFilter')->name('category');
+		Route::get('color/{color}', 'FilterController@ColorFilter')->name('color');
+		Route::get('size/{size}', 'FilterController@SizeFilter')->name('size');
+	});
 });
 Route::name('feedback.')->namespace('Feedback')->prefix('feedback')->group(function(){
 	Route::resource('rate', 'RateController');
