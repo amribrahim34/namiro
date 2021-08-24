@@ -41,6 +41,12 @@ class FilterController extends Controller
         return $this->get_product_view_and_variables($products);
     }
 
+    public function PriceFilter(Request $request){
+        $range = explode(';' ,$request->price );
+        $products = Product::whereBetween('price',$range )->with('stocks')->paginate(9);
+        return $this->get_product_view_and_variables($products);
+    }
+
     private function get_product_view_and_variables ($products){
         $colors = Color::get();
         $sizes = Size::get();

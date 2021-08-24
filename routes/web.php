@@ -42,6 +42,7 @@ Route::name('products.')->namespace('Products')->prefix('products')->group(funct
 		Route::get('category/{category}', 'FilterController@CategoryFilter')->name('category');
 		Route::get('color/{color}', 'FilterController@ColorFilter')->name('color');
 		Route::get('size/{size}', 'FilterController@SizeFilter')->name('size');
+		Route::post('price', 'FilterController@PriceFilter')->name('price');
 	});
 });
 Route::name('feedback.')->namespace('Feedback')->prefix('feedback')->group(function(){

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
   <div class="shop-page-wrapper shop-page-padding ptb-100">
       <div class="container-fluid">
           <div class="row">
@@ -21,10 +22,12 @@
                           <div class="price_filter">
                               <div id="slider-range"></div>
                               <div class="price_slider_amoun text-right">
-                                  <div class="label-input d-flex row-reverse ">
-                                      <label class="">السعر : </label>
-                                      <input type="range" multiple  data-drag-middle  value="10,80" />
-                                  </div>
+                                  <form action="{{route('products.filter.price')}}" method="post">
+                                      @csrf
+                                    <input type="text" id="range" class="w-100" name="price" value="" />
+                                    <button class="btn btn-success">عرض </button>
+                                  </form>
+                                  {{-- </div> --}}
                                   {{-- <button type="button">Filter</button>  --}}
                               </div>
                           </div>
@@ -338,11 +341,23 @@
   @endif
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{asset('assets/namiro/js/multirange/multirange.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
 @endsection
 @section('js')
-        <script src="{{asset('assets/namiro/js/multirange/multirange.js')}}"></script>
-        <script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>   
+        <script>
+            $("#range").ionRangeSlider({
+                skin: "modern",
+                min: 0,
+                max: 1000,
+                from: 50,
+                to: 700,
+                type: 'double',
+                // prefix: "$",
+                // grid: true,
+                // grid_num: 10
+            });
         </script>
 @endsection
