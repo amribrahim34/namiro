@@ -17,22 +17,20 @@
                               </form>
                           </div>
                       </div>
-                      <div class="sidebar-widget mb-40 text-right">
-                          <h3 class="sidebar-title">السعر</h3>
-                          <div class="price_filter">
-                              <div id="slider-range"></div>
-                              <div class="price_slider_amoun text-right">
-                                  <form action="{{route('products.product.index')}}" method="get">
-                                      @csrf
-                                    <input type="text" id="range" class="w-100" name="price" value="" />
-                                    <input type="hidden" name="search" value='true'>
-                                    <button class="btn btn-success">عرض </button>
-                                  </form>
-                                  {{-- </div> --}}
-                                  {{-- <button type="button">Filter</button>  --}}
-                              </div>
-                          </div>
-                      </div>
+                        <div class="sidebar-widget mb-40 text-right">
+                            <h3 class="sidebar-title">السعر</h3>
+                            <div class="price_filter">
+                                <div id="slider-range"></div>
+                                <div class="price_slider_amoun text-right">
+                                    <form action="{{route('products.product.index')}}" method="get">
+                                        @csrf
+                                        <input type="text" id="range" class="w-100" name="price" value="" />
+                                        <input type="hidden" name="search" value='true'>
+                                        {{-- <button class="btn btn-success">عرض </button> --}}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                       <div class="sidebar-widget mb-45 text-right">
                           <h3 class="sidebar-title text-right"> القسم </h3>
                           <div class="sidebar-categories">
@@ -40,10 +38,14 @@
                                 @if ($categories)
                                   @foreach ($categories as $category)
                                     <li>
-                                        <a href="{{route('products.product.index',['category'=>$category->id ,'search'=>true ])}}">
-                                            {{$category->title}} 
-                                            <span>{{$category->products->count()}}</span>
-                                        </a>
+                                        <div class="d-flex justify-content-around ">
+                                            <div>
+                                                <input data-filtertype='category' type="checkbox" 
+                                                name="category" value="{{$category->id}}" class="filter">
+                                            </div>
+                                            <span class="">{{$category->title}}</span>
+                                            <span class="">{{$category->products->count()}}</span>
+                                        </div>
                                     </li>
                                   @endforeach
                                 @endif
@@ -60,9 +62,9 @@
                               <ul>
                                 @if ($colors)
                                   @foreach ($colors as $color)
-                                  <a href="{{route('products.product.index',['color'=>$color->id ,'search'=>true ])}}">
+                                    {{-- <input data-filtertype='color' type="checkbox" name="color" value="{{$color->id}}" class="filter"> --}}
+
                                     <li class="{{$color->title}}"></li>
-                                  </a>
                                   @endforeach
                                 @endif
                               </ul>
@@ -75,9 +77,9 @@
                                 @if ($sizes)
                                   @foreach ($sizes as $size)
                                     <li>
-                                        <a href="{{route('products.product.index',['size'=>$size->id ,'search'=>true ])}}">
-                                            {{$size->title}}
-                                        </a>
+                                        <input data-filtertype='size' type="checkbox" 
+                                        name="size" value="{{$size->id}}" class="filter">
+                                        {{$size->title}}
                                     </li>
                                   @endforeach
                                 @endif
@@ -356,16 +358,78 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>   
         <script>
-            $("#range").ionRangeSlider({
-                skin: "modern",
-                min: 0,
-                max: 1000,
-                from: 50,
-                to: 700,
-                type: 'double',
-                // prefix: "$",
-                // grid: true,
-                // grid_num: 10
+            $(document).ready(function(){
+                $("#range").ionRangeSlider({
+                    skin: "modern",
+                    min: 0,
+                    max: 1000,
+                    from: 50,
+                    to: 700,
+                    type: 'double',
+                    // prefix: "$",
+                    // grid: true,
+                    // grid_num: 10
+                });
+                var data = {
+                    category:[],
+                    color:[],
+                    material:[],
+                    size:[],
+                    price: '',
+                };
+                $('#range').change(function(){
+                    data.price = this.value
+                });
+                $('.filter').change(function(){
+                    if(this.checked) {
+                        type = this.dataset.filtertype;
+                        if (type == 'category') {
+                            data.category.push(this.value);
+                        }
+
+                        if (type == 'color') {
+                            data.color.push(this.value);
+                        }
+
+                        if (type == 'size') {
+                            data.size.push(this.value);
+                        }
+
+                        if (type == 'material') {
+                            data.material.push(this.value);
+                        }
+                    }else{
+
+                        if (type == 'category') {
+                            removeItem = this.value;
+                            data.category = jQuery.grep(data.category, function(value) {
+                                return value != removeItem;
+                            });
+                        }
+
+                        if (type == 'color') {
+                            removeItem = this.value;
+                            data.color = jQuery.grep(data.color, function(value) {
+                                return value != removeItem;
+                            });
+                        }
+
+                        if (type == 'material') {
+                            removeItem = this.value;
+                            data.material = jQuery.grep(data.material, function(value) {
+                                return value != removeItem;
+                            });
+                        }
+
+                        if (type == 'size') {
+                            removeItem = this.value;
+                            data.size = jQuery.grep(data.size, function(value) {
+                                return value != removeItem;
+                            });
+                        }
+                    }
+                    console.log(data);
+                });
             });
         </script>
 @endsection
