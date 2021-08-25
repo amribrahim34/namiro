@@ -51,4 +51,22 @@ class Product extends Model implements HasMedia {
 	public function stocks(){
 		return $this->hasMany('App\Models\Calculations\Stock');
 	}
+
+	public function scopeBySubcategory($query, $sub_cat_ids){
+		return $query->whereIn('subcategory_id',$sub_cat_ids);
+	}
+
+	public function scopeByStock($query, $stock_ids){
+		return $query->whereHas('stocks',function($query)
+			use($stock_ids)
+			{
+				$query->whereIn('id',$stock_ids );
+			}
+		);
+	}
+
+	public function scopeByPriceRange($query, $range){
+		return $query->whereBetween('price',$range );
+	}
+
 }

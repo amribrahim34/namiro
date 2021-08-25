@@ -22,9 +22,10 @@
                           <div class="price_filter">
                               <div id="slider-range"></div>
                               <div class="price_slider_amoun text-right">
-                                  <form action="{{route('products.filter.price')}}" method="post">
+                                  <form action="{{route('products.product.index')}}" method="get">
                                       @csrf
                                     <input type="text" id="range" class="w-100" name="price" value="" />
+                                    <input type="hidden" name="search" value='true'>
                                     <button class="btn btn-success">عرض </button>
                                   </form>
                                   {{-- </div> --}}
@@ -39,7 +40,10 @@
                                 @if ($categories)
                                   @foreach ($categories as $category)
                                     <li>
-                                      <a href="{{route('products.filter.category',$category->id)}}">{{$category->title}} <span>{{$category->products->count()}}</span></a>
+                                        <a href="{{route('products.product.index',['category'=>$category->id ,'search'=>true ])}}">
+                                            {{$category->title}} 
+                                            <span>{{$category->products->count()}}</span>
+                                        </a>
                                     </li>
                                   @endforeach
                                 @endif
@@ -56,7 +60,7 @@
                               <ul>
                                 @if ($colors)
                                   @foreach ($colors as $color)
-                                  <a href="{{route('products.filter.color',$color->id)}}">
+                                  <a href="{{route('products.product.index',['color'=>$color->id ,'search'=>true ])}}">
                                     <li class="{{$color->title}}"></li>
                                   </a>
                                   @endforeach
@@ -70,7 +74,11 @@
                               <ul>
                                 @if ($sizes)
                                   @foreach ($sizes as $size)
-                                    <li><a href="{{route('products.filter.size',$size->id)}}">{{$size->title}}</a></li>
+                                    <li>
+                                        <a href="{{route('products.product.index',['size'=>$size->id ,'search'=>true ])}}">
+                                            {{$size->title}}
+                                        </a>
+                                    </li>
                                   @endforeach
                                 @endif
                               </ul>

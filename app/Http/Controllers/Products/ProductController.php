@@ -15,13 +15,16 @@ class ProductController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
       $products = Product::paginate(9);
       $colors = Color::get();
       $sizes = Size::get();
       $categories = Category::with('subcategories','products')->get();
       $related_products = Product::inRandomOrder()->paginate(4);
+      if ($request->search == true) {
+        $products = $this->check_for_parameters_and_get_products($request);
+      }
       return view('products.index',[
           'products'=>$products,
           'categories'=>$categories,
@@ -87,6 +90,48 @@ class ProductController extends Controller
           'sizes'=>$sizes,
           'related_products'=>$related_products,
         ]);
+    }
+
+    private function check_for_parameters_and_get_products ($request){
+      if ($request->category) {
+          return $this->CategoryFilter($request->category);
+      }
+
+      if ($request->color) {
+        return $this->ColorFilter($request->color);
+      }
+
+      if ($request->size) {
+        return $this->SizeFilter($request->size);
+      }
+
+      if ($request->price) {
+        return $this->PriceFilter($request->price);
+      }
+    } 
+
+    private function CategoryFilter( $id){
+      $category = Category::FindOrFail($id);
+      $sub_cat_ids = $category->subcategories->pluck('id');
+      return Product::BySubcategory($sub_cat_ids)
+      ->with('stocks')->paginate(9);
+    }
+    
+    public function ColorFilter($id){
+      $color = Color::FindOrFail($id);
+      $stock_ids = $color->stocks->pluck('id');
+      return Product::ByStock($stock_ids)->with('stocks')->paginate(9);
+    }
+
+    public function SizeFilter($id){
+      $size = Size::FindOrFail($id);
+      $stock_ids = $size->stocks->pluck('id');
+      return Product::ByStock($stock_ids)->with('stocks')->paginate(9);
+    }
+
+    public function PriceFilter($price){
+      $range = explode(';' , $price);
+      return Product::ByPriceRange($range)->with('stocks')->paginate(9);
     }
 
     /**
