@@ -398,6 +398,7 @@
                         if (type == 'material') {
                             data.material.push(this.value);
                         }
+                        sendRequest(data);
                     }else{
 
                         if (type == 'category') {
@@ -427,7 +428,21 @@
                                 return value != removeItem;
                             });
                         }
+                        sendRequest(data);
                     }
+                    function sendRequest (data){
+                        $.ajax({
+                            url: '{{route("products.product.getdata")}}',
+                            type:'POST',
+                            data: data ,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(response , status  ){
+                                console.log(response);
+                            }
+                        });
+                    };
                     console.log(data);
                 });
             });
