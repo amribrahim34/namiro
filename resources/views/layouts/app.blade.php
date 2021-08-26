@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="{{asset('assets/namiro/css/bundle.css')}}">
         <link rel="stylesheet" href="{{asset('assets/namiro/css/style.css')}}">
         <link rel="stylesheet" href="{{asset('assets/namiro/css/responsive.css')}}">
+        @yield('css')
         <script src="{{asset('assets/namiro/js/vendor/modernizr-2.8.3.min.js')}}"></script>
     </head>
     <body>
@@ -78,5 +79,6 @@
         <script src="{{asset('assets/namiro/js/owl.carousel.min.js')}}"></script>
         <script src="{{asset('assets/namiro/js/plugins.js')}}"></script>
         <script src="{{asset('assets/namiro/js/main.js')}}"></script>
+        @yield('js')
     </body>
 </html>

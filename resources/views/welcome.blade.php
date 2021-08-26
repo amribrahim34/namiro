@@ -49,7 +49,7 @@
                                 <ul class="cart-dropdown">
                                     <li class="single-product-cart">
                                         <div class="cart-img">
-                                            <a href="#"><img src="{{asset('assets/namiro/img/cart/1.jpg')}}" alt=""></a>
+                                            <a href="#"><img src="{{asset('assets/namiro/img/cart/no-image-available-grid.png')}}" alt=""></a>
                                         </div>
                                         <div class="cart-title">
                                             <h5><a href="#"> Bits Headphone</a></h5>
@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="banner-wrapper mrgn-r-5">
-                                        <img src="{{asset('assets/namiro/img/banner/11.jpg')}}" alt="">
+                                        <img src="{{asset('assets/namiro/img/banner/1no-image-available-grid.png')}}" alt="">
                                         <div class="banner-wrapper3-content">
                                             <a href="#">Shop Now</a>
                                         </div>
@@ -209,7 +209,7 @@
                             <div class="product-wrapper mb-45">
                                 <div class="product-img">
                                     <a href="#">
-                                        <img src="{{asset('assets/namiro/img/product/fashion-2/1.jpg')}}" alt="">
+                                        <img src="{{asset('assets/namiro/img/product/fashion-2/no-image-available-grid.png')}}" alt="">
                                     </a>
                                     <span>hot</span>
                                     <div class="product-action">
@@ -484,7 +484,7 @@
                 <div class="instafeed-wrapper">
                     <div class="instafeed-active owl-carousel">
                         <div class="instafeed-img">
-                            <img src="{{asset('assets/namiro/img/instra/1.jpg')}}" alt="">
+                            <img src="{{asset('assets/namiro/img/instra/no-image-available-grid.png')}}" alt="">
                         </div>
                         <div class="instafeed-img">
                             <img src="{{asset('assets/namiro/img/instra/2.jpg')}}" alt="">
@@ -508,7 +508,7 @@
         <!-- insta feed end -->
 
         <footer class="footer-area">
-            <div class="footer-top-area bg-img pt-105 pb-65" style="background-image: url({{asset('assets/namiro/img/bg/1.jpg')}})" data-overlay="9">
+            <div class="footer-top-area bg-img pt-105 pb-65" style="background-image: url({{asset('assets/namiro/img/bg/no-image-available-grid.png')}})" data-overlay="9">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-4 col-md-3">
@@ -594,7 +594,7 @@
                             <div class="quick-view-learg-img">
                                 <div class="quick-view-tab-content tab-content">
                                     <div class="tab-pane active show fade" id="modal1" role="tabpanel">
-                                        <img src="assets/img/quick-view/l1.jpg" alt="">
+                                        <img src="assets/img/quick-view/lno-image-available-grid.png" alt="">
                                     </div>
                                     <div class="tab-pane fade" id="modal2" role="tabpanel">
                                         <img src="assets/img/quick-view/l2.jpg" alt="">
@@ -606,7 +606,7 @@
                             </div>
                             <div class="quick-view-list nav" role="tablist">
                                 <a class="active" href="#modal1" data-toggle="tab" role="tab">
-                                    <img src="assets/img/quick-view/s1.jpg" alt="">
+                                    <img src="assets/img/quick-view/sno-image-available-grid.png" alt="">
                                 </a>
                                 <a href="#modal2" data-toggle="tab" role="tab">
                                     <img src="assets/img/quick-view/s2.jpg" alt="">

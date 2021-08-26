@@ -14,6 +14,7 @@
 					<td >#</td>
 					<td >Name</td>
 					<td >category</td>
+					<td >action</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -22,6 +23,18 @@
 					<td>{{$subcategory->id}} </td>
 					<td>{{$subcategory->title}} </td>
 					<td>{{$subcategory->category->title}} </td>
+					<td class="d-flex">
+						<a href="{{route('admin.products.subcategory.edit',$subcategory->id)}}" class="text-info  d-flex align-items-center">
+							<i class="fa fa-pencil-square-o f-24 m-r-15"></i>
+						</a>
+						<form action="{{route('admin.products.subcategory.destroy',$subcategory->id)}}" method="post">
+							@csrf
+							@method('delete')
+							<button class="text-danger btn btn-link" type="submit">
+								<i class="fa fa-trash f-24"></i>
+							</button>
+						</form>
+					</td>
 				</tr>
 				@endforeach
 			</tbody>

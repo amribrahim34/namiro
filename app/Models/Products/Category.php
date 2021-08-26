@@ -11,6 +11,7 @@ class Category extends Model {
 	protected $table = 'categories';
 	public $timestamps = true;
 	use SoftDeletes;
+	protected $guarded = [];
 	// use HasRelationships;
 
 	public function products (){

@@ -43,23 +43,7 @@ class CartController extends Controller
         // dd($product);
         $prev_cart = Cart::whereIn('stock_id' , $product->stocks->pluck('id'))->first();
         if ( $prev_cart  == null) {
-            $stock = Stock::where('product_id' ,$request->product_id);
-            if ($request->color_id) {
-                $stock = $stock->where('color_id' ,$request->color_id);
-            }
-            if ($request->size_id) {
-                $stock = $stock->where('size_id' ,$request->size_id);
-            }
-            $stock = $stock->get()->first();  
-            $cart = new Cart;
-            $cart->stock_id = $stock->id;
-            if ($request->quantity) {
-                $cart->quantity = $request->quantity;
-            }else{
-                $cart->quantity = 1;
-            }
-            $cart->user_id = Auth::id();
-            $cart->save();
+            $this->storeNewCart($request);
         }else {
             if ($request->quantity) {
                 $prev_cart->update(['quantity'=>$request->quantity]);
@@ -101,6 +85,7 @@ class CartController extends Controller
     public function update(Request $request)
     {
         $data = $request->data;
+        dd($request);
         $total =0;
         foreach ($data as $cart) {
             $modified_cart = Cart::find($cart['id']);
@@ -119,6 +104,30 @@ class CartController extends Controller
     {
         $cart = Cart::find($id);
         $cart->forceDelete();
+    }
+
+    private function storeNewCart($request){
+            $stock = $this->getProductStock($request); 
+            $cart = new Cart;
+            $cart->stock_id = $stock->id;
+            if ($request->quantity) {
+                $cart->quantity = $request->quantity;
+            }else{
+                $cart->quantity = 1;
+            }
+            $cart->user_id = Auth::id();
+            $cart->save();
+    }
+
+    private function getProductStock($request){
+        $stock = Stock::where('product_id' ,$request->product_id);
+        if ($request->color_id) {
+            $stock = $stock->where('color_id' ,$request->color_id);
+        }
+        if ($request->size_id) {
+            $stock = $stock->where('size_id' ,$request->size_id);
+        }
+        return $stock->get()->first();  
     }
   
 }

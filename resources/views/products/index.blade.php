@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
   <div class="shop-page-wrapper shop-page-padding ptb-100">
       <div class="container-fluid">
           <div class="row">
@@ -9,25 +10,27 @@
                       <div class="sidebar-widget mb-50">
                           <h3 class="sidebar-title text-right">بحث </h3>
                           <div class="sidebar-search">
-                              <form action="#">
-                                  <input placeholder="ابحث هنا.." type="text">
-                                  <button><i class="ti-search"></i></button>
+                              <form action="{{route('products.product.search')}}" method="post">
+                                    @CSRF
+                                    <input placeholder="ابحث هنا.." type="text" name="search_term">
+                                    <button><i class="ti-search"></i></button>
                               </form>
                           </div>
                       </div>
-                      <div class="sidebar-widget mb-40 text-right">
-                          <h3 class="sidebar-title">السعر</h3>
-                          <div class="price_filter">
-                              <div id="slider-range"></div>
-                              <div class="price_slider_amoun text-right">
-                                  <div class="label-input d-flex row-reverse ">
-                                      <label class="">السعر : </label>
-                                      <input type="text" id="amount" name="price"  placeholder="Add Your Price" />
-                                  </div>
-                                  {{-- <button type="button">Filter</button>  --}}
-                              </div>
-                          </div>
-                      </div>
+                        <div class="sidebar-widget mb-40 text-right">
+                            <h3 class="sidebar-title">السعر</h3>
+                            <div class="price_filter">
+                                <div id="slider-range"></div>
+                                <div class="price_slider_amoun text-right">
+                                    <form action="{{route('products.product.index')}}" method="get">
+                                        @csrf
+                                        <input type="text" id="range" class="w-100" name="price" value="" />
+                                        <input type="hidden" name="search" value='true'>
+                                        {{-- <button class="btn btn-success">عرض </button> --}}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                       <div class="sidebar-widget mb-45 text-right">
                           <h3 class="sidebar-title text-right"> القسم </h3>
                           <div class="sidebar-categories">
@@ -35,7 +38,14 @@
                                 @if ($categories)
                                   @foreach ($categories as $category)
                                     <li>
-                                      <a href="#">{{$category->title}} <span>{{$category->products->count()}}</span></a>
+                                        <div class="d-flex justify-content-around ">
+                                            <div>
+                                                <input data-filtertype='category' type="checkbox" 
+                                                name="category" value="{{$category->id}}" class="filter">
+                                            </div>
+                                            <span class="">{{$category->title}}</span>
+                                            <span class="">{{$category->products->count()}}</span>
+                                        </div>
                                     </li>
                                   @endforeach
                                 @endif
@@ -52,6 +62,8 @@
                               <ul>
                                 @if ($colors)
                                   @foreach ($colors as $color)
+                                    {{-- <input data-filtertype='color' type="checkbox" name="color" value="{{$color->id}}" class="filter"> --}}
+
                                     <li class="{{$color->title}}"></li>
                                   @endforeach
                                 @endif
@@ -64,7 +76,11 @@
                               <ul>
                                 @if ($sizes)
                                   @foreach ($sizes as $size)
-                                    <li><a href="#">{{$size->title}}</a></li>
+                                    <li>
+                                        <input data-filtertype='size' type="checkbox" 
+                                        name="size" value="{{$size->id}}" class="filter">
+                                        {{$size->title}}
+                                    </li>
                                   @endforeach
                                 @endif
                               </ul>
@@ -139,7 +155,11 @@
                                           <div class="product-wrapper mb-30">
                                               <div class="product-img">
                                                   <a href="{{route('products.product.show',$product->id)}}">
-                                                      <img src="{{asset('assets/namiro/img/product/fashion-colorful/1.jpg')}}" alt="">
+                                                  @if ($product->getFirstMedia('cover'))
+                                                        {{$product->getFirstMedia('cover')}}                         
+                                                  @else
+                                                      <img src="{{asset('assets/namiro/img/product/fashion-colorful/no-image-available-grid.png')}}" alt="">
+                                                  @endif
                                                   </a>
                                                   <span>hot</span>
                                                   <div class="product-action">
@@ -179,7 +199,7 @@
                                                 <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
                                                     <div class="product-img list-img-width">
                                                         <a href="{{route('products.product.show',$product->id)}}">
-                                                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/1.jpg')}}" alt="">
+                                                            <img src="{{asset('assets/namiro/img/product/fashion-colorful/no-image-available-grid.png')}}" alt="">
                                                         </a>
                                                         <div class="product-action-list-style">
                                                             <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
@@ -240,7 +260,7 @@
                             <div class="quick-view-learg-img">
                                 <div class="quick-view-tab-content tab-content">
                                     <div class="tab-pane active show fade" id="modal1" role="tabpanel">
-                                        <img src="{{asset('assets/namiro/img/quick-view/l1.jpg')}}" alt="">
+                                        <img src="{{asset('assets/namiro/img/quick-view/lno-image-available-grid.png')}}" alt="">
                                     </div>
                                     <div class="tab-pane fade" id="modal2" role="tabpanel">
                                         <img src="{{asset('assets/namiro/img/quick-view/l2.jpg')}}" alt="">
@@ -252,7 +272,7 @@
                             </div>
                             <div class="quick-view-list nav" role="tablist">
                                 <a class="active" href="#modal1" data-toggle="tab" role="tab">
-                                    <img src="{{asset('assets/namiro/img/quick-view/s1.jpg')}}" alt="">
+                                    <img src="{{asset('assets/namiro/img/quick-view/sno-image-available-grid.png')}}" alt="">
                                 </a>
                                 <a href="#modal2" data-toggle="tab" role="tab">
                                     <img src="{{asset('assets/namiro/img/quick-view/s2.jpg')}}" alt="">
@@ -329,4 +349,102 @@
 		<!-- modal -->
       @endforeach
   @endif
+@endsection
+@section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+@endsection
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>   
+        <script>
+            $(document).ready(function(){
+                $("#range").ionRangeSlider({
+                    skin: "modern",
+                    min: 0,
+                    max: 1000,
+                    from: 50,
+                    to: 700,
+                    type: 'double',
+                    // prefix: "$",
+                    // grid: true,
+                    // grid_num: 10
+                });
+                var data = {
+                    category:[],
+                    color:[],
+                    material:[],
+                    size:[],
+                    price: '',
+                };
+                $('#range').change(function(){
+                    data.price = this.value
+                });
+                $('.filter').change(function(){
+                    if(this.checked) {
+                        type = this.dataset.filtertype;
+                        if (type == 'category') {
+                            data.category.push(this.value);
+                        }
+
+                        if (type == 'color') {
+                            data.color.push(this.value);
+                        }
+
+                        if (type == 'size') {
+                            data.size.push(this.value);
+                        }
+
+                        if (type == 'material') {
+                            data.material.push(this.value);
+                        }
+                        sendRequest(data);
+                    }else{
+
+                        if (type == 'category') {
+                            removeItem = this.value;
+                            data.category = jQuery.grep(data.category, function(value) {
+                                return value != removeItem;
+                            });
+                        }
+
+                        if (type == 'color') {
+                            removeItem = this.value;
+                            data.color = jQuery.grep(data.color, function(value) {
+                                return value != removeItem;
+                            });
+                        }
+
+                        if (type == 'material') {
+                            removeItem = this.value;
+                            data.material = jQuery.grep(data.material, function(value) {
+                                return value != removeItem;
+                            });
+                        }
+
+                        if (type == 'size') {
+                            removeItem = this.value;
+                            data.size = jQuery.grep(data.size, function(value) {
+                                return value != removeItem;
+                            });
+                        }
+                        sendRequest(data);
+                    }
+                    function sendRequest (data){
+                        $.ajax({
+                            url: '{{route("products.product.getdata")}}',
+                            type:'POST',
+                            data: data ,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(response , status  ){
+                                console.log(response);
+                            }
+                        });
+                    };
+                    console.log(data);
+                });
+            });
+        </script>
 @endsection

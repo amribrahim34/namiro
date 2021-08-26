@@ -9629,3 +9629,12 @@ input.cart-plus-minus-box {
     cursor: pointer;
 }
 
+.product-details-small-img{
+    width: 141px;
+    height: 135px;
+}
+
+.product-details-related-img{
+    width: 312px;
+    height: 400px;
+}

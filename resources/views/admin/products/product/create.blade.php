@@ -20,8 +20,9 @@
     <div class="card-block">
         <form class="form-material" method="POST" action="{{route('admin.products.product.store')}}" enctype="multipart/form-data" >
             @CSRF
-            <div class="form-group form-default">
-                <input type="file" name="cover" id="" class="form-control">
+            <div class="form-group form-default d-flex row">
+                <span class="col-2">product cover</span>
+                <input type="file" name="cover" id="" class="form-control col-10">
             </div>
             <div class="form-group form-default">
                 <select class="form-control select2" name="subcategory_id" >
@@ -89,12 +90,11 @@
                         </select>
                     </div>
                     <div class="form-group form-default col-md-2">
-                        <input type="number" name="quantity" class="form-control" value="{{old('quantity')}}" required>
+                        <input type="number" name="quantity" class="form-control" value="{{old('quantity')}}" required placeholder="quantity">
                     </div>
                     <div class="row">
-                        <div>
-                            <input type="file" name="" id="" class="dropzone">
-                        </div>
+                        <span class="col-4">product photos</span>
+                        <input type="file" name="product_images" id="" class="col-8" multiple>
                     </div>
                     <input data-repeater-delete type="button" value="delete" class="btn btn-danger "/>
                 </div>

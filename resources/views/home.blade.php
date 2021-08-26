@@ -6,7 +6,7 @@
     <section class="hero">
       <div id="owl-hero" class="owl-carousel owl-theme owl-carousel--dots-inside">        
 
-        <div class="hero__slide" style="background-image: url({{asset('assets/namiro/img/hero/1.jpg')}})">
+        <div class="hero__slide" style="background-image: url({{asset('assets/namiro/img/hero/no-image-available-grid.png')}})">
           <div class="container text-center">
             <h1 class="hero__title">Got the style? Show us</h1>
             <a href="single-product.html" class="hero__link">Shop Now</a>
@@ -82,8 +82,8 @@
                 <div class="col-lg-2 col-sm-4 product">
                   <div class="product__img-holder">
                     <a href="{{route('products.product.show',$product->id)}}" class="product__link" aria-label="Product">
-                      <img src="{{asset('assets/namiro/img/shop/product_1.jpg')}}" alt="" class="product__img">
-                      <img src="{{asset('assets/namiro/img/shop/product_back_1.jpg')}}" alt="" class="product__img-back">
+                      <img src="{{asset('assets/namiro/img/shop/product_no-image-available-grid.png')}}" alt="" class="product__img">
+                      <img src="{{asset('assets/namiro/img/shop/product_back_no-image-available-grid.png')}}" alt="" class="product__img-back">
                     </a>
                     <div class="product__actions">
                       <a href="quickview.html" class="product__quickview">
@@ -133,8 +133,8 @@
                 <div class="col-lg-2 col-sm-4 product">
                   <div class="product__img-holder">
                     <a href="{{route('products.product.show',$product->id)}}" class="product__link" aria-label="Product">
-                      <img src="{{asset('assets/namiro/img/shop/product_1.jpg')}}" alt="" class="product__img">
-                      <img src="{{asset('assets/namiro/img/shop/product_back_1.jpg')}}" alt="" class="product__img-back">
+                      <img src="{{asset('assets/namiro/img/shop/product_no-image-available-grid.png')}}" alt="" class="product__img">
+                      <img src="{{asset('assets/namiro/img/shop/product_back_no-image-available-grid.png')}}" alt="" class="product__img-back">
                     </a>
                     <div class="product__actions">
                       <a href="quickview.html" class="product__quickview">

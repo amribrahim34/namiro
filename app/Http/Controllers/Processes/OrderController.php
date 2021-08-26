@@ -39,10 +39,13 @@ class OrderController extends Controller {
      */
     public function store(Request $request)
     {
-        // dd($request->toArray());
+        // dd($request->except(['_token']));
         $order = new Order;
         $carts = Cart::where('user_id' , Auth::id())->doesntHave('order')->update(['order_id'=>$order->id]);
-        Address::updateOrCreate($request->toArray());
+        $data = $request->except(['_token','email']);
+        $data['user_id'] = Auth::id();
+        Address::updateOrCreate($data);
+        return redirect(route('products.product.index'));
     }
 
     /**
