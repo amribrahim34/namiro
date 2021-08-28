@@ -94,43 +94,32 @@ class ProductController extends Controller
     }
 
     public function getdata (Request $request){
-      return $this->check_for_parameters_and_get_products($request);
-    } 
-
-    private function check_for_parameters_and_get_products ($request){
+      $products = Product::with('stocks');
       if ($request->category) {
-          return $this->CategoryFilter($request->category);
+          $succategories = $this->get_subcategory_that_has_category_in_the_id_array($request->category);
+          $products = $products->BySubcategory($succategories);
       }
-
       if ($request->color) {
-        return $this->ColorFilter($request->color);
+        $stock_ids = $this->get_stocks_by_relation('color' ,$request->size);
+        $products = $products->ByStock($stock_ids);
       }
 
       if ($request->size) {
-        return $this->SizeFilter($request->size);
+        $stock_ids = $this->get_stocks_by_relation('size' ,$request->size);
+        $products = $products->ByStock($stock_ids);
       }
 
       if ($request->price) {
-        return $this->PriceFilter($request->price);
+        $range = explode(';' , $request->price);
+        $products = $products->ByPriceRange($range);
       }
+      return  $products->paginate(9);
     } 
-
-    private function CategoryFilter( $id_array){
-      $subcategories= $this->get_subcategory_that_has_category_in_the_id_array($id_array);
-      $sub_cat_ids = $subcategories->pluck('id');
-      return Product::BySubcategory($sub_cat_ids)
-      ->with('stocks')->paginate(9);
-    }
 
     private function get_subcategory_that_has_category_in_the_id_array($id_array){
       return Subcategory::whereHas('category',function($query)use($id_array){
           $query->whereIn('id',$id_array);
-      });
-    }
-    
-    private function ColorFilter($id_array){
-      $stock_ids = $this->get_stocks_by_relation('color' ,$id_array);
-      return Product::ByStock($stock_ids)->with('stocks')->paginate(9);
+      })->pluck('id');
     }
 
     private function get_stocks_by_relation($relation , $ids){
@@ -139,15 +128,6 @@ class ProductController extends Controller
       })->get()->pluck('id');
     }
 
-    public function SizeFilter($id_array){
-      $stock_ids = $this->get_stocks_by_relation('size' ,$id_array);
-      return Product::ByStock($stock_ids)->with('stocks')->paginate(9);
-    }
-
-    public function PriceFilter($price){
-      $range = explode(';' , $price);
-      return Product::ByPriceRange($range)->with('stocks')->paginate(9);
-    }
 
     /**
      * Update the specified resource in storage.

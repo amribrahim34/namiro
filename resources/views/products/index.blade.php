@@ -22,12 +22,8 @@
                             <div class="price_filter">
                                 <div id="slider-range"></div>
                                 <div class="price_slider_amoun text-right">
-                                    <form action="{{route('products.product.index')}}" method="get">
-                                        @csrf
-                                        <input type="text" id="range" class="w-100" name="price" value="" />
-                                        <input type="hidden" name="search" value='true'>
-                                        {{-- <button class="btn btn-success">عرض </button> --}}
-                                    </form>
+                                    <input type="text" id="range" class="w-100" name="price" value="" />
+                                    <button class="btn btn-success" id="price_button">عرض </button>
                                 </div>
                             </div>
                         </div>
@@ -151,7 +147,7 @@
                                   <div class="row">
                                     @if ($products)
                                       @foreach ($products as $product)
-                                        <div class="col-md-6 col-xl-4">
+                                        <div class="col-md-6 col-xl-4 product">
                                           <div class="product-wrapper mb-30">
                                               <div class="product-img">
                                                   <a href="{{route('products.product.show',$product->id)}}">
@@ -355,96 +351,104 @@
 @endsection
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#range").ionRangeSlider({
+            skin: "modern",
+            min: 0,
+            max: 1000,
+            from: 50,
+            to: 700,
+            type: 'double',
+            // prefix: "$",
+            // grid: true,
+            // grid_num: 10
+        });
+        var data = {
+            category:[],
+            color:[],
+            material:[],
+            size:[],
+            price: '',
+        };
+        $('#range').change(function(){
+            data.price = this.value
+        });
+        $('#price_button').click(function(){
+            sendRequest(data);
+        });
+        $('.filter').change(function(){
+            if(this.checked) {
+                type = this.dataset.filtertype;
+                if (type == 'category') {
+                    data.category.push(this.value);
+                }
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>   
-        <script>
-            $(document).ready(function(){
-                $("#range").ionRangeSlider({
-                    skin: "modern",
-                    min: 0,
-                    max: 1000,
-                    from: 50,
-                    to: 700,
-                    type: 'double',
-                    // prefix: "$",
-                    // grid: true,
-                    // grid_num: 10
-                });
-                var data = {
-                    category:[],
-                    color:[],
-                    material:[],
-                    size:[],
-                    price: '',
-                };
-                $('#range').change(function(){
-                    data.price = this.value
-                });
-                $('.filter').change(function(){
-                    if(this.checked) {
-                        type = this.dataset.filtertype;
-                        if (type == 'category') {
-                            data.category.push(this.value);
-                        }
+                if (type == 'color') {
+                    data.color.push(this.value);
+                }
 
-                        if (type == 'color') {
-                            data.color.push(this.value);
-                        }
+                if (type == 'size') {
+                    data.size.push(this.value);
+                }
 
-                        if (type == 'size') {
-                            data.size.push(this.value);
-                        }
+                if (type == 'material') {
+                    data.material.push(this.value);
+                }
+                sendRequest(data);
+            }else{
 
-                        if (type == 'material') {
-                            data.material.push(this.value);
-                        }
-                        sendRequest(data);
-                    }else{
+                if (type == 'category') {
+                    removeItem = this.value;
+                    data.category = jQuery.grep(data.category, function(value) {
+                        return value != removeItem;
+                    });
+                }
 
-                        if (type == 'category') {
-                            removeItem = this.value;
-                            data.category = jQuery.grep(data.category, function(value) {
-                                return value != removeItem;
-                            });
-                        }
+                if (type == 'color') {
+                    removeItem = this.value;
+                    data.color = jQuery.grep(data.color, function(value) {
+                        return value != removeItem;
+                    });
+                }
 
-                        if (type == 'color') {
-                            removeItem = this.value;
-                            data.color = jQuery.grep(data.color, function(value) {
-                                return value != removeItem;
-                            });
-                        }
+                if (type == 'material') {
+                    removeItem = this.value;
+                    data.material = jQuery.grep(data.material, function(value) {
+                        return value != removeItem;
+                    });
+                }
 
-                        if (type == 'material') {
-                            removeItem = this.value;
-                            data.material = jQuery.grep(data.material, function(value) {
-                                return value != removeItem;
-                            });
-                        }
-
-                        if (type == 'size') {
-                            removeItem = this.value;
-                            data.size = jQuery.grep(data.size, function(value) {
-                                return value != removeItem;
-                            });
-                        }
-                        sendRequest(data);
-                    }
-                    function sendRequest (data){
-                        $.ajax({
-                            url: '{{route("products.product.getdata")}}',
-                            type:'POST',
-                            data: data ,
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            success: function(response , status  ){
-                                console.log(response);
-                            }
-                        });
-                    };
-                    console.log(data);
-                });
+                if (type == 'size') {
+                    removeItem = this.value;
+                    data.size = jQuery.grep(data.size, function(value) {
+                        return value != removeItem;
+                    });
+                }
+                sendRequest(data);
+            }
+            console.log(data);
+        });
+        function sendRequest (data){
+            $.ajax({
+                url: '{{route("products.product.getdata")}}',
+                type:'POST',
+                data: data ,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response , status  ){
+                    $('.product').remove();
+                    // $.each(response.data, function(index, value){
+                            
+                    // });
+                    console.log(response);
+                }
             });
-        </script>
+        };
+    });
+</script>
 @endsection

@@ -26,7 +26,7 @@
         @yield('css')
         <script src="{{asset('assets/namiro/js/vendor/modernizr-2.8.3.min.js')}}"></script>
     </head>
-    <body>
+    <body id="app">
         <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -79,6 +79,7 @@
         <script src="{{asset('assets/namiro/js/owl.carousel.min.js')}}"></script>
         <script src="{{asset('assets/namiro/js/plugins.js')}}"></script>
         <script src="{{asset('assets/namiro/js/main.js')}}"></script>
+        <script src="{{mix('js/app.js')}}"></script>
         @yield('js')
     </body>
 </html>

@@ -3,8 +3,8 @@
 
 <div class="card w-100">
 	<div class="card-header d-flex justify-content-between">
-		<h3>products list</h3>
-		<a href="{{route('admin.products.product.create')}}" class="btn btn-primary btn-round text-white">Create New</a>
+		<h3>قائمة المنتجات</h3>
+		<a href="{{route('admin.products.product.create')}}" class="btn btn-primary btn-round text-white">{{__('products.titles.create')}}</a>
 	</div>
 	<div class="card-body">
 		@if($products->count() >0)
@@ -13,16 +13,16 @@
 			<thead>
 				<tr class="">
 					<td >#</td>
-					<td >Name</td>
-					<td >price</td>
-					<td >category</td>
-					<td >subcategory</td>
-					<td >color</td>
-					<td >quantity</td>
-					<td >material</td>
-					<td >size</td>
+					<td >{{__('products.name')}}</td>
+					<td >{{__('products.price')}}</td>
+					<td >{{__('products.category_id')}}</td>
+					<td >{{__('products.subcategory_id')}}</td>
+					<td >{{__('products.color_id')}}</td>
+					<td >{{__('products.quantity')}}</td>
+					<td >{{__('products.material_id')}}</td>
+					<td >{{__('products.size_id')}}</td>
 					{{-- <td >discription</td> --}}
-					<td >action</td>
+					<td > التحكم</td>
 				</tr>
 			</thead>
 			<tbody>
