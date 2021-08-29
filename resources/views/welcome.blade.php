@@ -1,14 +1,13 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="ar" dir="rtl">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Fashion - eCommerce HTML5 Template</title>
+        <title>{{env('APP_NAME', 'namiro')}}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/namiro/img/favicon.png')}}">
-		
 		<!-- all css here -->
         <link rel="stylesheet" href="{{asset('assets/namiro/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/namiro/css/magnific-popup.css')}}">
@@ -35,71 +34,57 @@
                             <a class="navbar-brand" href="index.html"><img src="{{asset('assets/namiro/img/logo/logo-9.png')}}" alt=""></a>
                         </div>
                         <div class="header-search-cart-login">
-                            <div class="header-login">
-                                <ul>
-                                    <li><a href="{{route('login')}}">Login</a></li>
-                                    <li><a href="{{route('register')}}">Reg</a></li>
-                                </ul>
-                            </div>
-                            <div class="header-cart">
-                                <a class="icon-cart" href="#">
-                                    <i class="ti-shopping-cart"></i>
-                                    <span class="shop-count pink">02</span>
-                                </a>
-                                <ul class="cart-dropdown">
-                                    <li class="single-product-cart">
-                                        <div class="cart-img">
-                                            <a href="#"><img src="{{asset('assets/namiro/img/cart/no-image-available-grid.png')}}" alt=""></a>
-                                        </div>
-                                        <div class="cart-title">
-                                            <h5><a href="#"> Bits Headphone</a></h5>
-                                            <h6><a href="#">Black</a></h6>
-                                            <span>$80.00 x 1</span>
-                                        </div>
-                                        <div class="cart-delete">
-                                            <a href="#"><i class="ti-trash"></i></a>
-                                        </div>
-                                    </li>
-                                    <li class="single-product-cart">
-                                        <div class="cart-img">
-                                            <a href="#"><img src="{{asset('assets/namiro/img/cart/2.jpg')}}" alt=""></a>
-                                        </div>
-                                        <div class="cart-title">
-                                            <h5><a href="#"> Bits Headphone</a></h5>
-                                            <h6><a href="#">Black</a></h6>
-                                            <span>$80.00 x 1</span>
-                                        </div>
-                                        <div class="cart-delete">
-                                            <a href="#"><i class="ti-trash"></i></a>
-                                        </div>
-                                    </li>
-                                    <li class="single-product-cart">
-                                        <div class="cart-img">
-                                            <a href="#"><img src="{{asset('assets/namiro/img/cart/3.jpg')}}" alt=""></a>
-                                        </div>
-                                        <div class="cart-title">
-                                            <h5><a href="#"> Bits Headphone</a></h5>
-                                            <h6><a href="#">Black</a></h6>
-                                            <span>$80.00 x 1</span>
-                                        </div>
-                                        <div class="cart-delete">
-                                            <a href="#"><i class="ti-trash"></i></a>
-                                        </div>
-                                    </li>
-                                    <li class="cart-space">
-                                        <div class="cart-sub">
-                                            <h4>Subtotal</h4>
-                                        </div>
-                                        <div class="cart-price">
-                                            <h4>$240.00</h4>
-                                        </div>
-                                    </li>
-                                    <li class="cart-btn-wrapper">
-                                        <a class="cart-btn btn-hover" href="#">view cart</a>
-                                        <a class="cart-btn btn-hover" href="#">checkout</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            @if (!Auth::check())
+                                <div class="header-login">
+                                    <ul>
+                                        <li><a href="{{route('login')}}">Login</a></li>
+                                        <li><a href="{{route('register')}}">Reg</a></li>
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (Auth::check())
+                                <div class="header-cart">
+                                    <a class="icon-cart" href="#">
+                                        <i class="ti-shopping-cart"></i>
+                                        <span class="shop-count pink">{{ Auth::user()->carts != null ? Auth::user()->carts->count() : 0}}</span>
+                                    </a>
+                                    <ul class="cart-dropdown text-right">
+                                        @if (Auth::user()->carts != null)
+                                            @php $total = 0 @endphp
+                                            @foreach (Auth::user()->carts as $cart) 
+                                            @php $total += $cart->stock->product->price * $cart->quantity @endphp                       
+                                                <li class="single-product-cart" id="dropdowncart{{$cart->id}}">
+                                                    <div class="cart-img">
+                                                        <a href="#"><img src="{{asset('assets/namiro/img/cart/3.jpg')}}" alt=""></a>
+                                                    </div>
+                                                    <div class="cart-title">
+                                                        <h5><a href="#">{{$cart->stock->product->name}}</a></h5>
+                                                        <h6><a href="#">{{$cart->stock->color->title}}</a></h6>
+                                                        <span>{{$cart->stock->product->price}} * {{$cart->quantity}}</span>
+                                                    </div>
+                                                    <div class="cart-delete">
+                                                        <a href="#" data-cart_id="{{$cart->id}}">
+                                                            <i class="ti-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        @endif
+                                        <li class="cart-space">
+                                            <div class="cart-sub">
+                                                <h4>المجموع</h4>
+                                            </div>
+                                            <div class="cart-price" id="menue-cart-price">
+                                                <h4>{{$total}}</h4>
+                                            </div>
+                                        </li>
+                                        <li class="cart-btn-wrapper">
+                                            <a class="cart-btn btn-hover" href="{{route('processes.carts.index')}}">السلة </a>
+                                            <a class="cart-btn btn-hover" href="{{route('processes.orders.index')}}">الدفع</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -130,278 +115,44 @@
                     </div>
                 </div>
             </div>
-            <div class="currency-2">
-                <ul>
-                    <li>
-                        <a href="#">EN</a>
-                    </li>
-                    <li>
-                        <a href="#">RN</a>
-                    </li>
-                </ul>
-            </div>
             <div class="clickable-mainmenu-btn">
                 <a class="clickable-mainmenu-active" href="#"><img src="{{asset('assets/namiro/img/icon-img/43.png')}}" alt=""></a>
             </div>
         </div>
-        <!-- banner3 area start -->
-        <div class="banner-area3 pt-120 pb-115">
-            <div class="pl-100 pr-100">
-                <div class="container">
-                    <div class="row no-gutters">
-                        <div class="col-md-12 col-lg-4 col-xl-4">
-                            <div class="banner-wrapper mrgn-negative">
-                                <a href="#"><img src="{{asset('assets/namiro/img/banner/8.jpg')}}" alt=""></a>
-                                <div class="banner-wrapper2-content">
-                                    <h3>Speatial </h3>
-                                    <h2>Style</h2>
-                                    <span>Start from $299.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-8 col-xl-8">
-                            <div class="row no-gutters banner-mrg">
-                                <div class="col-md-6">
-                                    <div class="banner-wrapper mrgn-b-5 mrgn-r-5 ">
-                                        <img src="{{asset('assets/namiro/img/banner/9.jpg')}}" alt="">
-                                        <div class="banner-wrapper3-content">
-                                            <a href="#">Shop Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="banner-wrapper mrgn-b-5">
-                                        <img src="{{asset('assets/namiro/img/banner/10.jpg')}}" alt="">
-                                        <div class="banner-wrapper3-content banner-text-color">
-                                            <a href="#">Shop Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="banner-wrapper mrgn-r-5">
-                                        <img src="{{asset('assets/namiro/img/banner/1no-image-available-grid.png')}}" alt="">
-                                        <div class="banner-wrapper3-content">
-                                            <a href="#">Shop Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="banner-wrapper">
-                                        <img src="{{asset('assets/namiro/img/banner/12.jpg')}}" alt="">
-                                        <div class="banner-wrapper3-content">
-                                            <a href="#">Shop Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- banner3 area end -->
         <!-- all products area start -->
         <div class="all-products-area pb-70">
             <div class="pl-100 pr-100">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-3 col-xl-3 col-md-6">
-                            <div class="product-wrapper mb-45">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="{{asset('assets/namiro/img/product/fashion-2/no-image-available-grid.png')}}" alt="">
-                                    </a>
-                                    <span>hot</span>
-                                    <div class="product-action">
-                                        <a class="animate-left" title="Wishlist" href="#">
-                                            <i class="pe-7s-like"></i>
-                                        </a>
-                                        <a class="animate-top" title="Add To Cart" href="#">
-                                            <i class="pe-7s-cart"></i>
-                                        </a>
-                                        <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                            <i class="pe-7s-look"></i>
-                                        </a>
+                        @if ($products != null)
+                            @foreach ($products as $product)                                
+                                <div class="col-lg-3 col-xl-3 col-md-6">
+                                    <div class="product-wrapper mb-45">
+                                        <div class="product-img">
+                                            <a href="#">
+                                                <img src="{{asset('assets/namiro/img/product/fashion-2/8.jpg')}}" alt="">
+                                            </a>
+                                            <span>new</span>
+                                            <div class="product-action">
+                                                <a class="animate-left" title="Wishlist" href="#">
+                                                    <i class="pe-7s-like"></i>
+                                                </a>
+                                                <a class="animate-top" title="Add To Cart" href="#">
+                                                    <i class="pe-7s-cart"></i>
+                                                </a>
+                                                <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                    <i class="pe-7s-look"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-content">
+                                            <h4><a href="product-details.html">{{$product->name}}</a></h4>
+                                            <span>{{$product->price}}</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="product-content">
-                                    <h4><a href="product-details.html">Navy Bird Print</a></h4>
-                                    <span>$115.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-xl-3 col-md-6">
-                            <div class="product-wrapper mb-45">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="{{asset('assets/namiro/img/product/fashion-2/2.jpg')}}" alt="">
-                                    </a>
-                                    <div class="product-action">
-                                        <a class="animate-left" title="Wishlist" href="#">
-                                            <i class="pe-7s-like"></i>
-                                        </a>
-                                        <a class="animate-top" title="Add To Cart" href="#">
-                                            <i class="pe-7s-cart"></i>
-                                        </a>
-                                        <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                            <i class="pe-7s-look"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="product-details.html">Denim Stonewash</a></h4>
-                                    <span>$115.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-xl-3 col-md-6">
-                            <div class="product-wrapper mb-45">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="{{asset('assets/namiro/img/product/fashion-2/3.jpg')}}" alt="">
-                                    </a>
-                                    <span>new</span>
-                                    <div class="product-action">
-                                        <a class="animate-left" title="Wishlist" href="#">
-                                            <i class="pe-7s-like"></i>
-                                        </a>
-                                        <a class="animate-top" title="Add To Cart" href="#">
-                                            <i class="pe-7s-cart"></i>
-                                        </a>
-                                        <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                            <i class="pe-7s-look"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="product-details.html">Mini Waffle 5 Pack</a></h4>
-                                    <span>$115.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-xl-3 col-md-6">
-                            <div class="product-wrapper mb-45">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="{{asset('assets/namiro/img/product/fashion-2/4.jpg')}}" alt="">
-                                    </a>
-                                    <div class="product-action">
-                                        <a class="animate-left" title="Wishlist" href="#">
-                                            <i class="pe-7s-like"></i>
-                                        </a>
-                                        <a class="animate-top" title="Add To Cart" href="#">
-                                            <i class="pe-7s-cart"></i>
-                                        </a>
-                                        <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                            <i class="pe-7s-look"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="product-details.html">Dagger Smart Trousers</a></h4>
-                                    <span>$115.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-xl-3 col-md-6">
-                            <div class="product-wrapper mb-45">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="{{asset('assets/namiro/img/product/fashion-2/5.jpg')}}" alt="">
-                                    </a>
-                                    <span>sell</span>
-                                    <div class="product-action">
-                                        <a class="animate-left" title="Wishlist" href="#">
-                                            <i class="pe-7s-like"></i>
-                                        </a>
-                                        <a class="animate-top" title="Add To Cart" href="#">
-                                            <i class="pe-7s-cart"></i>
-                                        </a>
-                                        <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                            <i class="pe-7s-look"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="product-details.html">Homme Tapered Smart</a></h4>
-                                    <span>$115.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-xl-3 col-md-6">
-                            <div class="product-wrapper mb-45">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="{{asset('assets/namiro/img/product/fashion-2/6.jpg')}}" alt="">
-                                    </a>
-                                    <span>hot</span>
-                                    <div class="product-action">
-                                        <a class="animate-left" title="Wishlist" href="#">
-                                            <i class="pe-7s-like"></i>
-                                        </a>
-                                        <a class="animate-top" title="Add To Cart" href="#">
-                                            <i class="pe-7s-cart"></i>
-                                        </a>
-                                        <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                            <i class="pe-7s-look"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="product-details.html">Navy Bird Print</a></h4>
-                                    <span>$115.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-xl-3 col-md-6">
-                            <div class="product-wrapper mb-45">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="{{asset('assets/namiro/img/product/fashion-2/7.jpg')}}" alt="">
-                                    </a>
-                                    <div class="product-action">
-                                        <a class="animate-left" title="Wishlist" href="#">
-                                            <i class="pe-7s-like"></i>
-                                        </a>
-                                        <a class="animate-top" title="Add To Cart" href="#">
-                                            <i class="pe-7s-cart"></i>
-                                        </a>
-                                        <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                            <i class="pe-7s-look"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="product-details.html">Jacket Stonewash</a></h4>
-                                    <span>$115.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-xl-3 col-md-6">
-                            <div class="product-wrapper mb-45">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="{{asset('assets/namiro/img/product/fashion-2/8.jpg')}}" alt="">
-                                    </a>
-                                    <span>new</span>
-                                    <div class="product-action">
-                                        <a class="animate-left" title="Wishlist" href="#">
-                                            <i class="pe-7s-like"></i>
-                                        </a>
-                                        <a class="animate-top" title="Add To Cart" href="#">
-                                            <i class="pe-7s-cart"></i>
-                                        </a>
-                                        <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                            <i class="pe-7s-look"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="product-details.html">Skinny Jeans Terry</a></h4>
-                                    <span>$115.00</span>
-                                </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
@@ -762,15 +513,6 @@
                 </ul>
             </div>
         </div>
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		<!-- all js here -->
         <script src="{{asset('assets/namiro/js/vendor/jquery-1.12.0.min.js')}}"></script>
         <script src="{{asset('assets/namiro/js/popper.js')}}"></script>
@@ -784,5 +526,31 @@
         <script src="{{asset('assets/namiro/js/owl.carousel.min.js')}}"></script>
         <script src="{{asset('assets/namiro/js/plugins.js')}}"></script>
         <script src="{{asset('assets/namiro/js/main.js')}}"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            $('.cart-delete-button').on('click',function () {
+                Swal.fire({
+                    title: 'هل انت متأكد من انك تريد الحذف ؟ ',
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var cartId = $(this).data('cart_id');
+                        var RequestUrl = '{{route("processes.carts.destroy",'cartId')}}'
+                        $.ajax({
+                            url: RequestUrl.replace("cartId",cartId),
+                            type:'delete',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            context: document.body
+                        }).done(function() {
+                            $('#dropdowncart'+cartId).remove()
+                        });
+                    } 
+                });
+            });
+        </script>
     </body>
 </html>

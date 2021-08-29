@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Route::name('calculations.')->namespace('Calculations')->prefix('calculations')->group(function(){
 	Route::resource('sales', 'SalesController');
 	Route::resource('offer', 'OfferController');
@@ -46,9 +44,5 @@ Route::name('feedback.')->namespace('Feedback')->prefix('feedback')->group(funct
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@welcome')->name('welcom');

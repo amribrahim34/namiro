@@ -3,26 +3,23 @@
         <div class="container-fluid">
             <div class="header-bottom-wrapper">
                 <div class="logo-2 furniture-logo ptb-30">
-                    <a href="index.html">
+                    <a href="{{route('home')}}">
                         <img src="{{asset('assets/namiro/img/logo/2.png')}}" alt="">
                     </a>
                 </div>
                 <div class="menu-style-2 furniture-menu menu-hover">
                     <nav>
                         <ul>
+                            @if (Auth::check() &&  Auth::user()->admin == 1 )
+                                <li>
+                                    <a href="{{route('admin.index')}}">لوحة التحكم </a>
+                                </li>
+                            @endif
                             <li>
                                 <a href="{{route('home')}}">الرئيسية </a>
-                                {{-- <ul class="single-dropdown">
-                                    <li><a href="index.html">Fashion</a></li>
-                                    <li><a href="index-fashion-2.html">Fashion style 2</a></li>
-                                </ul> --}}
                             </li>
                             <li>
                                 <a href="{{route('products.product.index')}}">تصفح المنتجات </a>
-                                {{-- <ul class="single-dropdown">
-                                    <li><a href="index.html">Fashion</a></li>
-                                    <li><a href="index-fashion-2.html">Fashion style 2</a></li>
-                                </ul> --}}
                             </li>
                         </ul>
                     </nav>
@@ -107,8 +104,9 @@
                     </div>
                 @endif
                 <div class="furniture-search">
-                    <form action="#">
-                        <input placeholder="I am Searching for . . ." type="text">
+                    <form action="{{route('products.product.search')}}" method="post">
+                        @csrf
+                        <input pplaceholder="ابحث هنا.." type="text" name="search_term">
                         <button>
                             <i class="ti-search"></i>
                         </button>

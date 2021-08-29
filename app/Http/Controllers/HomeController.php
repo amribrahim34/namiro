@@ -31,4 +31,12 @@ class HomeController extends Controller
             'best_seller'=>$best_seller,
         ]);
     }
+
+    public function welcome()
+    {
+        $products = Product::with('stocks')->inRandomOrder()->take(8)->get();
+        return view('welcome',[
+            'products'=>$products,
+        ]);
+    }
 }
