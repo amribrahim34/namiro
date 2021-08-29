@@ -11,6 +11,16 @@
             @CSRF
             @method('put')
             <div class="form-group form-default">
+                <select class="form-control" name="category_id">
+                    <option  disabled selected> {{__('subcategories.category_id')}}</option>
+                    @if($categories->count() > 0)
+                    @foreach($categories as $category)
+                    <option value="{{$category->id}}" @if ($subcategory->category->exists() && $subcategory->category_id == $category->id) selected @endif > {{$category->title}}</option>
+                    @endforeach
+                    @endif
+                </select>
+            </div>
+            <div class="form-group form-default">
                 <input type="text" name="title" value="{{$subcategory->title}}" class="form-control" required="">
                 <span class="form-bar"></span>
                 <label class="float-label">{{__('subcategories.title')}}</label>

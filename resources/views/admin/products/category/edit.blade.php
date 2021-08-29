@@ -15,7 +15,7 @@
                 <span class="form-bar"></span>
                 <label class="float-label">{{__('categories.title')}}</label>
             </div>
-            <button type="submit" class="btn btn-primary float-right">submit</button>
+            <button type="submit" class="btn btn-primary float-right">{{__('app.forms.btn.FormSubmit')}}</button>
         </form>
     </div>
 </div>

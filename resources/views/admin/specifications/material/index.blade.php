@@ -3,8 +3,8 @@
 
 <div class="card w-100">
 	<div class="card-header d-flex justify-content-between">
-		<h3>materials list</h3>
-		<a href="{{route('admin.specifications.material.create')}}" class="btn btn-primary btn-round text-white">Create New</a>
+		<h3>{{__('materials.titles.index')}}</h3>
+		<a href="{{route('admin.specifications.material.create')}}" class="btn btn-primary btn-round text-white">{{__('materials.titles.create')}}</a>
 	</div>
 	<div class="card-body">
 		@if($materials->count() >0)
@@ -12,8 +12,8 @@
 			<thead>
 				<tr class="">
 					<td >#</td>
-					<td >Name</td>
-					<td >action</td>
+					<td >{{__('materials.title')}}</td>
+					<td >التحكم</td>
 				</tr>
 			</thead>
 			<tbody>

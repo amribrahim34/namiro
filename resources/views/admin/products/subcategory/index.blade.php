@@ -3,8 +3,8 @@
 
 <div class="card w-100">
 	<div class="card-header d-flex justify-content-between">
-		<h3>subcategories list</h3>
-		<a href="{{route('admin.products.subcategory.create')}}" class="btn btn-primary btn-round text-white">Create New</a>
+		<h3>{{__('subcategories.titles.index')}}</h3>
+		<a href="{{route('admin.products.subcategory.create')}}" class="btn btn-primary btn-round text-white">{{__('subcategories.titles.create')}}</a>
 	</div>
 	<div class="card-body">
 		@if($subcategories->count() >0)
@@ -12,9 +12,9 @@
 			<thead>
 				<tr class="">
 					<td >#</td>
-					<td >Name</td>
-					<td >category</td>
-					<td >action</td>
+					<td >{{__('subcategories.name')}}</td>
+					<td >{{__('subcategories.category_id')}}</td>
+					<td >التحكم</td>
 				</tr>
 			</thead>
 			<tbody>

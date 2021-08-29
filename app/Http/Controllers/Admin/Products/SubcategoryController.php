@@ -71,7 +71,11 @@ class SubcategoryController extends Controller
     public function edit($id)
     {
         $subcategory = Subcategory::find($id);
-        return view('admin.products.subcategory.edit',['subcategory'=>$subcategory]);
+        $categories = Category::get();
+        return view('admin.products.subcategory.edit',[
+            'subcategory'=>$subcategory,
+            'categories'=>$categories,
+        ]);
     }
 
     /**
