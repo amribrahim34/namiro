@@ -40,7 +40,7 @@
                                 <li class="single-product-cart" id="dropdowncart{{$cart->id}}">
                                     <div class="cart-img">
                                         <a href="{{route('products.product.show',$cart->stock->product_id)}}">
-                                            <img src="{{asset('assets/namiro/img/cart/no-image-available-grid.png')}}" alt="">
+                                            <img src="#" alt="">
                                         </a>
                                     </div>
                                     <div class="cart-title">

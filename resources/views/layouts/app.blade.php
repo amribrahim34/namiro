@@ -3,13 +3,12 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Ezone - eCommerce HTML5 Template</title>
+        <title>{{env('APP_NAME' , 'namiro')}}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/namiro/img/favicon.png')}}">
-		@yield('css')
 		<!-- all css here -->
         <link rel="stylesheet" href="{{asset('assets/namiro/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/namiro/css/magnific-popup.css')}}">
@@ -41,6 +40,20 @@
 		
 		<!-- all js here -->
         @yield('scripts')
+        <script src="{{asset('assets/namiro/js/vendor/jquery-1.12.0.min.js')}}"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="{{asset('assets/namiro/js/popper.js')}}"></script>
+        <script src="{{asset('assets/namiro/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('assets/namiro/js/jquery.magnific-popup.min.js')}}"></script>
+        <script src="{{asset('assets/namiro/js/isotope.pkgd.min.js')}}"></script>
+        <script src="{{asset('assets/namiro/js/imagesloaded.pkgd.min.js')}}"></script>
+        <script src="{{asset('assets/namiro/js/jquery.counterup.min.js')}}"></script>
+        <script src="{{asset('assets/namiro/js/waypoints.min.js')}}"></script>
+        <script src="{{asset('assets/namiro/js/ajax-mail.js')}}"></script>
+        <script src="{{asset('assets/namiro/js/owl.carousel.min.js')}}"></script>
+        <script src="{{asset('assets/namiro/js/plugins.js')}}"></script>
+        <script src="{{asset('assets/namiro/js/main.js')}}"></script>
+        {{-- <script src="{{mix('js/app.js')}}"></script> --}}
         <script>
             $('.cart-delete-button').on('click',function () {
                 Swal.fire({
@@ -66,20 +79,7 @@
                 });
             });
         </script>
-        {{-- <script src="{{asset('assets/namiro/js/vendor/jquery-1.12.0.min.js')}}"></script> --}}
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="{{asset('assets/namiro/js/popper.js')}}"></script>
-        <script src="{{asset('assets/namiro/js/bootstrap.min.js')}}"></script>
-        <script src="{{asset('assets/namiro/js/jquery.magnific-popup.min.js')}}"></script>
-        <script src="{{asset('assets/namiro/js/isotope.pkgd.min.js')}}"></script>
-        <script src="{{asset('assets/namiro/js/imagesloaded.pkgd.min.js')}}"></script>
-        <script src="{{asset('assets/namiro/js/jquery.counterup.min.js')}}"></script>
-        <script src="{{asset('assets/namiro/js/waypoints.min.js')}}"></script>
-        <script src="{{asset('assets/namiro/js/ajax-mail.js')}}"></script>
-        <script src="{{asset('assets/namiro/js/owl.carousel.min.js')}}"></script>
-        <script src="{{asset('assets/namiro/js/plugins.js')}}"></script>
-        <script src="{{asset('assets/namiro/js/main.js')}}"></script>
-        <script src="{{mix('js/app.js')}}"></script>
+        
         @yield('js')
     </body>
 </html>
