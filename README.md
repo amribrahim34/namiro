@@ -36,6 +36,6 @@ An e-commerce project which utilizes clean code, TDD, API, and vue.js, the proje
 - Run php artisan migrate:fresh --seed
 
 ### Accessing Admin 
-Link: /admin
-Email: admin@gmail.com
-Password: admin
+- Link: /admin
+- Email: admin@gmail.com
+- Password: admin
