@@ -3,7 +3,7 @@
 
 <div class="card w-100">
     <div class="card-header">
-        <h5>Material Form Inputs</h5>
+        <h4>{{__('subcategories.titles.create')}}</h4>
         <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
     </div>
     <div class="card-block">
@@ -11,9 +11,10 @@
             @CSRF
             <div class="form-group form-default">
                 <select class="form-control" name="category_id">
+                    <option  disabled selected> {{__('subcategories.category_id')}}</option>
                     @if($categories->count() > 0)
                     @foreach($categories as $category)
-                    <option value="{{$category->id}}"> {{$category->title}}</option>
+                    <option value="{{$category->id}}" > {{$category->title}}</option>
                     @endforeach
                     @endif
                 </select>
@@ -21,9 +22,9 @@
             <div class="form-group form-default">
                 <input type="text" name="title" class="form-control" required="">
                 <span class="form-bar"></span>
-                <label class="float-label">subcategory Name</label>
+                <label class="float-label">{{__('subcategories.title')}}</label>
             </div>
-            <button type="submit" class="btn btn-primary float-right">submit</button>
+            <button type="submit" class="btn btn-primary float-right">{{__('app.forms.btn.FormSubmit')}}</button>
         </form>
     </div>
 </div>

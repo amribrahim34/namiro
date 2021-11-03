@@ -19,6 +19,8 @@
       <!-- Favicon icon -->
       <link rel="icon" href="{{asset('assets/megable/images/favicon.ico')}}" type="image/x-icon">
       @yield('css')
+      <link rel="stylesheet" type="text/css" href="{{asset('assets/megable/css/select2/select2.min.css')}}">
+
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- waves.css -->
@@ -114,7 +116,7 @@
                               </div>
                           </div>
                       </div>
-                      <a href="index.html">
+                      <a href="{{route('admin.index')}}">
                           <img class="img-fluid" src="{{asset('assets/megable/images/logo.png')}}" alt="Theme-Logo" />
                       </a>
                       <a class="mobile-options waves-effect waves-light">
@@ -146,7 +148,7 @@
                           <li class="header-notification">
                               <a href="#!" class="waves-effect waves-light">
                                   <i class="ti-bell"></i>
-                                  <span class="badge bg-c-red"></span>
+                                  {{-- <span class="badge bg-c-red"></span> --}}
                               </a>
                               <ul class="show-notification">
                                   <li>
@@ -188,7 +190,7 @@
                           <li class="user-profile header-notification">
                               <a href="#!" class="waves-effect waves-light">
                                   <img src="{{asset('assets/megable/images/avatar-4.jpg')}}" class="img-radius" alt="User-Profile-Image">
-                                  <span>John Doe</span>
+                                  <span>{{Auth::user()->name}}</span>
                                   <i class="ti-angle-down"></i>
                               </a>
                               <ul class="show-notification profile-notification">
@@ -234,7 +236,7 @@
                               <div class="main-menu-header">
                                   <img class="img-80 img-radius" src="{{asset('assets/megable/images/avatar-4.jpg')}}" alt="User-Profile-Image">
                                   <div class="user-details">
-                                      <span id="more-details">John Doe<i class="fa fa-caret-down"></i></span>
+                                      <span id="more-details">{{Auth::user()->name}} <i class="fa fa-caret-down"></i></span>
                                   </div>
                               </div>
         
@@ -257,34 +259,34 @@
                                   </div>
                               </form>
                           </div>
-                          <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">NameSpaces</div>
+                          <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">الأقسام</div>
                           <ul class="pcoded-item pcoded-left-item">
                               {{-- products --}}
                               <li class="pcoded-hasmenu">
                                   <a href="javascript:void(0)" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Products</span>
+                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">{{__('products.titles.index')}}</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                                   <ul class="pcoded-submenu">
                                       <li class=" ">
                                           <a href="{{route('admin.products.product.index')}}" class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Product</span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">{{__('products.titles.index')}}</span>
                                               <span class="pcoded-mcaret"></span>
                                           </a>
                                       </li>
                                       <li class=" ">
                                           <a href="{{route('admin.products.category.index')}} " class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Category</span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">{{__('categories.titles.index')}}</span>
                                               <span class="pcoded-mcaret"></span>
                                           </a>
                                       </li>
                                       <li class=" ">
                                           <a href="{{route('admin.products.subcategory.index')}} " class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Subcategory</span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">{{__('subcategories.titles.index')}}</span>
                                               <span class="pcoded-mcaret"></span>
                                           </a>
                                       </li>
@@ -294,28 +296,28 @@
                               <li class="pcoded-hasmenu">
                                   <a href="javascript:void(0)" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">specifications</span>
+                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">المواصفات </span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                                   <ul class="pcoded-submenu">
                                       <li class=" ">
                                           <a href="{{route('admin.specifications.color.index')}}" class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Color</span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">{{__('colors.titles.index')}}</span>
                                               <span class="pcoded-mcaret"></span>
                                           </a>
                                       </li>
                                       <li class=" ">
                                           <a href="{{route('admin.specifications.material.index')}} " class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Material</span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">{{__('materials.titles.index')}}</span>
                                               <span class="pcoded-mcaret"></span>
                                           </a>
                                       </li>
                                       <li class=" ">
                                           <a href="{{route('admin.specifications.size.index')}} " class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Size</span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">{{__('sizes.titles.index')}}</span>
                                               <span class="pcoded-mcaret"></span>
                                           </a>
                                       </li>
@@ -339,7 +341,7 @@
                                   <div class="col-md-4">
                                       <ul class="breadcrumb-title">
                                           <li class="breadcrumb-item">
-                                              <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                              <a href="{{route('admin.index')}}"> <i class="fa fa-home"></i> </a>
                                           </li>
                                           <li class="breadcrumb-item"><a href="#!">Dashboard</a>
                                           </li>

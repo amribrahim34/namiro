@@ -40,7 +40,7 @@ class CategoryController extends Controller
       $category = new Category;
       $category->title = $request->name;
       $category->save();
-
+      $request->session()->flash('message',__('categories.massages.created_succesfully'));
       return redirect(route('admin.products.category.index'));
     }
 
@@ -63,7 +63,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-      
+      $category = Category::find($id);
+      return view('admin.products.category.edit',['category'=>$category]);
     }
 
     /**
@@ -72,9 +73,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id , Request $request)
     {
-      
+      $category = Category::find($id);
+      $category->update(['title'=>$request->title]);
+      $request->session()->flash('message',__('categories.massages.updated_succesfully'));
+      return redirect(route('admin.products.category.index'));
     }
 
     /**
@@ -83,9 +87,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id , Request $request)
     {
-      
+      $category = Category::find($id);
+      $category->delete();
+      $request->session()->flash('message',__('categories.massages.deleted_succesfully'));
+      return redirect(route('admin.products.category.index'));
     }
   
 }

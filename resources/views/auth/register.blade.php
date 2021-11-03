@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('page-name')
+    تسجيل
+@endsection
 @section('content')
 <div class="register-area ptb-100">
     <div class="container-fluid">

@@ -9,6 +9,7 @@ use App\Models\Specifications\Color;
 use App\Models\Specifications\Material;
 use App\Models\Specifications\Size;
 use App\Models\Calculations\Stock;
+use App\Http\Requests\ProductStoreRequest;
 
 class ProductController extends Controller
 {
@@ -20,7 +21,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
+        $products = Product::with('stocks','stocks.color','stocks.material','stocks.size','category.subcategory','category')->paginate(10);
         return view('admin.products.product.index',['products'=>$products]);
     }
 
@@ -50,32 +51,29 @@ class ProductController extends Controller
      *
      * @return Response
      */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-        // dd($request);
-      $request->validate([
-        'name' =>'required',
-        'discription' =>'required',
-        'price' =>'required',
-        'quantity' =>'required',
-        'size_id' =>'required',
-        'color_id' =>'required',
-        'material_id' =>'required',
-      ]);
-      $product = new Product;
-      $product->name = $request->name;
-      $product->subcategory_id = $request->subcategory_id;
-      $product->discription = $request->discription;
-      $product->price = $request->price;
-      $product->color_id = $request->color_id;
-      $product->material_id = $request->material_id;
-      $product->save();
-      $stock = new Stock;
-      $stock->amount = $request->quantity;
-      $stock->product_id = $product->id;
-      $stock->save();
-      $product->sizes()->sync([$request->size_id]);
-      return redirect(route('products.product.index'));
+      $product = $this->StoreProduct($request);
+      if ($request->group != null ) {
+        foreach ($request->group as  $item) {
+          $this->StoreStock($item , $product);
+        }
+      }
+      if ($request->file()) {
+        if ($request->file()['group']) {
+            foreach ($request->file()['group'] as $group) {
+                foreach ($group as $images) {
+                    foreach ($images as $image) {
+                        $product->addMedia($image)->toMediaCollection('product_images');
+                    }
+                }
+            }
+        }
+        if ($request->file('cover')) {
+          $product->addMedia($request->file('cover'))->toMediaCollection('cover');
+        }
+      }
+      return redirect(route('admin.products.product.index'));
     }
 
     /**
@@ -97,7 +95,20 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-      
+        $product = Product::with('stocks','stocks.color','stocks.material','stocks.size','category.subcategory','category')->findOrFail($id);
+        $categories = Category::get();
+        $subcategories = Subcategory::get();
+        $colors = Color::get();
+        $materials = Material::get();
+        $sizes = Size::get();
+        return view('admin.products.product.edit',[
+              'product'=>$product,
+              'categories'=>$categories,
+              'subcategories'=>$subcategories,
+              'colors'=>$colors,
+              'materials'=>$materials,
+              'sizes'=>$sizes,
+        ]);
     }
 
     /**
@@ -106,9 +117,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id , Request $request)
     {
-      
+      $product = Product::find($id);
+      $product->update($request->all());
+      $request->session()->flash('message',__('categories.massages.updated_succesfully'));
+      return redirect(route('admin.products.product.index'));
     }
 
     /**
@@ -117,9 +131,32 @@ class ProductController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id , Request $request)
     {
-      
+      $product = Product::find($id);
+      $product->delete();
+      $request->session()->flash('message',__('categories.massages.deleted_succesfully'));
+      return redirect(route('admin.products.product.index'));
+    }
+
+    private function StoreProduct($request){
+      $product = new Product;
+      $product->name = $request->name;
+      $product->subcategory_id = $request->subcategory_id;
+      $product->discription = $request->discription;
+      $product->price = $request->price;
+      $product->save();
+      return $product;
     }
   
+    private function StoreStock($item , $product){ 
+      $stock = new Stock;
+      $stock->amount = $item['quantity'];
+      $stock->product_id = $product->id;
+      $stock->color_id = $item['color_id'];
+      $stock->material_id = $item['material_id'];
+      $stock->size_id = $item['size_id'];
+      $stock->save();
+    }
+
 }

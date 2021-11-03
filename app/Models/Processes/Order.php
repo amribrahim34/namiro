@@ -1,6 +1,6 @@
 <?php
 
-namespace Orders;
+namespace App\Models\Processes;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
@@ -10,8 +10,8 @@ class Order extends Model {
 	protected $table = 'orders';
 	use SoftDeletes;
 
-	public function product(){
-		return $this->belongsTo('App\Models\Products\Product');
+	public function carts(){
+		return $this->hasMany('App\Models\Processes\Cart');
 	}
 
 	public function user(){

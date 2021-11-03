@@ -3,8 +3,8 @@
 
 <div class="card w-100">
 	<div class="card-header d-flex justify-content-between">
-		<h3>categories list</h3>
-		<a href="{{route('admin.products.category.create')}}" class="btn btn-primary btn-round text-white">Create New</a>
+		<h3>{{__('categories.titles.index')}}</h3>
+		<a href="{{route('admin.products.category.create')}}" class="btn btn-primary btn-round text-white">{{__('categories.titles.create')}}</a>
 	</div>
 	<div class="card-body">
 		@if($categories->count() >0)
@@ -12,7 +12,8 @@
 			<thead>
 				<tr class="">
 					<td >#</td>
-					<td >Name</td>
+					<td >{{__('categories.name')}}</td>
+					<td >التحكم</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -20,6 +21,18 @@
 				<tr>
 					<td>{{$category->id}} </td>
 					<td>{{$category->title}} </td>
+					<td class="d-flex">
+						<a href="{{route('admin.products.category.edit',$category->id)}}" class="text-info  d-flex align-items-center">
+							<i class="fa fa-pencil-square-o f-24 m-r-15"></i>
+						</a>
+						<form action="{{route('admin.products.category.destroy',$category->id)}}" method="post">
+							@csrf
+							@method('delete')
+							<button class="text-danger btn btn-link" type="submit">
+								<i class="fa fa-trash f-24"></i>
+							</button>
+						</form>
+					</td>
 				</tr>
 				@endforeach
 			</tbody>

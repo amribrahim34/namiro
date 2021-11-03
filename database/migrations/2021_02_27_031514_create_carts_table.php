@@ -12,8 +12,11 @@ class CreateCartsTable extends Migration {
 			$table->bigIncrements('id');
 			$table->unsignedBigInteger('user_id');
 			$table->foreign('user_id')->references('id')->on('users');
-			$table->unsignedBigInteger('product_id');
-			$table->foreign('product_id')->references('id')->on('products');
+			$table->unsignedBigInteger('stock_id');
+			$table->foreign('stock_id')->references('id')->on('stocks');
+			$table->unsignedBigInteger('order_id')->nullable();
+			$table->foreign('order_id')->references('id')->on('orders');
+			$table->integer('quantity');
 			$table->timestamps();
 			$table->softDeletes();
 		});

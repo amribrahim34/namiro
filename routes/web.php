@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Route::name('calculations.')->namespace('Calculations')->prefix('calculations')->group(function(){
 	Route::resource('sales', 'SalesController');
 	Route::resource('offer', 'OfferController');
@@ -27,15 +25,18 @@ Route::name('specifications.')->namespace('Specifications')->prefix('specificati
 	Route::resource('material', 'MaterialController');
 	Route::resource('size', 'SizeController');
 });
-Route::name('processes.')->namespace('Processes')->prefix('processes')->group(function(){
-	Route::resource('cart', 'CartController');
-	Route::resource('wish', 'WishController');
-	Route::resource('order', 'OrderController');
+Route::name('processes.')->middleware('auth')->namespace('Processes')->prefix('processes')->group(function(){
+	Route::post('carts/update', 'CartController@update')->name('carts.update');
+	Route::resource('carts', 'CartController')->except('update');
+	Route::resource('wishs', 'WishController');
+	Route::resource('orders', 'OrderController');
 });
 Route::name('products.')->namespace('Products')->prefix('products')->group(function(){
 	Route::resource('category', 'CategoryController');
 	Route::resource('subcategory', 'SubcategoryController');
 	Route::resource('product', 'ProductController');
+	Route::post('product/search', 'ProductController@search')->name('product.search');
+	Route::post('product/getdata', 'ProductController@getdata')->name('product.getdata');
 });
 Route::name('feedback.')->namespace('Feedback')->prefix('feedback')->group(function(){
 	Route::resource('rate', 'RateController');
@@ -43,9 +44,5 @@ Route::name('feedback.')->namespace('Feedback')->prefix('feedback')->group(funct
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@welcome')->name('welcom');

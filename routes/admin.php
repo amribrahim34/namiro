@@ -5,7 +5,7 @@
 Route::namespace('Admin')->middleware('auth')->group(function(){
 	Route::get('/', function () {
 		return view('admin.index');
-	});
+	})->name('index');
 	// Route::name('calculations.')->namespace('Calculations')->prefix('calculations')->group(function(){
 	// 	Route::resource('sales', 'SalesController');
 	// 	Route::resource('offer', 'OfferController');

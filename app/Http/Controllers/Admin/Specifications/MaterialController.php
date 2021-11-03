@@ -62,7 +62,8 @@ class MaterialController extends Controller
      */
     public function edit($id)
     {
-      
+        $material = Material::find($id);
+        return view('admin.specifications.material.edit',['material'=>$material]);
     }
 
     /**
@@ -71,9 +72,12 @@ class MaterialController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id , Request $request)
     {
-      
+        $material = Material::find($id);
+        $material->update(['title'=>$request->title]);
+        $request->session()->flash('message',__('materials.massages.updated_succesfully'));
+        return redirect(route('admin.specifications.material.index'));
     }
 
     /**
@@ -82,9 +86,12 @@ class MaterialController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id , Request $request)
     {
-      
+        $material = Material::find($id);
+        $material->delete();
+        $request->session()->flash('message',__('materials.massages.deleted_succesfully'));
+        return redirect(route('admin.specifications.material.index'));
     }
   
 }

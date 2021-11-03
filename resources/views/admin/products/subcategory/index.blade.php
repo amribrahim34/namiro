@@ -3,8 +3,8 @@
 
 <div class="card w-100">
 	<div class="card-header d-flex justify-content-between">
-		<h3>subcategories list</h3>
-		<a href="{{route('admin.products.subcategory.create')}}" class="btn btn-primary btn-round text-white">Create New</a>
+		<h3>{{__('subcategories.titles.index')}}</h3>
+		<a href="{{route('admin.products.subcategory.create')}}" class="btn btn-primary btn-round text-white">{{__('subcategories.titles.create')}}</a>
 	</div>
 	<div class="card-body">
 		@if($subcategories->count() >0)
@@ -12,8 +12,9 @@
 			<thead>
 				<tr class="">
 					<td >#</td>
-					<td >Name</td>
-					<td >category</td>
+					<td >{{__('subcategories.name')}}</td>
+					<td >{{__('subcategories.category_id')}}</td>
+					<td >التحكم</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -22,6 +23,18 @@
 					<td>{{$subcategory->id}} </td>
 					<td>{{$subcategory->title}} </td>
 					<td>{{$subcategory->category->title}} </td>
+					<td class="d-flex">
+						<a href="{{route('admin.products.subcategory.edit',$subcategory->id)}}" class="text-info  d-flex align-items-center">
+							<i class="fa fa-pencil-square-o f-24 m-r-15"></i>
+						</a>
+						<form action="{{route('admin.products.subcategory.destroy',$subcategory->id)}}" method="post">
+							@csrf
+							@method('delete')
+							<button class="text-danger btn btn-link" type="submit">
+								<i class="fa fa-trash f-24"></i>
+							</button>
+						</form>
+					</td>
 				</tr>
 				@endforeach
 			</tbody>

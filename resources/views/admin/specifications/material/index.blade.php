@@ -3,8 +3,8 @@
 
 <div class="card w-100">
 	<div class="card-header d-flex justify-content-between">
-		<h3>materials list</h3>
-		<a href="{{route('admin.specifications.material.create')}}" class="btn btn-primary btn-round text-white">Create New</a>
+		<h3>{{__('materials.titles.index')}}</h3>
+		<a href="{{route('admin.specifications.material.create')}}" class="btn btn-primary btn-round text-white">{{__('materials.titles.create')}}</a>
 	</div>
 	<div class="card-body">
 		@if($materials->count() >0)
@@ -12,7 +12,8 @@
 			<thead>
 				<tr class="">
 					<td >#</td>
-					<td >Name</td>
+					<td >{{__('materials.title')}}</td>
+					<td >التحكم</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -20,6 +21,18 @@
 				<tr>
 					<td>{{$material->id}} </td>
 					<td>{{$material->title}} </td>
+					<td class="d-flex">
+						<a href="{{route('admin.specifications.material.edit',$material->id)}}" class="text-info  d-flex align-items-center">
+							<i class="fa fa-pencil-square-o f-24 m-r-15"></i>
+						</a>
+						<form action="{{route('admin.specifications.material.destroy',$material->id)}}" method="post">
+							@csrf
+							@method('delete')
+							<button class="text-danger btn btn-link" type="submit">
+								<i class="fa fa-trash f-24"></i>
+							</button>
+						</form>
+					</td>
 				</tr>
 				@endforeach
 			</tbody>

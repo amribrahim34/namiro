@@ -70,7 +70,12 @@ class SubcategoryController extends Controller
      */
     public function edit($id)
     {
-      
+        $subcategory = Subcategory::find($id);
+        $categories = Category::get();
+        return view('admin.products.subcategory.edit',[
+            'subcategory'=>$subcategory,
+            'categories'=>$categories,
+        ]);
     }
 
     /**
@@ -79,9 +84,12 @@ class SubcategoryController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id , Request $request)
     {
-      
+        $subcategory = Subcategory::find($id);
+        $subcategory->update(['title'=>$request->title]);
+        $request->session()->flash('message',__('subcategories.massages.updated_succesfully'));
+        return redirect(route('admin.products.subcategory.index'));
     }
 
     /**
@@ -90,9 +98,12 @@ class SubcategoryController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id , Request $request)
     {
-      
+        $subcategory = Subcategory::find($id);
+        $subcategory->delete();
+        $request->session()->flash('message',__('subcategories.massages.deleted_succesfully'));
+        return redirect(route('admin.products.subcategory.index'));
     }
   
 }

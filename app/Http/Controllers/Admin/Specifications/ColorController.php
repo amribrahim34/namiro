@@ -36,9 +36,9 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['name'=>'required']);
+        $request->validate(['title'=>'required']);
         $color = new Color;
-        $color->name = $request->name;
+        $color->title = $request->title;
         $color->save();
         return redirect(route('admin.specifications.color.index'));
     }
@@ -62,7 +62,8 @@ class ColorController extends Controller
      */
     public function edit($id)
     {
-      
+        $color = Color::find($id);
+        return view('admin.specifications.color.edit',['color'=>$color]);
     }
 
     /**
@@ -71,9 +72,12 @@ class ColorController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id , Request $request)
     {
-      
+        $color = Color::find($id);
+        $color->update(['title'=>$request->title]);
+        $request->session()->flash('message',__('colors.massages.updated_succesfully'));
+        return redirect(route('admin.specifications.color.index'));
     }
 
     /**
@@ -82,9 +86,12 @@ class ColorController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id , Request $request)
     {
-      
+        $color = Color::find($id);
+        $color->delete();
+        $request->session()->flash('message',__('colors.massages.deleted_succesfully'));
+        return redirect(route('admin.specifications.color.index'));
     }
 
 }

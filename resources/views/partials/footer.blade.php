@@ -1,5 +1,5 @@
 <footer class="footer-area">
-    <div class="footer-top-area bg-img pt-105 pb-65" style="background-image: url(assets/img/bg/1.jpg)" data-overlay="9">
+    <div class="footer-top-area bg-img pt-105 pb-65" style="background-image: url(assets/img/bg/no-image-available-grid.png)" data-overlay="9">
         <div class="container">
             <div class="row">
                 <div class="col-xl-4 col-md-3">
@@ -92,7 +92,7 @@
                                     <th></th>
                                     <th>
                                         <a href="#">Remove <span>x</span></a>
-                                        <img src="assets/img/cart/4.jpg" alt="">
+                                        <img src="{{asset('assets/namiro/img/cart/4.jpg')}}" alt="">
                                         <p>Blush Sequin Top </p>
                                         <span>$75.99</span>
                                         <a class="compare-btn" href="#">Add to cart</a>

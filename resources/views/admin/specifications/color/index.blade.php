@@ -3,8 +3,8 @@
 
 <div class="card w-100">
 	<div class="card-header d-flex justify-content-between">
-		<h3>colors list</h3>
-		<a href="{{route('admin.specifications.color.create')}}" class="btn btn-primary btn-round text-white">Create New</a>
+		<h3>{{__('colors.titles.index')}}</h3>
+		<a href="{{route('admin.specifications.color.create')}}" class="btn btn-primary btn-round text-white">{{__('colors.titles.create')}}</a>
 	</div>
 	<div class="card-body">
 		@if($colors->count() >0)
@@ -12,14 +12,27 @@
 			<thead>
 				<tr class="">
 					<td >#</td>
-					<td >Name</td>
+					<td >{{__('colors.title')}}</td>
+					<td > التحكم</td>
 				</tr>
 			</thead>
 			<tbody>
 				@foreach($colors as $color)
 				<tr>
 					<td>{{$color->id}} </td>
-					<td>{{$color->name}} </td>
+					<td>{{$color->title}} </td>
+					<td class="d-flex">
+						<a href="{{route('admin.specifications.color.edit',$color->id)}}" class="text-info  d-flex align-items-center">
+							<i class="fa fa-pencil-square-o f-24 m-r-15"></i>
+						</a>
+						<form action="{{route('admin.specifications.color.destroy',$color->id)}}" method="post">
+							@csrf
+							@method('delete')
+							<button class="text-danger btn btn-link" type="submit">
+								<i class="fa fa-trash f-24"></i>
+							</button>
+						</form>
+					</td>
 				</tr>
 				@endforeach
 			</tbody>

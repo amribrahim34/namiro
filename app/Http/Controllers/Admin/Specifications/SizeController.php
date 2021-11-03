@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin\Specifications;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Specifications\Size;
+use Illuminate\Support\Facades\Auth;
 
 class SizeController extends Controller 
 {
@@ -60,7 +61,8 @@ class SizeController extends Controller
      */
     public function edit($id)
     {
-      
+        $size = Size::find($id);
+        return view('admin.specifications.size.edit',['size'=>$size]);
     }
 
     /**
@@ -69,9 +71,12 @@ class SizeController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id , Request $request)
     {
-      
+        $size = Size::find($id);
+        $size->update(['title'=>$request->title]);
+        $request->session()->flash('message',__('sizes.massages.updated_succesfully'));
+        return redirect(route('admin.specifications.size.index'));
     }
 
     /**
@@ -80,9 +85,12 @@ class SizeController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id , Request $request)
     {
-      
+        $size = Size::find($id);
+        $size->delete();
+        $request->session()->flash('message',__('sizes.massages.deleted_succesfully'));
+        return redirect(route('admin.specifications.size.index'));
     }
   
 }

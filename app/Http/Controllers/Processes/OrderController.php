@@ -2,6 +2,13 @@
 namespace App\Http\Controllers\Processes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Processes\Order;
+use App\Models\Processes\Cart;
+use App\Models\Calculations\Stock;
+use App\Models\Products\Product;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
+use App\Address ;
 
 class OrderController extends Controller {
 
@@ -12,7 +19,7 @@ class OrderController extends Controller {
      */
     public function index()
     {
-      
+        return view('processes.order.index');
     }
 
     /**
@@ -30,9 +37,15 @@ class OrderController extends Controller {
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-      
+        // dd($request->except(['_token']));
+        $order = new Order;
+        $carts = Cart::where('user_id' , Auth::id())->doesntHave('order')->update(['order_id'=>$order->id]);
+        $data = $request->except(['_token','email']);
+        $data['user_id'] = Auth::id();
+        Address::updateOrCreate($data);
+        return redirect(route('products.product.index'));
     }
 
     /**
