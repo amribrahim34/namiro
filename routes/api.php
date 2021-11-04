@@ -19,6 +19,9 @@ use Illuminate\Http\Request;
 
 
 // users
-Route::prefix('/users')->group(function(){
-    Route::post('/login','Api\LoginController@login');
+Route::prefix('/users')->group(function () {
+    Route::post('/login', 'Api\LoginController@login');
 });
+
+Route::get('products', 'Api\ProductController@index');
+Route::post('products/search', 'Api\ProductController@search');
