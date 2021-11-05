@@ -26,9 +26,10 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
+        // dd($request->price);
         $products = Product::with('stocks');
         if ($request->category) {
-            $subcategories = $this->get_subcategory_that_has_category_in_the_id_array($request->category);
+            $subcategories = $this->get_subcategory_that_has_category($request->category);
             $products = $products->BySubcategory($subcategories);
         }
         if ($request->color) {
@@ -42,13 +43,14 @@ class ProductController extends Controller
         }
 
         if ($request->price) {
-            $range = explode(';', $request->price);
+            // $range = explode(';', $request->price);
+            $range = $request->price;
             $products = $products->ByPriceRange($range);
         }
         return  $products->paginate(9);
     }
 
-    private function get_subcategory_that_has_category_in_the_id_array($id_array)
+    private function get_subcategory_that_has_category($id_array)
     {
         return Subcategory::whereHas('category', function ($query) use ($id_array) {
             $query->whereIn('id', $id_array);
