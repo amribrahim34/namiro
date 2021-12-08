@@ -18,27 +18,19 @@ class CartController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function getCarts()
     {
         $carts = Cart::with('stock', 'stock.product', 'stock.color', 'stock.material', 'stock.size')->where('user_id', Auth::id())->get();
         return $carts;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-    }
 
     /**
      * Store a newly created resource in storage.
      *
      * @return Response
      */
-    public function store(Request $request)
+    public function storeCarts(Request $request)
     {
         $product = Product::find($request->product_id);
         // dd($product);
@@ -52,28 +44,10 @@ class CartController extends Controller
                 $prev_cart->update(['quantity' => 1]);
             }
         }
-        return redirect(route('processes.carts.index'));
+        return response("created successfully");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-    }
 
     /**
      * Update the specified resource in storage.
@@ -84,7 +58,7 @@ class CartController extends Controller
     public function update(Request $request)
     {
         $data = $request->data;
-        dd($request);
+        dd($request->data);
         $total = 0;
         foreach ($data as $cart) {
             $modified_cart = Cart::find($cart['id']);
@@ -103,7 +77,11 @@ class CartController extends Controller
     public function destroy($id)
     {
         $cart = Cart::find($id);
-        $cart->forceDelete();
+        if (isset($cart) && $cart->user->id == Auth::user()->id) {
+            $cart->forceDelete();
+            return response("deleted successfully");
+        }
+        return response(abort(403, 'Unauthorized action.'));
     }
 
     private function storeNewCart($request)

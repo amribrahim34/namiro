@@ -28,3 +28,10 @@ Route::middleware('auth:api')->prefix('/products')->group(function () {
     Route::get('/', 'Api\ProductController@index');
     Route::post('/search', 'Api\ProductController@search');
 });
+
+Route::middleware('auth:api')->prefix('/carts')->group(function () {
+    Route::get('/', 'Api\CartController@getCarts');
+    Route::post('/', 'Api\CartController@storeCarts');
+    Route::delete('/{id}', 'Api\CartController@destroy');
+    Route::put('/{id}', 'Api\CartController@update');
+});
