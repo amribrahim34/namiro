@@ -35,3 +35,10 @@ Route::middleware('auth:api')->prefix('/carts')->group(function () {
     Route::delete('/{id}', 'Api\CartController@destroy');
     Route::put('/{id}', 'Api\CartController@update');
 });
+
+Route::middleware('auth:api')->prefix('/orders')->group(function () {
+    Route::get('/', 'Api\OrderController@getOrders');
+    // Route::post('/', 'Api\OrderController@storeCarts');
+    // Route::delete('/{id}', 'Api\OrderController@destroy');
+    // Route::put('/{id}', 'Api\OrderController@update');
+});
