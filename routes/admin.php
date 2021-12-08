@@ -2,10 +2,8 @@
 
 
 
-Route::namespace('Admin')->middleware('auth')->group(function(){
-	Route::get('/', function () {
-		return view('admin.index');
-	})->name('index');
+Route::namespace('Admin')->middleware('auth')->group(function () {
+	Route::get('/', 'AdminController@index')->name('index');
 	// Route::name('calculations.')->namespace('Calculations')->prefix('calculations')->group(function(){
 	// 	Route::resource('sales', 'SalesController');
 	// 	Route::resource('offer', 'OfferController');
@@ -14,7 +12,7 @@ Route::namespace('Admin')->middleware('auth')->group(function(){
 	// Route::name('customers.')->namespace('Customers')->prefix('customers')->group(function(){
 	// 	Route::resource('testmony', 'TestmonyController');
 	// });
-	Route::name('specifications.')->namespace('Specifications')->prefix('specifications')->group(function(){
+	Route::name('specifications.')->namespace('Specifications')->prefix('specifications')->group(function () {
 		Route::resource('color', 'ColorController');
 		Route::resource('material', 'MaterialController');
 		Route::resource('size', 'SizeController');
@@ -24,7 +22,7 @@ Route::namespace('Admin')->middleware('auth')->group(function(){
 	// 	Route::resource('wish', 'WishController');
 	// 	Route::resource('order', 'OrderController');
 	// });
-	Route::name('products.')->namespace('Products')->prefix('products')->group(function(){
+	Route::name('products.')->namespace('Products')->prefix('products')->group(function () {
 		Route::resource('category', 'CategoryController');
 		Route::resource('subcategory', 'SubcategoryController');
 		Route::resource('product', 'ProductController');

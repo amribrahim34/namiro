@@ -26,7 +26,6 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-        // dd($request->price);
         $products = Product::with('stocks');
         if ($request->category) {
             $subcategories = $this->get_subcategory_that_has_category($request->category);
@@ -43,7 +42,6 @@ class ProductController extends Controller
         }
 
         if ($request->price) {
-            // $range = explode(';', $request->price);
             $range = $request->price;
             $products = $products->ByPriceRange($range);
         }

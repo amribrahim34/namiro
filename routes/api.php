@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 // users
 Route::prefix('/users')->group(function () {
     Route::post('/login', 'Api\LoginController@login');
+    Route::post('/register', 'Api\RegisterController@create');
 });
 
 Route::middleware('auth:api')->prefix('/products')->group(function () {
